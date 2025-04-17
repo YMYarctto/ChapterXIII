@@ -10,8 +10,10 @@ public enum Efficacy{
     安神,
     止吐,
     抗过敏,
+    抗菌,
 }
 
+// offset开头的为补缺没有副作用的效果
 public enum SideEffect{
     失眠,
     嗜睡,
@@ -24,4 +26,5 @@ public enum SideEffect{
     焦虑,
     恶心,
     过敏,
+    offset抗菌,
 }
