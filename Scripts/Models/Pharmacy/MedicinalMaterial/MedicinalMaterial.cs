@@ -34,9 +34,8 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
         // 不为null，则认为有物体撞到
         if (inner.collider!=null&&inner.collider.CompareTag("Pot"))
         {
-            Debug.Log("药材放入药锅");
-            // EventManager.instance.SetInvokeParam("Pot/Add",medicinalMaterial_SO);
-            // EventManager.instance.Invoke("Pot/Add");
+            EventManager.instance.SetInvokeParam("Pot/Add",medicinalMaterial_SO);
+            EventManager.instance.Invoke("Pot/Add");
         }
 
     }
