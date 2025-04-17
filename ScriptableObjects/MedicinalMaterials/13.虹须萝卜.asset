@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78a636c4d6fd4435aa722a9db4a6efe, type: 3}
   m_Name: "13.\u8679\u987B\u841D\u535C"
   m_EditorClassIdentifier: 
-  ID: 0
-  Name: 
-  Efficacy: 
+  ID: 13
+  Name: "\u8679\u987B\u841D\u535C"
+  Efficacy: 0a000000
   SideEffect: 
-  Description: 
+  Description: "\u901A\u4F53\u7EA2\u4EAE\u7684\u6839\u987B\u690D\u7269\uFF0C\u80FD\u6709\u6548\u7F13\u89E3\u76AE\u80A4\u4E0E\u547C\u5438\u9053\u8FC7\u654F\u3002\u836F\u6548\u6E29\u548C\u5F97\u5C31\u50CF\u4E00\u4F4D\u8001\u592A\u592A\u7684\u62E5\u62B1\u3002"
