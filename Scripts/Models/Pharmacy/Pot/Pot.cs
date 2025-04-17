@@ -42,11 +42,14 @@ public class Pot : MonoBehaviour
         {
             foreach (Efficacy efficacy in medicinalMaterial_SO.Efficacy)
             {
+                //转化成相应负面效果
                 SideEffect sideEffect = (SideEffect)(int)efficacy;
+                //如果效果已经被抵消，跳过
                 if(offested_efficacieList.Contains(efficacy))
                 {
                     continue;
                 }
+                //如果存在相应负面效果，移除
                 if(sideEffectList.Contains(sideEffect))
                 {
                     sideEffectList.Remove(sideEffect);
@@ -54,6 +57,7 @@ public class Pot : MonoBehaviour
                     offseted_sideEffectList.Add(sideEffect);
                     continue;
                 }
+                //如果效果不存在，添加
                 if (!efficacieList.Contains(efficacy))
                 {
                     efficacieList.Add(efficacy);
@@ -61,11 +65,14 @@ public class Pot : MonoBehaviour
             }
             foreach (SideEffect sideEffect in medicinalMaterial_SO.SideEffect)
             {
+                //转化成相应正面效果
                 Efficacy efficacy = (Efficacy)(int)sideEffect;
+                //如果效果已经被抵消，跳过
                 if(offseted_sideEffectList.Contains(sideEffect))
                 {
                     continue;
                 }
+                //如果存在相应正面效果，移除
                 if(efficacieList.Contains(efficacy))
                 {
                     efficacieList.Remove(efficacy);
@@ -73,6 +80,7 @@ public class Pot : MonoBehaviour
                     offseted_sideEffectList.Add(sideEffect);
                     continue;
                 }
+                //如果效果不存在，添加
                 if (!sideEffectList.Contains(sideEffect))
                 {
                     sideEffectList.Add(sideEffect);

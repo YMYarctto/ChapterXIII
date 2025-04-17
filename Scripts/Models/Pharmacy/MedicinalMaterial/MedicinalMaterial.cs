@@ -29,9 +29,9 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         Destroy(thisGameObject);
-        // Vector2 Position = Camera.main.ScreenToWorldPoint(eventData.position);
+        // 射线检测鼠标是否碰撞到碰撞题
         RaycastHit2D inner = Physics2D.Raycast(eventData.position, Vector2.zero);
-        // 不为null，则认为有物体撞到
+        // 检测是否有碰撞题，有则是否为锅
         if (inner.collider!=null&&inner.collider.CompareTag("Pot"))
         {
             EventManager.instance.SetInvokeParam("Pot/Add",medicinalMaterial_SO);
