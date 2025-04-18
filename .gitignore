@@ -1,1 +1,10 @@
-Resource/.DS_Store
+Assets/Resource/.DS_Store
+Assets
+.DS_Store
+Library
+Temp
+Logs
+UserSettings
+.vscode
+*.csproj
+*.sln
