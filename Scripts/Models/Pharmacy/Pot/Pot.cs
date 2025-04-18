@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ETag;
 
 public class Pot : MonoBehaviour
 {
@@ -87,6 +88,13 @@ public class Pot : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 生成药水
+    /// </summary>
+    public void CreatePotion(){
+
     }
 
     void DebugLog()
