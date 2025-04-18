@@ -3,27 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using EMaterial;
 using ETag;
+using UnityEngine.EventSystems;
 
-public class Potion : MonoBehaviour
+public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler
 {
     string potion_name;
     public List<Efficacy> EfficacyList = new List<Efficacy>();
     public List<SideEffect> SideEffectList = new List<SideEffect>();
     string potion_description;
 
-    public static Potion CreatePotion(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
+    public void Init(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
     {
-        Potion potion = new();
-        potion.EfficacyList = efficacyList;
-        potion.SideEffectList = sideEffectList;
+        EfficacyList = efficacyList;
+        SideEffectList = sideEffectList;
         var potionInfo = PotionConst.GetPotionName(materialList);
         if (potionInfo.IsNull())
         {
             potionInfo=PotionConst.GetPotionName(efficacyList);
         }
-        potion.potion_name = potionInfo.potionName;
-        potion.potion_description = potionInfo.potionDescription;
+        potion_name = potionInfo.potionName;
+        potion_description = potionInfo.potionDescription;
         
-        return potion;
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        transform.SetParent(GameObject.Find("OnDrag").transform,true);
+        Debug.Log("开始拖动药水");
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        //TODO
+        Debug.Log("结束拖动药水");
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        //TODO
+        Debug.Log("正在拖动药水");
+    }
+
+    
 }

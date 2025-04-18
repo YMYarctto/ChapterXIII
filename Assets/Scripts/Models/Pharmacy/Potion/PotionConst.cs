@@ -11,6 +11,7 @@ public static class PotionConst
     private static Dictionary<List<MaterialName>,PotionName> potionDict;
     private static Dictionary<PotionName, string> potionDescriptionDict;
     private static Dictionary<Efficacy,string> efficacyDict;
+    private static Dictionary<PotionName,int> priceDict;
 
     public static void Init(){
         potionDict= new Dictionary<List<MaterialName>, PotionName>
@@ -44,6 +45,17 @@ public static class PotionConst
             { Efficacy.解毒, "误食中毒" },
             { Efficacy.安神, "神经紧张、易惊易怒" },
             { Efficacy.抗菌, "病菌感染" },
+        };
+
+        priceDict = new Dictionary<PotionName, int>//暂定
+        {
+            { PotionName.安眠药, 50 },
+            { PotionName.清热药, 60 },
+            { PotionName.止血药, 70 },
+            { PotionName.止痛药, 80 },
+            { PotionName.解毒药, 90 },
+            { PotionName.安神药, 100 },
+            { PotionName.抗菌药, 110 },
         };
     }
 
@@ -79,6 +91,15 @@ public static class PotionConst
         description = description.Substring(0, description.Length - 1);
         description += "等症状。请根据实际情况合理使用。";
         return new PotionInfo(name, description);
+    }
+
+    public static int GetPotionPrice(PotionName potionName)
+    {
+        if (priceDict.TryGetValue(potionName, out int price))
+        {
+            return price;
+        }
+        return 0;
     }
 
     public struct PotionInfo

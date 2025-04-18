@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ETag;
+using EMaterial;
 
 public class Pot : MonoBehaviour
 {
+    public GameObject PotionPrefab;
+
     List<MedicinalMaterial_SO> medicinalMaterialList = new List<MedicinalMaterial_SO>();
     List<Efficacy> efficacyList = new List<Efficacy>();
     List<SideEffect> sideEffectList = new List<SideEffect>();
@@ -93,8 +96,39 @@ public class Pot : MonoBehaviour
     /// <summary>
     /// 生成药水
     /// </summary>
-    public void CreatePotion(){
+    public void CreatePotion()
+    {
+        List<MaterialName> materialList = new List<MaterialName>();
+        foreach (MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
+        {
+            materialList.Add(medicinalMaterial_SO.Name);
+        }
+        Clear();
+        InstantiatePotion(materialList, efficacyList, sideEffectList);
+    }
 
+    void InstantiatePotion(List<MaterialName> materialList, List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
+    {
+        string[] _uiviews = {
+        "Shelf_item1",
+        "Shelf_item2",
+        "Shelf_item3",
+        };
+        foreach(var str in _uiviews)
+        {
+            GameObject gameobj_potion = Instantiate(PotionPrefab, GameObject.Find(str).transform);
+            gameobj_potion.GetComponent<Potion>().Init(materialList, efficacyList, sideEffectList);
+            gameobj_potion.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    void Clear()
+    {
+        medicinalMaterialList.Clear();
+        efficacyList.Clear();
+        sideEffectList.Clear();
+        offested_efficacieList.Clear();
+        offseted_sideEffectList.Clear();
     }
 
     void DebugLog()

@@ -9,7 +9,7 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
     Transform parent;
 
     void Awake() {
-        parent = GameObject.Find("Top_MousePointer").transform;
+        parent = GameObject.Find("OnDrag").transform;
     }
 
     GameObject thisGameObject;
