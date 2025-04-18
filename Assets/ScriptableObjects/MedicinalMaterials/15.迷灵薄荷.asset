@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78a636c4d6fd4435aa722a9db4a6efe, type: 3}
+  m_Name: "15.\u8FF7\u7075\u8584\u8377"
+  m_EditorClassIdentifier: 
+  ID: 15
+  Name: 15
+  Efficacy: 0900000001000000
+  SideEffect: 
+  Description: "\u88AB\u79F0\u4E3A\u201C\u6E05\u9192\u4E4B\u98CE\u201D\u7684\u6E05\u9999\u53F6\u7247\uFF0C\u5728\u5480\u56BC\u540E\u80FD\u8FC5\u901F\u9A71\u6563\u6655\u7729\u4E0E\u75B2\u52B3\u3002"
