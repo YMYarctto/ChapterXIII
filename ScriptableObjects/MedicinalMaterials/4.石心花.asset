@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "4.\u77F3\u5FC3\u82B1"
   m_EditorClassIdentifier: 
   ID: 4
-  Name: "\u77F3\u5FC3\u82B1"
+  Name: 4
   Efficacy: 06000000
   SideEffect: 090000000a000000
   Description: "\u508D\u5D16\u800C\u751F\uFF0C\u82B1\u74E3\u575A\u786C\u5982\u7389\u3002\u4F20\u8BF4\u662F\u4ECE\u52A8\u7269\u5C38\u4F53\u4E0A\u957F\u51FA\u7684\u690D\u7269\uFF0C\u6B62\u8840\u5947\u6548\uFF0C\u6C14\u5473\u96BE\u8010\u3002"
