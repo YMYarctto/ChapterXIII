@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ETag;
 
 [CreateAssetMenu(fileName = "MedicinalMaterial_SO", menuName = "Models/MedicinalMaterial_SO", order = 1)]
 public class MedicinalMaterial_SO : ScriptableObject
