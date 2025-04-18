@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ETag;
 
 public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -19,6 +20,22 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
         thisGameObject = Instantiate(gameObject, parent);
         thisGameObject.GetComponent<MedicinalMaterial>().medicinalMaterial_SO = medicinalMaterial_SO;
         thisGameObject.transform.position = eventData.position;
+
+        EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTitle",medicinalMaterial_SO.Name.ToString());
+        EventManager.instance.Invoke("UI/ItemInfo/ChangeTitle");
+        EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeDescription",medicinalMaterial_SO.Description);
+        EventManager.instance.Invoke("UI/ItemInfo/ChangeDescription");
+        string tag = "";
+        foreach (Efficacy efficacy in medicinalMaterial_SO.Efficacy)
+        {
+            tag += efficacy.ToString() + " ";
+        }
+        foreach (SideEffect sideEffect in medicinalMaterial_SO.SideEffect)
+        {
+            tag += sideEffect.ToString() + " ";
+        }
+        EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTag",tag);
+        EventManager.instance.Invoke("UI/ItemInfo/ChangeTag");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -37,6 +54,5 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
             EventManager.instance.SetInvokeParam("Pot/Add",medicinalMaterial_SO);
             EventManager.instance.Invoke("Pot/Add");
         }
-
     }
 }
