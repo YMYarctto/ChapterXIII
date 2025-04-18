@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EMaterial;
 using ETag;
 
 public class Potion : MonoBehaviour
 {
     string potion_name;
-    List<Efficacy> efficacyList = new List<Efficacy>();
-    List<SideEffect> sideEffectList = new List<SideEffect>();
+    public List<Efficacy> EfficacyList = new List<Efficacy>();
+    public List<SideEffect> SideEffectList = new List<SideEffect>();
     string potion_description;
-    int potion_price;
 
-    public static Potion CreatePotion(List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
+    public static Potion CreatePotion(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
     {
         Potion potion = new();
-        potion.efficacyList = efficacyList;
-        potion.sideEffectList = sideEffectList;
+        potion.EfficacyList = efficacyList;
+        potion.SideEffectList = sideEffectList;
+        var potionInfo = PotionConst.GetPotionName(materialList);
+        if (potionInfo.IsNull())
+        {
+            potionInfo=PotionConst.GetPotionName(efficacyList);
+        }
+        potion.potion_name = potionInfo.potionName;
+        potion.potion_description = potionInfo.potionDescription;
         
         return potion;
     }

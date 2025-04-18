@@ -6,7 +6,7 @@ using EMaterial;
 using System.Linq;
 using ETag;
 
-public static class PotionCreateList
+public static class PotionConst
 {
     private static Dictionary<List<MaterialName>,PotionName> potionDict;
     private static Dictionary<PotionName, string> potionDescriptionDict;
@@ -78,7 +78,7 @@ public static class PotionCreateList
         }
         description = description.Substring(0, description.Length - 1);
         description += "等症状。请根据实际情况合理使用。";
-        return PotionInfo.Null;
+        return new PotionInfo(name, description);
     }
 
     public struct PotionInfo
