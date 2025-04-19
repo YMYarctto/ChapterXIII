@@ -40,6 +40,7 @@ public class Pot : MonoBehaviour
         }
         medicinalMaterialList.Add(medicinalMaterial_SO);
         AddTag();
+        ShowUI();
         DebugLog();
     }
 
@@ -105,11 +106,12 @@ public class Pot : MonoBehaviour
         {
             materialList.Add(medicinalMaterial_SO.Name);
         }
+        InstantiatePotion(materialList);
         Clear();
-        InstantiatePotion(materialList, efficacyList, sideEffectList);
+        ShowUI();
     }
 
-    void InstantiatePotion(List<MaterialName> materialList, List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
+    void InstantiatePotion(List<MaterialName> materialList)
     {
         string[] _uiviews = {
         "Shelf_item1",
@@ -131,6 +133,32 @@ public class Pot : MonoBehaviour
         sideEffectList.Clear();
         offseted_efficacieList.Clear();
         offseted_sideEffectList.Clear();
+    }
+
+    void ShowUI(){
+        string title_str="";
+        foreach(MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
+        {
+            title_str+=medicinalMaterial_SO.Name.ToString()+" ";
+        }
+        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeTitle", title_str);
+        EventManager.instance.Invoke("UI/PotInfo/ChangeTitle");
+
+        string efficacy_str="";
+        foreach(Efficacy efficacy in efficacyList)
+        {
+            efficacy_str+=efficacy.ToString()+" ";
+        }
+        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeEfficacyTag", efficacy_str);
+        EventManager.instance.Invoke("UI/PotInfo/ChangeEfficacyTag");
+
+        string sideEffect_str="";
+        foreach(SideEffect sideEffect in sideEffectList)
+        {
+            sideEffect_str+=sideEffect.ToString()+" ";
+        }
+        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeSideEffectTag", sideEffect_str);
+        EventManager.instance.Invoke("UI/PotInfo/ChangeSideEffectTag");
     }
 
     void DebugLog()

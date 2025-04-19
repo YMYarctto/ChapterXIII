@@ -52,9 +52,10 @@ public static class PotionConst
     public static PotionInfo GetPotionName(List<MaterialName> materialNames)
     {
         List<MaterialName> materialList = materialNames.OrderBy(x => (int)x).ToList();
-        if (potionDict.TryGetValue(materialList, out PotionName potion))
-        {
-            return new PotionInfo(potion.ToString(), potionDescriptionDict[potion]);
+        foreach(var kv in potionDict){
+            if(kv.Key.SequenceEqual(materialList)){
+                return new PotionInfo(kv.Value.ToString(), potionDescriptionDict[kv.Value]);
+            }
         }
         return PotionInfo.Null;
     }
@@ -69,7 +70,7 @@ public static class PotionConst
             name+= $"{efficacy}";
             description += $"{efficacy}、";
         }
-        description = description.Substring(0, description.Length - 1);
+        description = description.Substring(0, description.Length - "、".Length);
         description += "效果的复合药剂，适用于";
         foreach(var efficacy in efficacyList)
         {
@@ -78,8 +79,9 @@ public static class PotionConst
                 description += $"{str}、";
             }
         }
-        description = description.Substring(0, description.Length - 1);
+        description = description.Substring(0, description.Length - "、".Length);
         description += "等症状。请根据实际情况合理使用。";
+        name+="药";
         return new PotionInfo(name, description);
     }
 
