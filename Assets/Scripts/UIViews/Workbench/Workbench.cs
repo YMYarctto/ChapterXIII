@@ -22,11 +22,11 @@ public class Workbench : UIView
 
     public override void Enable()
     {
-        transform.position=new(0,0,0);
+        transform.position=new(Screen.width/2,0,0);
     }
 
     public override void Disable()
     {
-        transform.position=new(Screen.width,0,0);
+        transform.position=new(Screen.width*3/2,0,0);
     }
 }
