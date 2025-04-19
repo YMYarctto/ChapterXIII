@@ -54,7 +54,7 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
         // 检测是否有碰撞题，有则是否为物品栏
         if (inner.collider!=null&&inner.collider.CompareTag("Inventory"))
         {
-            if(inner.collider.GetComponentsInChildren<Transform>(true).Length <= 1)
+            if(inner.collider.transform.childCount ==0)
             {
                 parent=inner.collider.gameObject.transform;
                 current_image=Image.mini;
