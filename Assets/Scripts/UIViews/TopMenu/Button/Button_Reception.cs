@@ -28,5 +28,6 @@ public class Button_Reception : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerClick(PointerEventData eventData)
     {
         UIManager.instance.DisableUIView("Workbench");
+        UIManager.instance.EnableUIView("Reception");
     }
 }

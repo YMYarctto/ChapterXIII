@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class CustomerController : MonoBehaviour
 {
     public GameObject CustomerPerfab;
 

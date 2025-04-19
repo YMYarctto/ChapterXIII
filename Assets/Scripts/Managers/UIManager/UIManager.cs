@@ -19,7 +19,6 @@ public class UIManager : MonoBehaviour
                 _UIManager = FindObjectOfType(typeof(UIManager)) as UIManager;
                 if (!_UIManager)
                 {
-                    Debug.LogWarning("UIManager:\n没有找到UIManager,请在场景中添加一个UIManager");
                     return null;
                 }
                 _UIManager.Init();
