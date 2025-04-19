@@ -17,7 +17,10 @@ public class Customer_Normal : MonoBehaviour
     GameObject request;
 
     //TODO 临时
-    List<PotionName> potionListConst = new(){PotionName.安眠药,PotionName.清热药};
+    List<PotionName> potionListConst = new(){
+        PotionName.安眠药,
+        //PotionName.清热药,
+    };
 
     void FixedUpdate()
     {
@@ -35,7 +38,7 @@ public class Customer_Normal : MonoBehaviour
             if(transform.localPosition.x<0){
                 transform.localPosition+=new Vector3(Speed*Time.fixedDeltaTime,0,0);
             }else{
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }
@@ -55,7 +58,7 @@ public class Customer_Normal : MonoBehaviour
         SetStatus(Status.Running);
     }
 
-    public void GetPrice(Potion potion){
+    public void GivePotion(Potion potion){
         PotionName potionName = potionList[current_potion_index];
         Efficacy tag=(Efficacy)(int)potionName;
         float price=PotionConst.GetPotionPrice(potionName);

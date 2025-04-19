@@ -37,11 +37,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void Refresh(){
-        foreach(var trans in customer_area.Keys)
+        List<Transform> list=new(customer_area.Keys);
+        for(int i=0;i<list.Count;i++)
         {
-            if(trans.childCount==0)
+            if(list[i].childCount==0)
             {
-                customer_area[trans]=false;
+                customer_area[list[i]]=false;
             }
         }
     }

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerClickHandler
 {
     string potion_name;
-    public List<Efficacy> EfficacyList;
+    [HideInInspector]public List<Efficacy> EfficacyList;
     [HideInInspector]public List<SideEffect> SideEffectList;
     string potion_description;
 
@@ -50,15 +50,26 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         // 射线检测鼠标是否碰撞到碰撞题
-        RaycastHit2D inner = Physics2D.Raycast(eventData.position, Vector2.zero);
+        Collider2D collider = Physics2D.Raycast(eventData.position, Vector2.zero).collider;
         // 检测是否有碰撞题，有则是否为物品栏
-        if (inner.collider!=null&&inner.collider.CompareTag("Inventory"))
+        if (collider!=null)
         {
-            if(inner.collider.transform.childCount ==0)
+            if(collider.CompareTag("Customer"))
             {
-                parent=inner.collider.gameObject.transform;
-                current_image=Image.mini;
+                collider.transform.parent.GetComponent<Customer_Normal>().GivePotion(this);
+                Destroy(gameObject);
+                return;
             }
+
+            if(collider.CompareTag("Inventory"))
+            {
+                if(collider.transform.childCount ==0)
+                {
+                    parent=collider.transform;
+                    current_image=Image.mini;
+                }
+            }
+            
         }
         transform.SetParent(parent,true);
         if(current_image==Image.mini)

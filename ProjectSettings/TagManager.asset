@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pot
   - Inventory
+  - Customer
   layers:
   - Default
   - TransparentFX

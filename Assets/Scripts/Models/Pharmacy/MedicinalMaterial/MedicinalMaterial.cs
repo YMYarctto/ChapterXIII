@@ -33,9 +33,9 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
     {
         Destroy(thisGameObject);
         // 射线检测鼠标是否碰撞到碰撞题
-        RaycastHit2D inner = Physics2D.Raycast(eventData.position, Vector2.zero);
+        Collider2D collider = Physics2D.Raycast(eventData.position, Vector2.zero).collider;
         // 检测是否有碰撞题，有则是否为锅
-        if (inner.collider!=null&&inner.collider.CompareTag("Pot"))
+        if (collider!=null&&collider.CompareTag("Pot"))
         {
             EventManager.instance.SetInvokeParam("Pot/Add",medicinalMaterial_SO);
             EventManager.instance.Invoke("Pot/Add");
