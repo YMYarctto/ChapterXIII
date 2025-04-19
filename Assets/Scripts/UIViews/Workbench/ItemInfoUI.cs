@@ -14,9 +14,9 @@ public class ItemInfoUI : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.instance.RemoveListener<string>("UI/ItemInfo/ChangeTitle", ChangeTitle);
-        EventManager.instance.RemoveListener<string>("UI/ItemInfo/ChangeDescription", ChangeDescription);
-        EventManager.instance.RemoveListener<string>("UI/ItemInfo/ChangeTag", ChangeTag);
+        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeTitle", ChangeTitle);
+        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeDescription", ChangeDescription);
+        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeTag", ChangeTag);
     }
 
     public void ChangeTitle(string str)

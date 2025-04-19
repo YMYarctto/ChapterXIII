@@ -14,9 +14,9 @@ public class PotInfoUI : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.instance.RemoveListener<string>("UI/PotInfo/ChangeTitle", ChangeTitle);
-        EventManager.instance.RemoveListener<string>("UI/PotInfo/ChangeEfficacyTag", ChangeEfficacyTag);
-        EventManager.instance.RemoveListener<string>("UI/PotInfo/ChangeSideEffectTag", ChangeSideEffectTag);
+        EventManager.instance?.RemoveListener<string>("UI/PotInfo/ChangeTitle", ChangeTitle);
+        EventManager.instance?.RemoveListener<string>("UI/PotInfo/ChangeEfficacyTag", ChangeEfficacyTag);
+        EventManager.instance?.RemoveListener<string>("UI/PotInfo/ChangeSideEffectTag", ChangeSideEffectTag);
     }
 
     public void ChangeTitle(string str)

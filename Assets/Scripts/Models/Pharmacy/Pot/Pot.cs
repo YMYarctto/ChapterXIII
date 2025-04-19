@@ -22,8 +22,8 @@ public class Pot : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.instance.RemoveListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
-        EventManager.instance.RemoveListener("Pot/Make", CreatePotion);
+        EventManager.instance?.RemoveListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
+        EventManager.instance?.RemoveListener("Pot/Make", CreatePotion);
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
