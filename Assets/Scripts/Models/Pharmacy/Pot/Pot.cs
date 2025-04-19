@@ -11,17 +11,19 @@ public class Pot : MonoBehaviour
     List<MedicinalMaterial_SO> medicinalMaterialList = new List<MedicinalMaterial_SO>();
     List<Efficacy> efficacyList = new List<Efficacy>();
     List<SideEffect> sideEffectList = new List<SideEffect>();
-    List<Efficacy> offested_efficacieList = new List<Efficacy>();
+    List<Efficacy> offseted_efficacieList = new List<Efficacy>();
     List<SideEffect> offseted_sideEffectList = new List<SideEffect>();
 
     void OnEnable()
     {
         EventManager.instance.AddListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
+        EventManager.instance.AddListener("Pot/Make", CreatePotion);
     }
 
     void OnDisable()
     {
         EventManager.instance.RemoveListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
+        EventManager.instance.RemoveListener("Pot/Make", CreatePotion);
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
@@ -49,7 +51,7 @@ public class Pot : MonoBehaviour
                 //转化成相应负面效果
                 SideEffect sideEffect = (SideEffect)(int)efficacy;
                 //如果效果已经被抵消，跳过
-                if(offested_efficacieList.Contains(efficacy))
+                if(offseted_efficacieList.Contains(efficacy))
                 {
                     continue;
                 }
@@ -57,7 +59,7 @@ public class Pot : MonoBehaviour
                 if(sideEffectList.Contains(sideEffect))
                 {
                     sideEffectList.Remove(sideEffect);
-                    offested_efficacieList.Add(efficacy);
+                    offseted_efficacieList.Add(efficacy);
                     offseted_sideEffectList.Add(sideEffect);
                     continue;
                 }
@@ -80,7 +82,7 @@ public class Pot : MonoBehaviour
                 if(efficacyList.Contains(efficacy))
                 {
                     efficacyList.Remove(efficacy);
-                    offested_efficacieList.Add(efficacy);
+                    offseted_efficacieList.Add(efficacy);
                     offseted_sideEffectList.Add(sideEffect);
                     continue;
                 }
@@ -127,7 +129,7 @@ public class Pot : MonoBehaviour
         medicinalMaterialList.Clear();
         efficacyList.Clear();
         sideEffectList.Clear();
-        offested_efficacieList.Clear();
+        offseted_efficacieList.Clear();
         offseted_sideEffectList.Clear();
     }
 
@@ -144,7 +146,7 @@ public class Pot : MonoBehaviour
             str += $" {sideEffect},";
         }
         str += "\n 被抵消的功效:";
-        foreach(Efficacy efficacy in offested_efficacieList)
+        foreach(Efficacy efficacy in offseted_efficacieList)
         {
             str += $" {efficacy},";
         }

@@ -8,56 +8,46 @@ using ETag;
 
 public static class PotionConst
 {
-    private static Dictionary<List<MaterialName>,PotionName> potionDict;
-    private static Dictionary<PotionName, string> potionDescriptionDict;
-    private static Dictionary<Efficacy,string> efficacyDict;
-    private static Dictionary<PotionName,int> priceDict;
-
-    public static void Init(){
-        potionDict= new Dictionary<List<MaterialName>, PotionName>
-        {
-            { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.迷灵薄荷 }, PotionName.安眠药 },
-            { new List<MaterialName> { MaterialName.凉影果,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.清热药 },
-            { new List<MaterialName> { MaterialName.石心花,MaterialName.虹须萝卜,MaterialName.迷灵薄荷 }, PotionName.止血药 },
-            { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.止痛药 },
-            { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.灰胆根,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.解毒药 },
-            { new List<MaterialName> { MaterialName.石心花,MaterialName.月落藤,MaterialName.虹须萝卜,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.安神药 },
-            { new List<MaterialName> { MaterialName.银须菌,MaterialName.虹须萝卜 }, PotionName.抗菌药 },
-        };
-
-        potionDescriptionDict = new Dictionary<PotionName, string>
-        {
-            { PotionName.安眠药, "这是一瓶用于诱导睡眠的药剂，能有效缓解失眠，让使用者迅速进入深度睡眠状态。" },
-            { PotionName.清热药, "这是一瓶用于缓解内火和燥热的药剂，适合在发热、上火时服用，具有良好的清热效果。" },
-            { PotionName.止血药, "这是一瓶用于止血的基础药剂，适用于小型外伤或突发性出血，能够快速凝血并加快愈合。" },
-            { PotionName.止痛药, "这是一瓶用于缓解身体疼痛的药剂，适合外伤或头痛等症状，短时间内可显著减轻疼痛感。" },
-            { PotionName.解毒药, "这是一瓶用于清除体内毒素的药剂，适合因误食或中毒引起的不适，使用后可快速稳定症状。" },
-            { PotionName.安神药, "这是一瓶用于镇定精神、缓解焦虑的药剂，适合神经紧张、易惊易怒等情况，服用后心绪将逐渐平稳。" },
-            { PotionName.抗菌药, "这是一瓶用于抵抗感染的药剂，可对抗常见的细菌侵袭，适合在外伤或虚弱时期使用。" },
-        };
-
-        efficacyDict = new Dictionary<Efficacy, string>
-        {
-            { Efficacy.安眠, "睡眠障碍" },
-            { Efficacy.清热, "各种热症" },
-            { Efficacy.止血, "外伤出血、疾病出血" },
-            { Efficacy.止痛, "外伤疼痛、神经疼痛" },
-            { Efficacy.解毒, "误食中毒" },
-            { Efficacy.安神, "神经紧张、易惊易怒" },
-            { Efficacy.抗菌, "病菌感染" },
-        };
-
-        priceDict = new Dictionary<PotionName, int>//暂定
-        {
-            { PotionName.安眠药, 50 },
-            { PotionName.清热药, 60 },
-            { PotionName.止血药, 70 },
-            { PotionName.止痛药, 80 },
-            { PotionName.解毒药, 90 },
-            { PotionName.安神药, 100 },
-            { PotionName.抗菌药, 110 },
-        };
-    }
+    private static Dictionary<List<MaterialName>,PotionName> potionDict = new()
+    {
+        { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.迷灵薄荷 }, PotionName.安眠药 },
+        { new List<MaterialName> { MaterialName.凉影果,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.清热药 },
+        { new List<MaterialName> { MaterialName.石心花,MaterialName.虹须萝卜,MaterialName.迷灵薄荷 }, PotionName.止血药 },
+        { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.止痛药 },
+        { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.灰胆根,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.解毒药 },
+        { new List<MaterialName> { MaterialName.石心花,MaterialName.月落藤,MaterialName.虹须萝卜,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.安神药 },
+        { new List<MaterialName> { MaterialName.银须菌,MaterialName.虹须萝卜 }, PotionName.抗菌药 },
+    };
+    private static Dictionary<PotionName, string> potionDescriptionDict = new()
+    {
+        { PotionName.安眠药, "这是一瓶用于诱导睡眠的药剂，能有效缓解失眠，让使用者迅速进入深度睡眠状态。" },
+        { PotionName.清热药, "这是一瓶用于缓解内火和燥热的药剂，适合在发热、上火时服用，具有良好的清热效果。" },
+        { PotionName.止血药, "这是一瓶用于止血的基础药剂，适用于小型外伤或突发性出血，能够快速凝血并加快愈合。" },
+        { PotionName.止痛药, "这是一瓶用于缓解身体疼痛的药剂，适合外伤或头痛等症状，短时间内可显著减轻疼痛感。" },
+        { PotionName.解毒药, "这是一瓶用于清除体内毒素的药剂，适合因误食或中毒引起的不适，使用后可快速稳定症状。" },
+        { PotionName.安神药, "这是一瓶用于镇定精神、缓解焦虑的药剂，适合神经紧张、易惊易怒等情况，服用后心绪将逐渐平稳。" },
+        { PotionName.抗菌药, "这是一瓶用于抵抗感染的药剂，可对抗常见的细菌侵袭，适合在外伤或虚弱时期使用。" },
+    };
+    private static Dictionary<Efficacy,string> efficacyDict = new()
+    {
+        { Efficacy.安眠, "睡眠障碍" },
+        { Efficacy.清热, "各种热症" },
+        { Efficacy.止血, "外伤出血、疾病出血" },
+        { Efficacy.止痛, "外伤疼痛、神经疼痛" },
+        { Efficacy.解毒, "误食中毒" },
+        { Efficacy.安神, "神经紧张、易惊易怒" },
+        { Efficacy.抗菌, "病菌感染" },
+    };
+    private static Dictionary<PotionName,int> priceDict = new()//暂定
+    {
+        { PotionName.安眠药, 50 },
+        { PotionName.清热药, 60 },
+        { PotionName.止血药, 70 },
+        { PotionName.止痛药, 80 },
+        { PotionName.解毒药, 90 },
+        { PotionName.安神药, 100 },
+        { PotionName.抗菌药, 110 },
+    };
 
     public static PotionInfo GetPotionName(List<MaterialName> materialNames)
     {

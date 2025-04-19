@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler
 {
     string potion_name;
-    public List<Efficacy> EfficacyList = new List<Efficacy>();
-    public List<SideEffect> SideEffectList = new List<SideEffect>();
+    [HideInInspector]public List<Efficacy> EfficacyList = new List<Efficacy>();
+    [HideInInspector]public List<SideEffect> SideEffectList = new List<SideEffect>();
     string potion_description;
 
     public void Init(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
