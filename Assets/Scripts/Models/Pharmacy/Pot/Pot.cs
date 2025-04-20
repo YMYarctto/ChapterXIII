@@ -14,6 +14,13 @@ public class Pot : MonoBehaviour
     List<Efficacy> offseted_efficacieList = new List<Efficacy>();
     List<SideEffect> offseted_sideEffectList = new List<SideEffect>();
 
+    Animator animator;
+
+    void Awake()
+    {
+        animator=GetComponent<Animator>();
+    }
+
     void OnEnable()
     {
         EventManager.instance.AddListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
@@ -39,6 +46,7 @@ public class Pot : MonoBehaviour
             return;
         }
         medicinalMaterialList.Add(medicinalMaterial_SO);
+        animator.SetTrigger("Add");
         AddTag();
         ShowUI();
         DebugLog();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerClickHandler
 {
     Transform parent;
     Transform drag_transform;
@@ -18,6 +18,7 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        ShowUI();
         transform.SetParent(drag_transform,true);
         transform.position = eventData.position;
     }
@@ -40,10 +41,16 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         transform.position = eventData.position;
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ShowUI();
+    }
+
     void ShowUI(){
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTitle",spoon);
         EventManager.instance.Invoke("UI/ItemInfo/ChangeTitle");
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeDescription",description);
         EventManager.instance.Invoke("UI/ItemInfo/ChangeDescription");
     }
+
 }

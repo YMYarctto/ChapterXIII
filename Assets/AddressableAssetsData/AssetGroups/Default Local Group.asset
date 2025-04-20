@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: e0a23486e0815486c8dfab907423b5f4
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 36c52e23608d3493691bb60dd8ffdb2a
+    m_Address: Assets/Perfebs/Customer/customer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81caf00989ab44095b2f46d01994a15d
+    m_Address: Assets/Perfebs/Potion/potion.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8b89d66c3b2f946c7902f0f43e35e911, type: 2}
   m_SchemaSet:
