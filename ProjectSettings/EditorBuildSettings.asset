@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PharmacyScene.unity
     guid: e88d75d307571487babe9cf10624c16c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 02dc1480074954e7e90792bff07d4125, type: 2}
