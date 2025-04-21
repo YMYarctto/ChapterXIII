@@ -16,9 +16,19 @@ public class Pot : MonoBehaviour
 
     Animator animator;
 
+    Transform[] shelf_uiviews = new Transform[3];
+
     void Awake()
     {
         animator=GetComponent<Animator>();
+        string[] _uiviews = {
+        "Shelf_item1",
+        "Shelf_item2",
+        "Shelf_item3",
+        };
+        for(int i=0;i<_uiviews.Length;i++){
+            shelf_uiviews[i]=GameObject.Find(_uiviews[i]).transform;
+        }
     }
 
     void OnEnable()
@@ -35,6 +45,10 @@ public class Pot : MonoBehaviour
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
     {
+        if(!ShelfIsEmpty()){
+            Debug.Log("请先清理架子上的药水");
+            return;
+        }
         if(medicinalMaterialList.Contains(medicinalMaterial_SO))
         {
             Debug.Log("药材已存在");
@@ -121,17 +135,20 @@ public class Pot : MonoBehaviour
 
     void InstantiatePotion(List<MaterialName> materialList)
     {
-        string[] _uiviews = {
-        "Shelf_item1",
-        "Shelf_item2",
-        "Shelf_item3",
-        };
-        foreach(var str in _uiviews)
+        foreach(var view in shelf_uiviews)
         {
-            GameObject gameobj_potion = Instantiate(PotionPrefab, GameObject.Find(str).transform);
+            GameObject gameobj_potion = Instantiate(PotionPrefab, view);
             gameobj_potion.GetComponent<Potion>().Init(materialList, efficacyList, sideEffectList);
             gameobj_potion.transform.localPosition = Vector3.zero;
         }
+    }
+
+    bool ShelfIsEmpty(){
+        int count=0;
+        foreach(var trans in shelf_uiviews){
+            count+=trans.childCount;
+        }
+        return count==0;
     }
 
     void Clear()

@@ -5,6 +5,7 @@ using EMaterial;
 using ETag;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerClickHandler
 {
@@ -23,8 +24,8 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
 
     public void Init(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
     {
-        EfficacyList = new(efficacyList);
-        SideEffectList = new(sideEffectList);
+        EfficacyList = new(efficacyList.OrderBy(x=>(int)x).ToList());
+        SideEffectList = new(sideEffectList.OrderBy(x=>(int)x).ToList());
         var potionInfo = PotionConst.GetPotionName(materialList);
         if (potionInfo.IsNull())
         {

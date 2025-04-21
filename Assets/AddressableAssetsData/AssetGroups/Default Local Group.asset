@@ -18,82 +18,82 @@ MonoBehaviour:
   m_GUID: e0a23486e0815486c8dfab907423b5f4
   m_SerializeEntries:
   - m_GUID: 1f4ea443f9b234b25acc805d3599e15d
-    m_Address: "Assets/ArtResource/Resource/potion/\u6B62\u8840\u836F_\u74F6\u585E.png"
+    m_Address: "\u6B62\u8840\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 246cad53022404aca9e0004aabeff77b
-    m_Address: "Assets/ArtResource/Resource/potion/\u5B89\u795E\u836F_\u74F6\u585E.png"
+    m_Address: "\u5B89\u795E\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 289ce56e2683e4360be376ef438ba1d2
-    m_Address: "Assets/ArtResource/Resource/potion/\u6297\u83CC\u836F_\u74F6\u585E.png"
+    m_Address: "\u6297\u83CC\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 29f0a7911fd1940559755556c11020da
-    m_Address: "Assets/ArtResource/Resource/potion/\u5B89\u7720\u836F.png"
+    m_Address: "\u5B89\u7720\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 36c52e23608d3493691bb60dd8ffdb2a
-    m_Address: Assets/Perfebs/Customer/customer.prefab
+    m_Address: customer
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c08c21d8d2c64979829cb62b16109a8
-    m_Address: "Assets/ArtResource/Resource/potion/\u6297\u83CC\u836F.png"
+    m_Address: "\u6297\u83CC\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 518619b1d2b59460bb2478cc83b1080c
-    m_Address: "Assets/ArtResource/Resource/potion/\u6B62\u8840\u836F.png"
+    m_Address: "\u6B62\u8840\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5470e75a093f3428d86b418b697b4b6b
-    m_Address: "Assets/ArtResource/Resource/potion/\u89E3\u6BD2\u836F.png"
+    m_Address: "\u89E3\u6BD2\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54873d440ec414ef594378346d5ef044
-    m_Address: "Assets/ArtResource/Resource/potion/\u6E05\u70ED\u836F.png"
+    m_Address: "\u6E05\u70ED\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 792d6db79857a4453a971fce5594ef36
-    m_Address: "Assets/ArtResource/Resource/potion/\u5B89\u7720\u836F_\u74F6\u585E.png"
+    m_Address: "\u5B89\u7720\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81caf00989ab44095b2f46d01994a15d
-    m_Address: Assets/Perfebs/Potion/potion.prefab
+    m_Address: potion
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 95587d35814f349388e11693e3817aff
-    m_Address: "Assets/ArtResource/Resource/potion/\u6B62\u75DB\u836F_\u74F6\u585E.png"
+    m_Address: "\u6B62\u75DB\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b897e791912554f18af31ef1bf6eddea
-    m_Address: "Assets/ArtResource/Resource/potion/\u5B89\u795E\u836F.png"
+    m_Address: "\u5B89\u795E\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9e62320066654955990b3e9e7458239
-    m_Address: "Assets/ArtResource/Resource/potion/\u6E05\u70ED\u836F_\u74F6\u585E.png"
+    m_Address: "\u6E05\u70ED\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d804a73b45e3b440b95be44c38370895
-    m_Address: "Assets/ArtResource/Resource/potion/\u6B62\u75DB\u836F.png"
+    m_Address: "\u6B62\u75DB\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f4123134b41fb4708b868f40ac48a314
-    m_Address: "Assets/ArtResource/Resource/potion/\u89E3\u6BD2\u836F_\u74F6\u585E.png"
+    m_Address: "\u89E3\u6BD2\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
