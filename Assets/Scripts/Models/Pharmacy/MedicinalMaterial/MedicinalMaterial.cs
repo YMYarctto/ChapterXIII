@@ -53,6 +53,7 @@ public class MedicinalMaterial : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         var view = UIManager.instance.GetUIView<ItemInfoUI>("ItemInfoUI");
         view.RemoveAllTag();
+        view.ShowImage();
         view.ChangeTitle(medicinalMaterial_SO.Name.ToString());
         view.ChangeDescription(medicinalMaterial_SO.Description);
 

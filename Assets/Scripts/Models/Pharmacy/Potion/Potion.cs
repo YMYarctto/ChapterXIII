@@ -107,6 +107,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         var view = UIManager.instance.GetUIView<ItemInfoUI>("ItemInfoUI");
         view.RemoveAllTag();
+        view.ShowImage();
         view.ChangeTitle(potion_name);
         view.ChangeDescription(potion_description);
         foreach (Efficacy efficacy in EfficacyList)
