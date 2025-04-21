@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29f0a7911fd1940559755556c11020da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56d7a4526dc674c53b87432ad7c76815, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 803535644571686788}
   - component: {fileID: 2332495672936166248}
   m_Layer: 5
-  m_Name: Image
+  m_Name: bottle_plug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

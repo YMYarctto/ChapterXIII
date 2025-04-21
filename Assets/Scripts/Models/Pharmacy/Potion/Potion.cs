@@ -4,6 +4,7 @@ using UnityEngine;
 using EMaterial;
 using ETag;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerClickHandler
 {
@@ -18,7 +19,7 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
     GameObject potion;
     GameObject mini;
 
-    Image current_image;
+    PotionImage current_image;
 
     public void Init(List<MaterialName> materialList,List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
     {
@@ -37,14 +38,22 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
         potion.transform.localScale=new Vector3(0.25f,0.25f,0.25f);
         mini=transform.Find("potion_mini").gameObject;
         mini.SetActive(false);
-        current_image=Image.potion;
+        current_image=PotionImage.potion;
+
+        foreach(var efficacy in efficacyList){
+            var sprites = ResourceManager.instance.GetPotionSprite(efficacy.ToString());
+            if(sprites!=null){
+                potion.GetComponent<Image>().sprite=sprites.potion;
+                potion.transform.Find("bottle_plug").GetComponent<Image>().sprite=sprites.bottle_plug;
+            }
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         transform.SetParent(onDrag,true);
         transform.position=eventData.position;
-        ChangeImage(Image.potion);
+        ChangeImage(PotionImage.potion);
         ShowUI();
     }
 
@@ -67,15 +76,15 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
                 if(collider.transform.childCount ==0)
                 {
                     parent=collider.transform;
-                    current_image=Image.mini;
+                    current_image=PotionImage.mini;
                 }
             }
             
         }
         transform.SetParent(parent,true);
-        if(current_image==Image.mini)
+        if(current_image==PotionImage.mini)
         {
-            ChangeImage(Image.mini);
+            ChangeImage(PotionImage.mini);
         }
         transform.localPosition=Vector3.zero;
     }
@@ -106,9 +115,9 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
         EventManager.instance.Invoke("UI/ItemInfo/ShowUI");
     }
 
-    void ChangeImage(Image image)
+    void ChangeImage(PotionImage image)
     {
-        if(image==Image.potion){
+        if(image==PotionImage.potion){
             potion.transform.localScale=new Vector3(0.25f,0.25f,0.25f);
             mini.SetActive(false);
         }else
@@ -118,7 +127,7 @@ public class Potion : MonoBehaviour,IDragHandler,IBeginDragHandler,IEndDragHandl
         }
     }
 
-    enum Image
+    enum PotionImage
     {
         potion,
         mini,

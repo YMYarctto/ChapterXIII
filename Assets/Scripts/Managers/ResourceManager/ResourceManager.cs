@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using EResource;
-using UnityEngine.UI;
+using ResourceModel;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -25,9 +25,26 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        _=instance;
+    }
+
     void Init()
     {
-        
+        if(sprite_dict==null)
+            sprite_dict=new();
+
+        foreach(var kv in ResourceConst.potion_sprite){
+            Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
+                var t2d=handle.Result;
+                sprite_dict[kv.Key]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+            };
+            Addressables.LoadAssetAsync<Texture2D>(kv.Value+"_瓶塞").Completed += (handle) =>{
+                var t2d = handle.Result;
+                sprite_dict[kv.Key+"_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+            };
+        }
     }
 
     public GameObject GetGameObject(string url){
@@ -41,12 +58,19 @@ public class ResourceManager : MonoBehaviour
     }
 
     public Sprite GetSprite(string url){
-        Texture2D t2d=null;
-        Addressables.LoadAssetAsync<Texture2D>(url).Completed += (handle) =>{t2d = handle.Result;};
-        return Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+        if(sprite_dict.TryGetValue(url,out Sprite sprite)){
+            return sprite;
+        }
+        return null;
     }
 
-    public Sprite GetSprite(SpriteName sp){
-        return GetSprite(ResourceConst.sprites[sp]);
+    public PotionSprite GetPotionSprite(string url){
+        var Sprite_potion = GetSprite(url);
+        if(Sprite_potion==null)
+            return null;
+        var Sprite_plug = GetSprite(url+"_瓶塞");
+        if(Sprite_plug==null)
+            return null;
+        return new(Sprite_potion,Sprite_plug);
     }
 }

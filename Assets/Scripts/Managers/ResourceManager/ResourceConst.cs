@@ -3,11 +3,17 @@ using EResource;
 
 public static class ResourceConst{
     public static Dictionary<GameObjectName,string> gameObjects = new(){
-        {GameObjectName.Customer,"Assets/Perfebs/Customer/customer.prefab"},
-        {GameObjectName.Potion,"Assets/Perfebs/Potion/potion.prefab"}
+        {GameObjectName.Customer,"customer"},
+        {GameObjectName.Potion,"potion"}
     };
 
-    public static Dictionary<SpriteName,string> sprites = new(){
-        {SpriteName.安眠药,""},
+    public static Dictionary<string,string> potion_sprite = new(){
+        {"安眠","安眠药"},
+        {"安神","安神药"},
+        {"止痛","止痛药"},
+        {"止血","止血药"},
+        {"清热","清热药"},
+        {"抗菌","抗菌药"},
+        {"解毒","解毒药"},
     };
 }
