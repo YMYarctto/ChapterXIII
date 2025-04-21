@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ItemInfoUI : UIView
 {
@@ -10,9 +11,14 @@ public class ItemInfoUI : UIView
     Transform _tag;
     Transform image;
 
+    GameObject tag_prefab;
+    List<GameObject> tag_list;
+    Vector2[] tag_position;
+    int tag_index = 0;
+
     void Awake()
     {
-        UIManager.instance.AddUIView("ItemInfoUI",this);
+        UIManager.instance.AddUIView("ItemInfoUI", this);
     }
 
     public void ChangeTitle(string str)
@@ -25,47 +31,80 @@ public class ItemInfoUI : UIView
         description.GetComponent<TMP_Text>().text = str;
     }
 
-    public void ChangeTag(string str)
-    {
-        _tag.GetComponent<TMP_Text>().text = str;
-    }
-
     public override void Init()
     {
-        EventManager.instance.AddListener<string>("UI/ItemInfo/ChangeTitle", ChangeTitle);
-        EventManager.instance.AddListener<string>("UI/ItemInfo/ChangeDescription", ChangeDescription);
-        EventManager.instance.AddListener<string>("UI/ItemInfo/ChangeTag", ChangeTag);
-        EventManager.instance.AddListener("UI/ItemInfo/ShowUI",ShowUI);
+        tag_prefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.tag);
+        tag_list = new();
+        
         title = transform.Find("ItemInfo_title");
         description = transform.Find("ItemInfo_description");
         _tag = transform.Find("ItemInfo_tag");
         image = transform.Find("ItemInfo_image");
         image.gameObject.SetActive(false);
+
+        tag_position = new Vector2[6];
+        for (int i = 0; i < 6; i += 2)
+        {
+            tag_position[i] = new(-50, 115 - 25 * i);
+            tag_position[i + 1] = new(50, 115 - 25 * i);
+        }
     }
 
     public override void OnUnload()
     {
-        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeTitle", ChangeTitle);
-        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeDescription", ChangeDescription);
-        EventManager.instance?.RemoveListener<string>("UI/ItemInfo/ChangeTag", ChangeTag);
-        EventManager.instance?.RemoveListener("UI/ItemInfo/ShowUI",ShowUI);
         UIManager.instance?.RemoveUIView("ItemInfoUI");
     }
 
     public override void Enable()
     {
-        
+
     }
 
     public override void Disable()
     {
-        
+
     }
 
-    public void ShowUI(){
+    public void ShowImage()
+    {
         image.gameObject.SetActive(true);
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeTitle");
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeDescription");
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeTag");
+    }
+
+    /// <summary>
+    /// 添加标签
+    /// </summary>
+    /// <param name="str">标签内容</param>
+    /// <param name="color">标签颜色</param>
+    /// <param name="is_offseted">是否被划掉</param>
+    public void AddTag(string str, Color color, bool is_offseted)
+    {
+        if (tag_index >= 6) return;
+        GameObject gameobj_tag = Instantiate(tag_prefab, _tag);
+        gameobj_tag.transform.localPosition = tag_position[tag_index];
+        gameobj_tag.GetComponent<Image>().color = color;
+        gameobj_tag.transform.Find("tag_text").GetComponent<TMP_Text>().text = str;
+        gameobj_tag.transform.Find("tag_image").gameObject.SetActive(is_offseted);
+        tag_list.Add(gameobj_tag);
+        tag_index++;
+    }
+
+    /// <summary>
+    /// 添加标签
+    /// </summary>
+    /// <param name="str">标签内容</param>
+    /// <param name="color"><标签颜色/param>
+    public void AddTag(string str, Color color)
+    {
+        AddTag(str, color, false);
+    }
+
+    public void RemoveAllTag()
+    {
+        foreach (var obj in tag_list)
+        {
+            Destroy(obj);
+        }
+        tag_index = 0;
+        tag_list.Clear();
     }
 }

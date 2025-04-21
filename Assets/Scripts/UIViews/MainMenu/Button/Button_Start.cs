@@ -11,7 +11,7 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void Awake()
     {
-        text= GetComponentInChildren<TMP_Text>();
+        text = GetComponentInChildren<TMP_Text>();
         if (text == null)
         {
             Debug.LogError("Button: 未找到 TMP_Text 组件");
@@ -28,6 +28,6 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadSceneAsync("PharmacyScene",LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("PharmacyScene", LoadSceneMode.Additive);
     }
 }

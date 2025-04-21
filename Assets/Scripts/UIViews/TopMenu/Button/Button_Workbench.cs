@@ -10,7 +10,7 @@ public class Button_Workbench : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     void Awake()
     {
-        text= GetComponentInChildren<TMP_Text>();
+        text = GetComponentInChildren<TMP_Text>();
         if (text == null)
         {
             Debug.LogError("Button: 未找到 TMP_Text 组件");

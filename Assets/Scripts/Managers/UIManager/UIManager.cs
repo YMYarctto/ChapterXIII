@@ -48,6 +48,17 @@ public class UIManager : MonoBehaviour
             _UIs.Remove(u);
         }
     }
+
+    public T GetUIView<T>(string url)where T:UIView
+    {
+        if (!_UIs.ContainsKey(url))
+        {
+            Debug.LogError($"UIManager:\n获取Url: \"{url}\" 失败,该Url不存在");
+            return null;
+        }
+        return _UIs[url].gameObject.GetComponent<T>();
+    }
+
     public void EnableUIView(string url)
     {
         if (!_UIs.ContainsKey(url))

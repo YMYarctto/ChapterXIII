@@ -4,7 +4,8 @@ using EResource;
 public static class ResourceConst{
     public static Dictionary<GameObjectName,string> gameObjects = new(){
         {GameObjectName.Customer,"customer"},
-        {GameObjectName.Potion,"potion"}
+        {GameObjectName.Potion,"potion"},
+        {GameObjectName.tag,"tag"},
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

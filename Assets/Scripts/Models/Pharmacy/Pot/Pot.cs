@@ -6,7 +6,7 @@ using EMaterial;
 
 public class Pot : MonoBehaviour
 {
-    public GameObject PotionPrefab;
+    GameObject PotionPrefab;
 
     List<MedicinalMaterial_SO> medicinalMaterialList = new List<MedicinalMaterial_SO>();
     List<Efficacy> efficacyList = new List<Efficacy>();
@@ -20,14 +20,17 @@ public class Pot : MonoBehaviour
 
     void Awake()
     {
-        animator=GetComponent<Animator>();
+        PotionPrefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.Potion);
+
+        animator = GetComponent<Animator>();
         string[] _uiviews = {
         "Shelf_item1",
         "Shelf_item2",
         "Shelf_item3",
         };
-        for(int i=0;i<_uiviews.Length;i++){
-            shelf_uiviews[i]=GameObject.Find(_uiviews[i]).transform;
+        for (int i = 0; i < _uiviews.Length; i++)
+        {
+            shelf_uiviews[i] = GameObject.Find(_uiviews[i]).transform;
         }
     }
 
@@ -45,11 +48,12 @@ public class Pot : MonoBehaviour
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
     {
-        if(!ShelfIsEmpty()){
+        if (!ShelfIsEmpty())
+        {
             Debug.Log("请先清理架子上的药水");
             return;
         }
-        if(medicinalMaterialList.Contains(medicinalMaterial_SO))
+        if (medicinalMaterialList.Contains(medicinalMaterial_SO))
         {
             Debug.Log("药材已存在");
             return;
@@ -66,7 +70,8 @@ public class Pot : MonoBehaviour
         DebugLog();
     }
 
-    public void AddTag(){
+    public void AddTag()
+    {
         foreach (MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
         {
             foreach (Efficacy efficacy in medicinalMaterial_SO.Efficacy)
@@ -74,12 +79,12 @@ public class Pot : MonoBehaviour
                 //转化成相应负面效果
                 SideEffect sideEffect = (SideEffect)(int)efficacy;
                 //如果效果已经被抵消，跳过
-                if(offseted_efficacieList.Contains(efficacy))
+                if (offseted_efficacieList.Contains(efficacy))
                 {
                     continue;
                 }
                 //如果存在相应负面效果，移除
-                if(sideEffectList.Contains(sideEffect))
+                if (sideEffectList.Contains(sideEffect))
                 {
                     sideEffectList.Remove(sideEffect);
                     offseted_efficacieList.Add(efficacy);
@@ -97,12 +102,12 @@ public class Pot : MonoBehaviour
                 //转化成相应正面效果
                 Efficacy efficacy = (Efficacy)(int)sideEffect;
                 //如果效果已经被抵消，跳过
-                if(offseted_sideEffectList.Contains(sideEffect))
+                if (offseted_sideEffectList.Contains(sideEffect))
                 {
                     continue;
                 }
                 //如果存在相应正面效果，移除
-                if(efficacyList.Contains(efficacy))
+                if (efficacyList.Contains(efficacy))
                 {
                     efficacyList.Remove(efficacy);
                     offseted_efficacieList.Add(efficacy);
@@ -135,7 +140,7 @@ public class Pot : MonoBehaviour
 
     void InstantiatePotion(List<MaterialName> materialList)
     {
-        foreach(var view in shelf_uiviews)
+        foreach (var view in shelf_uiviews)
         {
             GameObject gameobj_potion = Instantiate(PotionPrefab, view);
             gameobj_potion.GetComponent<Potion>().Init(materialList, efficacyList, sideEffectList);
@@ -143,12 +148,14 @@ public class Pot : MonoBehaviour
         }
     }
 
-    bool ShelfIsEmpty(){
-        int count=0;
-        foreach(var trans in shelf_uiviews){
-            count+=trans.childCount;
+    bool ShelfIsEmpty()
+    {
+        int count = 0;
+        foreach (var trans in shelf_uiviews)
+        {
+            count += trans.childCount;
         }
-        return count==0;
+        return count == 0;
     }
 
     void Clear()
@@ -160,25 +167,26 @@ public class Pot : MonoBehaviour
         offseted_sideEffectList.Clear();
     }
 
-    void ShowUI(){
-        string title_str="";
-        foreach(MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
+    void ShowUI()
+    {
+        string title_str = "";
+        foreach (MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
         {
-            title_str+=medicinalMaterial_SO.Name.ToString()+" ";
+            title_str += medicinalMaterial_SO.Name.ToString() + " ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeTitle", title_str);
 
-        string efficacy_str="";
-        foreach(Efficacy efficacy in efficacyList)
+        string efficacy_str = "";
+        foreach (Efficacy efficacy in efficacyList)
         {
-            efficacy_str+=efficacy.ToString()+" ";
+            efficacy_str += efficacy.ToString() + " ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeEfficacyTag", efficacy_str);
 
-        string sideEffect_str="";
-        foreach(SideEffect sideEffect in sideEffectList)
+        string sideEffect_str = "";
+        foreach (SideEffect sideEffect in sideEffectList)
         {
-            sideEffect_str+=sideEffect.ToString()+" ";
+            sideEffect_str += sideEffect.ToString() + " ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeSideEffectTag", sideEffect_str);
         EventManager.instance.Invoke("UI/PotInfo/ShowUI");
@@ -186,23 +194,23 @@ public class Pot : MonoBehaviour
 
     void DebugLog()
     {
-        string str=$" 药材个数: {medicinalMaterialList.Count}\n 功效:";
-        foreach(Efficacy efficacy in efficacyList)
+        string str = $" 药材个数: {medicinalMaterialList.Count}\n 功效:";
+        foreach (Efficacy efficacy in efficacyList)
         {
             str += $" {efficacy},";
         }
         str += "\n 副作用:";
-        foreach(SideEffect sideEffect in sideEffectList)
+        foreach (SideEffect sideEffect in sideEffectList)
         {
             str += $" {sideEffect},";
         }
         str += "\n 被抵消的功效:";
-        foreach(Efficacy efficacy in offseted_efficacieList)
+        foreach (Efficacy efficacy in offseted_efficacieList)
         {
             str += $" {efficacy},";
         }
         str += "\n 被抵消的副作用:";
-        foreach(SideEffect sideEffect in offseted_sideEffectList)
+        foreach (SideEffect sideEffect in offseted_sideEffectList)
         {
             str += $" {sideEffect},";
         }

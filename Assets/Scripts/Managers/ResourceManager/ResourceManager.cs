@@ -7,6 +7,7 @@ using ResourceModel;
 
 public class ResourceManager : MonoBehaviour
 {
+    private Dictionary<GameObjectName,GameObject> gameObject_dict;
     private Dictionary<string,Sprite> sprite_dict;
 
     private static ResourceManager _resourceManager;
@@ -32,8 +33,8 @@ public class ResourceManager : MonoBehaviour
 
     void Init()
     {
-        if(sprite_dict==null)
-            sprite_dict=new();
+        sprite_dict??=new();
+        gameObject_dict??=new();
 
         foreach(var kv in ResourceConst.potion_sprite){
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
@@ -45,16 +46,21 @@ public class ResourceManager : MonoBehaviour
                 sprite_dict[kv.Key+"_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
             };
         }
+
+        foreach(var kv in ResourceConst.gameObjects){
+            Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
+                var obj=handle.Result;
+                gameObject_dict[kv.Key]= obj;
+            };
+        }
     }
 
-    public GameObject GetGameObject(string url){
-        GameObject prefabObj=null;
-        Addressables.LoadAssetAsync<GameObject>(url).Completed += (handle) =>{prefabObj = handle.Result;};
-        return prefabObj;
-    }
-
-    public GameObject GetGameObject(GameObjectName obj){
-        return GetGameObject(ResourceConst.gameObjects[obj]);
+    public GameObject GetGameObject(GameObjectName obj_name){
+        if(gameObject_dict.TryGetValue(obj_name,out GameObject obj)){
+            return obj;
+        }
+        Debug.Log($"获取预制体失败：{obj_name}");
+        return null;
     }
 
     public Sprite GetSprite(string url){

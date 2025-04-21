@@ -1,5 +1,7 @@
-namespace ETag{
-    public enum Efficacy{
+namespace ETag
+{
+    public enum Efficacy
+    {
         安眠,
         提神,
         止泻,
@@ -15,7 +17,8 @@ namespace ETag{
     }
 
     // offset开头的为补缺没有副作用的效果
-    public enum SideEffect{
+    public enum SideEffect
+    {
         失眠,
         嗜睡,
         腹泻,

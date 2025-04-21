@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reception :UIView
+public class Reception : UIView
 {
     void Awake()
     {
-        UIManager.instance.AddUIView("Reception",this);
+        UIManager.instance.AddUIView("Reception", this);
     }
 
     public override void Init()
     {
-        
+
     }
 
     public override void OnUnload()
@@ -21,11 +21,11 @@ public class Reception :UIView
 
     public override void Enable()
     {
-        transform.position=new(Screen.width/2,0,0);
+        transform.position = new(Screen.width / 2, 0, 0);
     }
 
     public override void Disable()
     {
-        transform.position=new(-Screen.width/2,0,0);
+        transform.position = new(-Screen.width / 2, 0, 0);
     }
 }

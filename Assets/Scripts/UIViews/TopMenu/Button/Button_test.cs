@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Button_test : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class Button_test : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     TMP_Text text;
 
     void Awake()
     {
-        text= GetComponentInChildren<TMP_Text>();
+        text = GetComponentInChildren<TMP_Text>();
         if (text == null)
         {
             Debug.LogError("Button: 未找到 TMP_Text 组件");
