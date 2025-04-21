@@ -116,7 +116,7 @@ public class Pot : MonoBehaviour
         }
         InstantiatePotion(materialList);
         Clear();
-        ShowUI();
+        EventManager.instance.Invoke("UI/PotInfo/ClearUI");
     }
 
     void InstantiatePotion(List<MaterialName> materialList)
@@ -150,7 +150,6 @@ public class Pot : MonoBehaviour
             title_str+=medicinalMaterial_SO.Name.ToString()+" ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeTitle", title_str);
-        EventManager.instance.Invoke("UI/PotInfo/ChangeTitle");
 
         string efficacy_str="";
         foreach(Efficacy efficacy in efficacyList)
@@ -158,7 +157,6 @@ public class Pot : MonoBehaviour
             efficacy_str+=efficacy.ToString()+" ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeEfficacyTag", efficacy_str);
-        EventManager.instance.Invoke("UI/PotInfo/ChangeEfficacyTag");
 
         string sideEffect_str="";
         foreach(SideEffect sideEffect in sideEffectList)
@@ -166,7 +164,7 @@ public class Pot : MonoBehaviour
             sideEffect_str+=sideEffect.ToString()+" ";
         }
         EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeSideEffectTag", sideEffect_str);
-        EventManager.instance.Invoke("UI/PotInfo/ChangeSideEffectTag");
+        EventManager.instance.Invoke("UI/PotInfo/ShowUI");
     }
 
     void DebugLog()

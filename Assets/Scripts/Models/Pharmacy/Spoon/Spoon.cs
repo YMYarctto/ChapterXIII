@@ -47,10 +47,13 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     }
 
     void ShowUI(){
+        UIManager.instance.EnableUIView("ItemInfoUI");
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTitle",spoon);
         EventManager.instance.Invoke("UI/ItemInfo/ChangeTitle");
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeDescription",description);
         EventManager.instance.Invoke("UI/ItemInfo/ChangeDescription");
+        EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTag","");
+        EventManager.instance.Invoke("UI/ItemInfo/ChangeTag");
     }
 
 }

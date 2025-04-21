@@ -28,16 +28,6 @@ public static class PotionConst
         { PotionName.安神药, "这是一瓶用于镇定精神、缓解焦虑的药剂，适合神经紧张、易惊易怒等情况，服用后心绪将逐渐平稳。" },
         { PotionName.抗菌药, "这是一瓶用于抵抗感染的药剂，可对抗常见的细菌侵袭，适合在外伤或虚弱时期使用。" },
     };
-    private static Dictionary<Efficacy,string> efficacyDict = new()
-    {
-        { Efficacy.安眠, "睡眠障碍" },
-        { Efficacy.清热, "各种热症" },
-        { Efficacy.止血, "外伤出血、疾病出血" },
-        { Efficacy.止痛, "外伤疼痛、神经疼痛" },
-        { Efficacy.解毒, "误食中毒" },
-        { Efficacy.安神, "神经紧张、易惊易怒" },
-        { Efficacy.抗菌, "病菌感染" },
-    };
     private static Dictionary<PotionName,int> priceDict = new()//暂定
     {
         { PotionName.安眠药, 50 },
@@ -71,16 +61,7 @@ public static class PotionConst
             description += $"{efficacy}、";
         }
         description = description.Substring(0, description.Length - "、".Length);
-        description += "效果的复合药剂，适用于";
-        foreach(var efficacy in efficacyList)
-        {
-            if (efficacyDict.TryGetValue(efficacy, out string str))
-            {
-                description += $"{str}、";
-            }
-        }
-        description = description.Substring(0, description.Length - "、".Length);
-        description += "等症状。请根据实际情况合理使用。";
+        description += "效果的复合药剂。请根据实际情况合理使用。";
         name+="药";
         return new PotionInfo(name, description);
     }

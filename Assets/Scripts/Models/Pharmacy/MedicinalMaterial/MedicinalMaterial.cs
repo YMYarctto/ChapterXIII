@@ -49,9 +49,7 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
 
     void ShowUI(){
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTitle",medicinalMaterial_SO.Name.ToString());
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeTitle");
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeDescription",medicinalMaterial_SO.Description);
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeDescription");
         string tag = "";
         foreach (Efficacy efficacy in medicinalMaterial_SO.Efficacy)
         {
@@ -62,6 +60,6 @@ public class MedicinalMaterial : MonoBehaviour,IBeginDragHandler, IDragHandler, 
             tag += sideEffect.ToString() + " ";
         }
         EventManager.instance.SetInvokeParam("UI/ItemInfo/ChangeTag",tag);
-        EventManager.instance.Invoke("UI/ItemInfo/ChangeTag");
+        EventManager.instance.Invoke("UI/ItemInfo/ShowUI");
     }
 }
