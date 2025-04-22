@@ -4,7 +4,6 @@ using UnityEngine;
 using ETag;
 using EMaterial;
 using EColor;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Pot : MonoBehaviour
 {
@@ -20,9 +19,12 @@ public class Pot : MonoBehaviour
 
     Transform[] shelf_uiviews = new Transform[3];
 
+    status current_status;
+
     void Awake()
     {
         PotionPrefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.Potion);
+        current_status=status.HaveWater;
 
         animator = GetComponent<Animator>();
         string[] _uiviews = {
@@ -39,17 +41,21 @@ public class Pot : MonoBehaviour
     void OnEnable()
     {
         EventManager.instance.AddListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
-        EventManager.instance.AddListener("Pot/Make", CreatePotion);
+        EventManager.instance.AddListener("Pot/Make", StarStir);
     }
 
     void OnDisable()
     {
         EventManager.instance?.RemoveListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
-        EventManager.instance?.RemoveListener("Pot/Make", CreatePotion);
+        EventManager.instance?.RemoveListener("Pot/Make", StarStir);
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
     {
+        if(current_status!=status.HaveWater){
+            Debug.Log("当前不可添加素材");
+            return;
+        }
         if (!ShelfIsEmpty())
         {
             Debug.Log("请先清理架子上的药水");
@@ -150,6 +156,21 @@ public class Pot : MonoBehaviour
         }
     }
 
+    public void StarStir(){
+        if(medicinalMaterialList.Count==0){
+            return;
+        }
+        StartCoroutine(Stir());
+    }
+
+    IEnumerator Stir(){
+        animator.SetBool("isStir",true);
+        current_status=status.Stiring;
+        yield return new WaitForSeconds(5);
+        animator.SetBool("isStir",false);
+        CreatePotion();
+    }
+
     bool ShelfIsEmpty()
     {
         int count = 0;
@@ -224,5 +245,11 @@ public class Pot : MonoBehaviour
             str += $" {sideEffect},";
         }
         Debug.Log(str);
+    }
+
+    enum status{
+        NoWater,
+        HaveWater,
+        Stiring,
     }
 }
