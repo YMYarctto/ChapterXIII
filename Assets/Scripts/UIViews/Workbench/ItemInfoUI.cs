@@ -14,6 +14,7 @@ public class ItemInfoUI : UIView
     GameObject tag_prefab;
     List<GameObject> tag_list;
     Vector2[] tag_position;
+    Vector2[] tag_position_v4;
     int tag_index = 0;
 
     void Awake()
@@ -43,10 +44,14 @@ public class ItemInfoUI : UIView
         image.gameObject.SetActive(false);
 
         tag_position = new Vector2[6];
+        tag_position_v4 = new Vector2[4];
         for (int i = 0; i < 6; i += 2)
         {
             tag_position[i] = new(-50, 115 - 25 * i);
             tag_position[i + 1] = new(50, 115 - 25 * i);
+            if(i>=4)return;
+            tag_position_v4[i]= new(-50, 90 - 25 * i);
+            tag_position_v4[i+1]=new(50, 90 - 25 * i);
         }
     }
 
@@ -79,8 +84,10 @@ public class ItemInfoUI : UIView
     public void AddTag(string str, Color color, bool is_offseted)
     {
         if (tag_index >= 6) return;
+        if(tag_index==4)ChangePositionVersion_v6();
+        
         GameObject gameobj_tag = Instantiate(tag_prefab, _tag);
-        gameobj_tag.transform.localPosition = tag_position[tag_index];
+        gameobj_tag.transform.localPosition = tag_index>=4?tag_position[tag_index]:tag_position_v4[tag_index];
         gameobj_tag.GetComponent<Image>().color = color;
         gameobj_tag.transform.Find("tag_text").GetComponent<TMP_Text>().text = str;
         gameobj_tag.transform.Find("tag_image").gameObject.SetActive(is_offseted);
@@ -96,6 +103,14 @@ public class ItemInfoUI : UIView
     public void AddTag(string str, Color color)
     {
         AddTag(str, color, false);
+    }
+
+    void ChangePositionVersion_v6()
+    {
+        for (int i=0;i<tag_list.Count;i++)
+        {
+            tag_list[i].transform.localPosition=tag_position[i];
+        }
     }
 
     public void RemoveAllTag()

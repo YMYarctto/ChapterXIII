@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ETag;
 using EMaterial;
+using EColor;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Pot : MonoBehaviour
 {
@@ -135,7 +137,7 @@ public class Pot : MonoBehaviour
         }
         InstantiatePotion(materialList);
         Clear();
-        EventManager.instance.Invoke("UI/PotInfo/ClearUI");
+        UIManager.instance.GetUIView<PotInfoUI>("PotInfoUI").ClearUI();
     }
 
     void InstantiatePotion(List<MaterialName> materialList)
@@ -169,27 +171,34 @@ public class Pot : MonoBehaviour
 
     void ShowUI()
     {
+        var view = UIManager.instance.GetUIView<PotInfoUI>("PotInfoUI");
+        view.ShowImage();
+        view.RemoveAllTag();
         string title_str = "";
         foreach (MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
         {
             title_str += medicinalMaterial_SO.Name.ToString() + " ";
         }
-        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeTitle", title_str);
+        view.ChangeTitle(title_str);
 
-        string efficacy_str = "";
+        
         foreach (Efficacy efficacy in efficacyList)
         {
-            efficacy_str += efficacy.ToString() + " ";
+            view.AddTag(efficacy.ToString(),TagColor.Efficacy);
         }
-        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeEfficacyTag", efficacy_str);
-
-        string sideEffect_str = "";
         foreach (SideEffect sideEffect in sideEffectList)
         {
-            sideEffect_str += sideEffect.ToString() + " ";
+            view.AddTag(sideEffect.ToString(),TagColor.SideEffect);
         }
-        EventManager.instance.SetInvokeParam("UI/PotInfo/ChangeSideEffectTag", sideEffect_str);
-        EventManager.instance.Invoke("UI/PotInfo/ShowUI");
+        
+        foreach (Efficacy efficacy in offseted_efficacieList)
+        {
+            view.AddTag(efficacy.ToString(),TagColor.Efficacy,true);
+        }
+        foreach (SideEffect sideEffect in offseted_sideEffectList)
+        {
+            view.AddTag(sideEffect.ToString(),TagColor.SideEffect,true);
+        }
     }
 
     void DebugLog()
