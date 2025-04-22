@@ -115,7 +115,7 @@ public class Customer_Normal : MonoBehaviour
     void ChangeUI(int index){
         for(int i=index;i<order_obj.Count;i++){
             GameObject obj=order_obj[i];
-            obj.transform.localPosition=OrderConst.PositonConst[order_obj.Count-1][i];
+            obj.transform.localPosition=OrderConst.PositonConst[order_obj.Count-index-1][i-index];
             if(i==index)
             {
                 obj.transform.Find("potion").localScale=OrderConst.PositonStruct[OrderConst.PositionScale.Focus].Scale;
