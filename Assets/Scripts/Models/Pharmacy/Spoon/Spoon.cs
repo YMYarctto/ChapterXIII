@@ -17,6 +17,18 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         drag_transform = GameObject.Find("OnDrag").transform;
     }
 
+    void OnEnable()
+    {
+        EventManager.instance.AddListener("Pot/Make/Start",HideThis);
+        EventManager.instance.AddListener("Pot/Make/Finish",ShowThis);
+    }
+
+    void OnDisable()
+    {
+        EventManager.instance?.RemoveListener("Pot/Make/Start",HideThis);
+        EventManager.instance?.RemoveListener("Pot/Make/Finish",ShowThis);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         ShowUI();
@@ -45,6 +57,14 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     public void OnPointerClick(PointerEventData eventData)
     {
         ShowUI();
+    }
+
+    public void ShowThis(){
+        transform.localScale=new Vector3(1,1,1);
+    }
+
+    public void HideThis(){
+        transform.localScale=Vector3.zero;
     }
 
     void ShowUI()

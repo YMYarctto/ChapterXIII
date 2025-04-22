@@ -157,18 +157,21 @@ public class Pot : MonoBehaviour
     }
 
     public void StarStir(){
-        if(medicinalMaterialList.Count==0){
+        if(medicinalMaterialList.Count==0||current_status!=status.HaveWater){
             return;
         }
         StartCoroutine(Stir());
     }
 
     IEnumerator Stir(){
+        EventManager.instance.Invoke("Pot/Make/Start");
         animator.SetBool("isStir",true);
         current_status=status.Stiring;
         yield return new WaitForSeconds(5);
         animator.SetBool("isStir",false);
         CreatePotion();
+        EventManager.instance.Invoke("Pot/Make/Finish");
+        current_status=status.HaveWater;
     }
 
     bool ShelfIsEmpty()
