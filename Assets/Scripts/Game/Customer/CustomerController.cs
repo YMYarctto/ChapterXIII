@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CustomerController : MonoBehaviour
 {
-    public GameObject CustomerPerfab;
+    GameObject customer_perfab;
 
     Transform customer_panel;
     Dictionary<Transform,bool> customer_area;
@@ -14,6 +14,8 @@ public class CustomerController : MonoBehaviour
 
     void Awake()
     {
+        customer_perfab=ResourceManager.instance.GetGameObject(EResource.GameObjectName.Customer);
+        
         customer_panel=GameObject.Find("Customer_Panel").transform;
         waiting_area=customer_panel.Find("Customer_Waiting");
         string[] area={"Customer_area1","Customer_area2","Customer_area3"};
@@ -55,7 +57,7 @@ public class CustomerController : MonoBehaviour
             Debug.Log("客人已满");
             return;
         }
-        var customer = Instantiate(CustomerPerfab,waiting_area);
+        var customer = Instantiate(customer_perfab,waiting_area);
         customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
         customer.transform.SetParent(trans,true);
         customer_area[trans]=true;

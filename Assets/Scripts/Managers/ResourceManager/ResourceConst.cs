@@ -5,7 +5,8 @@ public static class ResourceConst{
     public static Dictionary<GameObjectName,string> gameObjects = new(){
         {GameObjectName.Customer,"customer"},
         {GameObjectName.Potion,"potion"},
-        {GameObjectName.tag,"tag"},
+        {GameObjectName.Tag,"tag"},
+        {GameObjectName.Order,"order"}
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

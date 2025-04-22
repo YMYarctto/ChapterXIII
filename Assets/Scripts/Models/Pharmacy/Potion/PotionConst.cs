@@ -30,6 +30,8 @@ public static class PotionConst
     };
     private static Dictionary<PotionName,int> priceDict = new()//暂定
     {
+        { PotionName.提神药, 20},
+        { PotionName.止咳药, 25},
         { PotionName.安眠药, 50 },
         { PotionName.清热药, 60 },
         { PotionName.止血药, 70 },

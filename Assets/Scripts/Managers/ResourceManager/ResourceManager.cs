@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using EResource;
 using ResourceModel;
+using EPotion;
+using ETag;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -39,11 +41,11 @@ public class ResourceManager : MonoBehaviour
         foreach(var kv in ResourceConst.potion_sprite){
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
                 var t2d=handle.Result;
-                sprite_dict[kv.Key]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                sprite_dict[kv.Key+"药"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
             };
             Addressables.LoadAssetAsync<Texture2D>(kv.Value+"_瓶塞").Completed += (handle) =>{
                 var t2d = handle.Result;
-                sprite_dict[kv.Key+"_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                sprite_dict[kv.Key+"药_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
             };
         }
 
@@ -70,7 +72,15 @@ public class ResourceManager : MonoBehaviour
         return null;
     }
 
-    public PotionSprite GetPotionSprite(string url){
+    public PotionSprite GetPotionSprite(PotionName url){
+        return GetPotionSprite(url.ToString());
+    }
+
+    public PotionSprite GetPotionSprite(Efficacy url){
+        return GetPotionSprite(url.ToString()+"药");
+    }
+
+    PotionSprite GetPotionSprite(string url){
         var Sprite_potion = GetSprite(url);
         if(Sprite_potion==null)
             return null;

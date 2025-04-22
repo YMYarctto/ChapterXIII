@@ -34,7 +34,7 @@ public class ItemInfoUI : UIView
 
     public override void Init()
     {
-        tag_prefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.tag);
+        tag_prefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.Tag);
         tag_list = new();
         
         title = transform.Find("ItemInfo_title");

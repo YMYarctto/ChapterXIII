@@ -3,7 +3,9 @@ namespace EPotion
     public enum PotionName
     {
         安眠药 = 0,
+        提神药 = 1,
         清热药 = 3,
+        止咳药 = 4,
         止血药 = 6,
         止痛药 = 7,
         解毒药 = 5,
