@@ -12,10 +12,13 @@ public class CustomerController : MonoBehaviour
     Dictionary<Transform,bool> customer_area;
     Transform waiting_area;
 
+    Queue<GameObject> customer_inWaiting;
+
     void Awake()
     {
         customer_perfab=ResourceManager.instance.GetGameObject(EResource.GameObjectName.Customer);
         
+        customer_inWaiting=new();
         customer_panel=GameObject.Find("Customer_Panel").transform;
         waiting_area=customer_panel.Find("Customer_Waiting");
         string[] area={"Customer_area1","Customer_area2","Customer_area3"};
@@ -47,19 +50,28 @@ public class CustomerController : MonoBehaviour
                 customer_area[list[i]]=false;
             }
         }
+        for(Transform trans=GetAvailableArea();trans!=null&&customer_inWaiting.Count!=0;)
+        {
+            CreateCustomer(customer_inWaiting.Dequeue(),trans);
+        }
     }
 
     public void CreateCustomer(){
         Transform trans = GetAvailableArea();
+        var customer = Instantiate(customer_perfab,waiting_area);
         if(trans==null)
         {
-            //TODO
-            Debug.Log("客人已满");
+            customer.SetActive(false);
+            customer_inWaiting.Enqueue(customer);
             return;
         }
-        var customer = Instantiate(customer_perfab,waiting_area);
-        customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
+        CreateCustomer(customer,trans);
+    }
+
+    public void CreateCustomer(GameObject customer,Transform trans){
+        customer.SetActive(true);
         customer.transform.SetParent(trans,true);
+        customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
         customer_area[trans]=true;
         customer.GetComponent<Customer_Normal>().Init().SetStatusRunning();
     }

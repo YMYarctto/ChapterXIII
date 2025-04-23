@@ -31,7 +31,7 @@ namespace EColor
         {
             get
             {
-                ColorUtility.TryParseHtmlString("#38E000", out Color color);
+                ColorUtility.TryParseHtmlString("#8ECACB", out Color color);
                 return color;
             }
         }

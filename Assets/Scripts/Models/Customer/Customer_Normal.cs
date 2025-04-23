@@ -9,7 +9,9 @@ using UnityEngine.UI;
 
 public class Customer_Normal : MonoBehaviour
 {
-    public float Speed;
+    Color customer_color;
+    float customer_a_speed=0.6f;
+
     Order_SO order_SO;
     GameObject order_perfab;
 
@@ -19,7 +21,6 @@ public class Customer_Normal : MonoBehaviour
     List<GameObject> order_obj = new();
     Status current_status = Status.Waiting;
 
-    Transform waiting_area;
     GameObject request;
     Collider2D collider_2d;
     PatienceBar patienceBar;
@@ -32,13 +33,13 @@ public class Customer_Normal : MonoBehaviour
     {
         if (current_status == Status.Running)
         {
-            if (transform.localPosition.x > 0)
+            if (customer_color.a<1)
             {
-                transform.localPosition -= new Vector3(Speed * Time.fixedDeltaTime, 0, 0);
+                customer_color.a=customer_color.a+customer_a_speed*Time.fixedDeltaTime>1?1:customer_color.a+customer_a_speed*Time.fixedDeltaTime;
+                GetComponent<Image>().color=customer_color;
             }
             else
             {
-                transform.localPosition.Set(0, transform.localPosition.y, transform.localPosition.z);
                 SetStatus(Status.Order);
             }
         }
@@ -53,9 +54,10 @@ public class Customer_Normal : MonoBehaviour
         }
         if (current_status == Status.Leaving)
         {
-            if (transform.localPosition.x < 0)
+            if (customer_color.a>0)
             {
-                transform.localPosition += new Vector3(Speed * Time.fixedDeltaTime, 0, 0);
+                customer_color.a=customer_color.a-customer_a_speed*Time.fixedDeltaTime<0?0:customer_color.a-customer_a_speed*Time.fixedDeltaTime;
+                GetComponent<Image>().color=customer_color;
             }
             else
             {
@@ -68,12 +70,14 @@ public class Customer_Normal : MonoBehaviour
     {
         order_SO=DataManager.instance.Order;
         order_perfab=ResourceManager.instance.GetGameObject(GameObjectName.Order);
+        customer_color=GetComponent<Image>().color;
+        customer_color.a=0;
+        GetComponent<Image>().color=customer_color;
 
         current_waiting_time=waiting_time_max;
         System.Random ran = new();
         int order_count = order_SO.RandomOrderCount();
         SetStatus(Status.Waiting);
-        waiting_area = GameObject.Find("Customer_Waiting").transform;
         request = transform.Find("request").gameObject;
         patienceBar = request.transform.Find("patience_bar").GetComponent<PatienceBar>();
         collider_2d=request.GetComponent<BoxCollider2D>();
@@ -158,7 +162,6 @@ public class Customer_Normal : MonoBehaviour
     {
         //TODO
         Debug.Log("获得金钱：" + current_price);
-        transform.SetParent(waiting_area);
         SetStatus(Status.Leaving);
         EventManager.instance.Invoke("Customer/Leave");
     }
