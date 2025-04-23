@@ -25,7 +25,7 @@ public class Customer_Normal : MonoBehaviour
     Collider2D collider_2d;
     PatienceBar patienceBar;
 
-    float waiting_time_max=15;
+    float waiting_time_max=25;
     float current_waiting_time;
     float waiting_time_scale=0f;
 
