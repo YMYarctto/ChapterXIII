@@ -22,6 +22,11 @@ public class Customer_Normal : MonoBehaviour
     Transform waiting_area;
     GameObject request;
     Collider2D collider_2d;
+    PatienceBar patienceBar;
+
+    float waiting_time_max=15;
+    float current_waiting_time;
+    float waiting_time_scale=0f;
 
     void FixedUpdate()
     {
@@ -35,6 +40,15 @@ public class Customer_Normal : MonoBehaviour
             {
                 transform.localPosition.Set(0, transform.localPosition.y, transform.localPosition.z);
                 SetStatus(Status.Order);
+            }
+        }
+        if(current_status==Status.Order)
+        {
+            current_waiting_time-=waiting_time_scale*Time.fixedDeltaTime;
+            patienceBar.ChangeUI(current_waiting_time/waiting_time_max);
+            if(current_waiting_time<=0){
+                SettlePrice();
+                SetStatus(Status.Leaving);
             }
         }
         if (current_status == Status.Leaving)
@@ -55,11 +69,13 @@ public class Customer_Normal : MonoBehaviour
         order_SO=DataManager.instance.Order;
         order_perfab=ResourceManager.instance.GetGameObject(GameObjectName.Order);
 
+        current_waiting_time=waiting_time_max;
         System.Random ran = new();
         int order_count = order_SO.RandomOrderCount();
         SetStatus(Status.Waiting);
         waiting_area = GameObject.Find("Customer_Waiting").transform;
         request = transform.Find("request").gameObject;
+        patienceBar = request.transform.Find("patience_bar").GetComponent<PatienceBar>();
         collider_2d=request.GetComponent<BoxCollider2D>();
         collider_2d.enabled=false;
         request.SetActive(false);
@@ -103,6 +119,7 @@ public class Customer_Normal : MonoBehaviour
 
     public void Order_Recept(){
         collider_2d.enabled=true;
+        waiting_time_scale=1f;
         ChangeUI(0);
     }
 
