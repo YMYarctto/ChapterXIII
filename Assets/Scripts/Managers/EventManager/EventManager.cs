@@ -25,6 +25,10 @@ public class EventManager : MonoBehaviour
             return _eventManager;
         }
     }
+    void Awake()
+    {
+        _=instance;
+    }
     void Init()
     {
         _events ??= new();

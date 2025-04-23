@@ -20,6 +20,7 @@ public class Pot : MonoBehaviour
     Transform[] shelf_uiviews = new Transform[3];
 
     status current_status;
+    float current_time;
 
     void Awake()
     {
@@ -48,6 +49,16 @@ public class Pot : MonoBehaviour
     {
         EventManager.instance?.RemoveListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
         EventManager.instance?.RemoveListener("Pot/Make", StarStir);
+    }
+
+    void FixedUpdate()
+    {
+        if(current_status==status.Stiring)
+            if(current_time>0){
+                current_time-=Time.fixedDeltaTime;
+            }else{
+                current_status=status.Finish;
+            }
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
@@ -167,7 +178,8 @@ public class Pot : MonoBehaviour
         EventManager.instance.Invoke("Pot/Make/Start");
         animator.SetBool("isStir",true);
         current_status=status.Stiring;
-        yield return new WaitForSeconds(5);
+        current_time=5f;
+        yield return new WaitUntil(()=>current_status==status.Finish);
         animator.SetBool("isStir",false);
         CreatePotion();
         EventManager.instance.Invoke("Pot/Make/Finish");
@@ -254,5 +266,6 @@ public class Pot : MonoBehaviour
         NoWater,
         HaveWater,
         Stiring,
+        Finish,
     }
 }

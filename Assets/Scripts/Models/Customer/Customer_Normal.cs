@@ -21,6 +21,7 @@ public class Customer_Normal : MonoBehaviour
 
     Transform waiting_area;
     GameObject request;
+    Collider2D collider_2d;
 
     void FixedUpdate()
     {
@@ -59,13 +60,14 @@ public class Customer_Normal : MonoBehaviour
         SetStatus(Status.Waiting);
         waiting_area = GameObject.Find("Customer_Waiting").transform;
         request = transform.Find("request").gameObject;
+        collider_2d=request.GetComponent<BoxCollider2D>();
+        collider_2d.enabled=false;
         request.SetActive(false);
         for(int i=0;i<order_count;i++)
         {
             potionList.Add(order_SO.PotionRange[ran.Next(order_SO.PotionRange.Count)]);
             CreateOrder(potionList[i]);
         }
-        ChangeUI(0);
         return this;
     }
 
@@ -76,7 +78,7 @@ public class Customer_Normal : MonoBehaviour
 
     public void GivePotion(Potion potion)
     {
-        PotionName potionName = potionList[current_potion_index];
+        PotionName potionName = potionList[current_potion_index]; 
         Efficacy tag = (Efficacy)(int)potionName;
         float price = PotionConst.GetPotionPrice(potionName);
         if (!potion.EfficacyList.Contains(tag))
@@ -99,6 +101,15 @@ public class Customer_Normal : MonoBehaviour
         ChangeUI(current_potion_index);
     }
 
+    public void Order_Recept(){
+        collider_2d.enabled=true;
+        ChangeUI(0);
+    }
+
+    public void Order_Refuse(){
+        SettlePrice();
+    }
+
     void CreateOrder(PotionName potionName){
         GameObject obj=Instantiate(order_perfab,request.transform);
         var sprites=ResourceManager.instance.GetPotionSprite(potionName);
@@ -109,6 +120,7 @@ public class Customer_Normal : MonoBehaviour
             potion.transform.Find("bottle_plug").GetComponent<RectTransform>().sizeDelta=new Vector2(sprites.bottle_plug.bounds.size.x*100,sprites.bottle_plug.bounds.size.y*100);
         }
         obj.transform.Find("order_text").GetComponent<TMP_Text>().text=potionName.ToString();
+        obj.SetActive(false);
         order_obj.Add(obj);
     }
 
@@ -121,6 +133,7 @@ public class Customer_Normal : MonoBehaviour
                 obj.transform.Find("potion").localScale=OrderConst.PositonStruct[OrderConst.PositionScale.Focus].Scale;
                 obj.transform.Find("order_text").GetComponent<TMP_Text>().fontSize=OrderConst.PositonStruct[OrderConst.PositionScale.Focus].FontSize;
             }
+            obj.SetActive(true);
         }
     }
 
