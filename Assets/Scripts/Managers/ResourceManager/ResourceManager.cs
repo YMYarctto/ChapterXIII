@@ -9,7 +9,7 @@ using ETag;
 
 public class ResourceManager : MonoBehaviour
 {
-    private Dictionary<GameObjectName,GameObject> gameObject_dict;
+    private Dictionary<string,GameObject> gameObject_dict;
     private Dictionary<string,Sprite> sprite_dict;
 
     private static ResourceManager _resourceManager;
@@ -38,7 +38,8 @@ public class ResourceManager : MonoBehaviour
         sprite_dict??=new();
         gameObject_dict??=new();
 
-        foreach(var kv in ResourceConst.potion_sprite){
+        foreach(var kv in ResourceConst.potion_sprite)
+        {
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
                 var t2d=handle.Result;
                 sprite_dict[kv.Key+"药"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
@@ -49,20 +50,42 @@ public class ResourceManager : MonoBehaviour
             };
         }
 
-        foreach(var kv in ResourceConst.gameObjects){
+        foreach(var kv in ResourceConst.gameObjects)
+        {
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
-                gameObject_dict[kv.Key]= obj;
+                gameObject_dict[kv.Key.ToString()]= obj;
+            };
+        }
+
+        foreach(var kv in ResourceConst.customer_normal_gameobject)
+        {
+            Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
+                var obj=handle.Result;
+                gameObject_dict[kv.Key.ToString()]= obj;
             };
         }
     }
 
     public GameObject GetGameObject(GameObjectName obj_name){
-        if(gameObject_dict.TryGetValue(obj_name,out GameObject obj)){
+        if(gameObject_dict.TryGetValue(obj_name.ToString(),out GameObject obj)){
             return obj;
         }
         Debug.Log($"获取预制体失败：{obj_name}");
         return null;
+    }
+
+    public List<GameObject> GetNormalCustomerList_v2(){
+        List<GameObject> list=new();
+        foreach(var v in ResourceConst.customer_normal_gameobject.Values){
+            if(gameObject_dict.TryGetValue(v,out GameObject obj)){
+                list.Add(obj);
+                list.Add(obj);
+                continue;
+            }
+            Debug.Log($"获取预制体失败：{v}");
+        }
+        return list;
     }
 
     public Sprite GetSprite(string url){

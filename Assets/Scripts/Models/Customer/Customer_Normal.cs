@@ -12,7 +12,8 @@ public class Customer_Normal : MonoBehaviour
     Color customer_color;
     float customer_a_speed=0.6f;
 
-    Order_SO order_SO;
+    OrderData_SO order_data;
+    CustomerData_SO customer_data;
     GameObject order_perfab;
 
     float current_price;
@@ -25,9 +26,8 @@ public class Customer_Normal : MonoBehaviour
     Collider2D collider_2d;
     PatienceBar patienceBar;
 
-    float waiting_time_max=25;
     float current_waiting_time;
-    float waiting_time_scale=0f;
+    float waiting_time_scale;
 
     void FixedUpdate()
     {
@@ -46,7 +46,7 @@ public class Customer_Normal : MonoBehaviour
         if(current_status==Status.Order)
         {
             current_waiting_time-=waiting_time_scale*Time.fixedDeltaTime;
-            patienceBar.ChangeUI(current_waiting_time/waiting_time_max);
+            patienceBar.ChangeUI(current_waiting_time/customer_data.CustomerWaitingTime);
             if(current_waiting_time<=0){
                 SettlePrice();
                 SetStatus(Status.Leaving);
@@ -61,6 +61,7 @@ public class Customer_Normal : MonoBehaviour
             }
             else
             {
+                EventManager.instance.Invoke("Customer/Leave");
                 Destroy(gameObject);
             }
         }
@@ -68,15 +69,17 @@ public class Customer_Normal : MonoBehaviour
 
     public Customer_Normal Init()
     {
-        order_SO=DataManager.instance.Order;
+        order_data=DataManager.instance.OrderData;
         order_perfab=ResourceManager.instance.GetGameObject(GameObjectName.Order);
+        customer_data=DataManager.instance.CustomerData;
         customer_color=GetComponent<Image>().color;
         customer_color.a=0;
         GetComponent<Image>().color=customer_color;
 
-        current_waiting_time=waiting_time_max;
+        current_waiting_time=customer_data.CustomerWaitingTime;
+        waiting_time_scale=customer_data.OrderingTimeScale;
         System.Random ran = new();
-        int order_count = order_SO.RandomOrderCount();
+        int order_count = order_data.RandomOrderCount();
         SetStatus(Status.Waiting);
         request = transform.Find("request").gameObject;
         patienceBar = request.transform.Find("patience_bar").GetComponent<PatienceBar>();
@@ -85,7 +88,7 @@ public class Customer_Normal : MonoBehaviour
         request.SetActive(false);
         for(int i=0;i<order_count;i++)
         {
-            potionList.Add(order_SO.PotionRange[ran.Next(order_SO.PotionRange.Count)]);
+            potionList.Add(order_data.PotionRange[ran.Next(order_data.PotionRange.Count)]);
             CreateOrder(potionList[i]);
         }
         return this;
@@ -123,7 +126,7 @@ public class Customer_Normal : MonoBehaviour
 
     public void Order_Recept(){
         collider_2d.enabled=true;
-        waiting_time_scale=1f;
+        waiting_time_scale=customer_data.WaitingTimeScale;
         ChangeUI(0);
     }
 
@@ -163,7 +166,7 @@ public class Customer_Normal : MonoBehaviour
         //TODO
         Debug.Log("获得金钱：" + current_price);
         SetStatus(Status.Leaving);
-        EventManager.instance.Invoke("Customer/Leave");
+        transform.SetParent(transform.parent,true);
     }
 
     void SetStatus(Status status)

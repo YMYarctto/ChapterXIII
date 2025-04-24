@@ -3,10 +3,18 @@ using EResource;
 
 public static class ResourceConst{
     public static Dictionary<GameObjectName,string> gameObjects = new(){
-        {GameObjectName.Customer,"customer"},
         {GameObjectName.Potion,"potion"},
         {GameObjectName.Tag,"tag"},
         {GameObjectName.Order,"order"}
+    };
+
+    public static Dictionary<NormalCustomerName,string> customer_normal_gameobject=new(){
+        {NormalCustomerName.兔子,"兔子"},
+        {NormalCustomerName.垂耳兔,"垂耳兔"},
+        {NormalCustomerName.蘑菇,"蘑菇"},
+        {NormalCustomerName.黑猫,"黑猫"},
+        {NormalCustomerName.三花,"三花"},
+        {NormalCustomerName.狐狸,"狐狸"},
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

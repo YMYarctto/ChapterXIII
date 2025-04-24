@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using EPotion;
 
-[CreateAssetMenu(fileName = "Order_SO", menuName = "Data/Order_SO", order = 2)]
-public class Order_SO : ScriptableObject
+[CreateAssetMenu(fileName = "OrderData_SO", menuName = "Data/OrderData_SO", order = 2)]
+public class OrderData_SO : ScriptableObject
 {
-    public List<int> OrderCount;
+    [Header("顾客点单数量(1/2/3)的对应权值")]public List<int> OrderCount;
 
-    public List<PotionName> PotionRange;
+    [Header("顾客点单数量的随机范围")]public List<PotionName> PotionRange;
 
     public int RandomOrderCount(){
         System.Random ran = new();

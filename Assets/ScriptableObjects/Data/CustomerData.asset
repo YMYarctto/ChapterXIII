@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0365cf0cf57da4af58081c64e4554d27, type: 3}
-  m_Name: OrderRange
+  m_Script: {fileID: 11500000, guid: 2bd886936d44647c184b55a6aacb8b80, type: 3}
+  m_Name: CustomerData
   m_EditorClassIdentifier: 
-  OrderCount: 4b00000019000000
-  PotionRange: 00000000010000000300000004000000
+  CustomerWaitingTime: 30
+  OrderingTimeScale: 0
+  WaitingTimeScale: 1

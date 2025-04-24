@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    public Order_SO Order{get=>_order;}
+    public OrderData_SO OrderData{get=>order_data;}
+    public CustomerData_SO CustomerData{get=>customer_data;}
 
-    [SerializeField]private Order_SO _order;
+    [SerializeField]private OrderData_SO order_data;
+    [SerializeField]private CustomerData_SO customer_data;
     private static DataManager _dataManager;
     public static DataManager instance
     {

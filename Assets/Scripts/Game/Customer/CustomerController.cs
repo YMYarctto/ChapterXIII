@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class CustomerController : MonoBehaviour
 {
-    GameObject customer_perfab;
+    List<GameObject> customer_perfab_list;
+    Queue<GameObject> random_customer_list;
 
     Transform customer_panel;
     Dictionary<Transform,bool> customer_area;
@@ -16,7 +17,8 @@ public class CustomerController : MonoBehaviour
 
     void Awake()
     {
-        customer_perfab=ResourceManager.instance.GetGameObject(EResource.GameObjectName.Customer);
+        customer_perfab_list=ResourceManager.instance.GetNormalCustomerList_v2();
+        random_customer_list=RandomList(customer_perfab_list);
         
         customer_inWaiting=new();
         customer_panel=GameObject.Find("Customer_Panel").transform;
@@ -57,6 +59,10 @@ public class CustomerController : MonoBehaviour
     }
 
     public void CreateCustomer(){
+        if(random_customer_list.Count==0){
+            random_customer_list=RandomList(customer_perfab_list);
+        }
+        GameObject customer_perfab=random_customer_list.Dequeue();
         Transform trans = GetAvailableArea();
         var customer = Instantiate(customer_perfab,waiting_area);
         if(trans==null)
@@ -90,4 +96,19 @@ public class CustomerController : MonoBehaviour
         return transList[ran.Next(transList.Count)];
     }
 
+    Queue<GameObject> RandomList(List<GameObject> gameObject_list){
+        List<GameObject> list=new(gameObject_list);
+        GameObject temp;
+        System.Random ran=new();
+        int max=list.Count;
+        for(int i=0;i<max-1;i++)
+        {
+            int j=ran.Next(i,max);
+            if(j==i)continue;
+            temp=list[i];
+            list[i]=list[j];
+            list[j]=temp;
+        }
+        return new Queue<GameObject>(list);
+    }
 }
