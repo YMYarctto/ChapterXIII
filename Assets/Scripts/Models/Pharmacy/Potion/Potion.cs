@@ -75,13 +75,20 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
                 Destroy(gameObject);
                 return;
             }
-
             if (collider.CompareTag("Inventory"))
             {
                 if (collider.transform.childCount == 0)
                 {
                     parent = collider.transform;
                     current_image = PotionImage.mini;
+                }
+            }
+            if (collider.CompareTag("InWarehouse"))
+            {
+                if (collider.transform.childCount == 0)
+                {
+                    parent = collider.transform;
+                    current_image = PotionImage.potion;
                 }
             }
 

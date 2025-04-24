@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CustomerData
   m_EditorClassIdentifier: 
   CustomerWaitingTime:
-  - 40
+  - 30
+  - 45
   - 60
-  - 80
   OrderingTimeScale: 0
   WaitingTimeScale: 1
   TipRate:

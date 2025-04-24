@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7768216a7d043e3a552ed758333676, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  TotalTime: 300
+  TotalTime: 180
   InitialWaitingTime: 30
   CustomerRefreshTime: 15

@@ -30,6 +30,16 @@ public class Customer_Normal : MonoBehaviour
     float current_waiting_time;
     float waiting_time_scale;
 
+    void OnEnable()
+    {
+        EventManager.instance.AddListener("Customer/SettleMoney",SettleMoney);
+    }
+
+    void OnDisable()
+    {
+        EventManager.instance.RemoveListener("Customer/SettleMoney",SettleMoney);
+    }
+
     void FixedUpdate()
     {
         if (current_status == Status.Running)
@@ -49,7 +59,7 @@ public class Customer_Normal : MonoBehaviour
             current_waiting_time-=waiting_time_scale*Time.fixedDeltaTime;
             patienceBar.ChangeUI(current_waiting_time/customer_waiting_time);
             if(current_waiting_time<=0){
-                SettlePrice();
+                SettleMoney();
                 SetStatus(Status.Leaving);
             }
         }
@@ -116,7 +126,7 @@ public class Customer_Normal : MonoBehaviour
         current_potion_index++;
         if (current_potion_index >= potionList.Count)
         {
-            SettlePrice();
+            SettleMoney();
             return;
         }
         ChangeUI(current_potion_index);
@@ -129,7 +139,7 @@ public class Customer_Normal : MonoBehaviour
     }
 
     public void Order_Refuse(){
-        SettlePrice();
+        SettleMoney();
     }
 
     void CreateOrderList(int order_count){
@@ -168,11 +178,11 @@ public class Customer_Normal : MonoBehaviour
         }
     }
 
-    void SettlePrice()
+    void SettleMoney()
     {
-        //TODO
+        if(current_status!=Status.Order)return;
         current_price*=customer_data.GetTipRate(current_waiting_time/customer_waiting_time);
-        Debug.Log("获得金钱：" + current_price);
+        GameController.AddMoney(current_price);
         SetStatus(Status.Leaving);
         transform.SetParent(transform.parent,true);
     }
@@ -183,7 +193,7 @@ public class Customer_Normal : MonoBehaviour
         if (status == Status.Order)
             request.SetActive(true);
         if (status == Status.Leaving)
-            request.SetActive(false);
+            request?.SetActive(false);
     }
 
     enum Status

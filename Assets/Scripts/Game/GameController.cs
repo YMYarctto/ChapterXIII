@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    static float money;
+
     GameData_SO game_data;
     TotalTimer totalTimer;
 
@@ -33,7 +35,11 @@ public class GameController : MonoBehaviour
             totalTimer.ChangeTimeUI((int)remain_time);
             StartCoroutine(ChangeTotalTime());
         }else{
+            totalTimer.ChangeTimeUI(0);
             StopAllCoroutines();
+            EventManager.instance.Invoke("Customer/SettleMoney");
+            //TODO
+            Debug.Log("累计获得金币: "+money);
         }
     }
 
@@ -42,5 +48,10 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(time);
         EventManager.instance.Invoke("Customer/Create");
         StartCoroutine(NextCustomer(game_data.CustomerRefreshTime));
+    }
+
+    public static void AddMoney(float m){
+        money+=m;
+        UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter").ChangeUI(money);
     }
 }

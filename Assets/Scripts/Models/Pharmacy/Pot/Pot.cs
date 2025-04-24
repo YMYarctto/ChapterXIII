@@ -67,12 +67,6 @@ public class Pot : MonoBehaviour
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
     {
         if(current_status!=status.HaveWater){
-            Debug.Log("当前不可添加素材");
-            return;
-        }
-        if (!ShelfIsEmpty())
-        {
-            Debug.Log("请先清理架子上的药水");
             return;
         }
         if (medicinalMaterialList.Contains(medicinalMaterial_SO))
@@ -150,6 +144,10 @@ public class Pot : MonoBehaviour
     /// </summary>
     public void CreatePotion()
     {
+        if (!ShelfIsEmpty())
+        {
+            return;
+        }
         List<MaterialName> materialList = new List<MaterialName>();
         foreach (MedicinalMaterial_SO medicinalMaterial_SO in medicinalMaterialList)
         {
