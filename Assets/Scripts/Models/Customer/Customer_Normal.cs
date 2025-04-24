@@ -193,7 +193,7 @@ public class Customer_Normal : MonoBehaviour
         if (status == Status.Order)
             request.SetActive(true);
         if (status == Status.Leaving)
-            request?.SetActive(false);
+            request.SetActive(false);
     }
 
     enum Status
