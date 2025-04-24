@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EPotion;
 
-[CreateAssetMenu(fileName = "OrderData_SO", menuName = "Data/OrderData_SO", order = 2)]
+[CreateAssetMenu(fileName = "OrderData_SO", menuName = "Data/Customer/OrderData_SO")]
 public class OrderData_SO : ScriptableObject
 {
     [Header("顾客点单数量(1/2/3)的对应权值")]public List<int> OrderCount;

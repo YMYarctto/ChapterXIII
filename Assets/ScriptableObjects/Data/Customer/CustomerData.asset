@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd886936d44647c184b55a6aacb8b80, type: 3}
   m_Name: CustomerData
   m_EditorClassIdentifier: 
-  CustomerWaitingTime: 30
+  CustomerWaitingTime: []
   OrderingTimeScale: 0
   WaitingTimeScale: 1
+  TipRate:
+  - 1.4
+  - 1.2
+  - 1

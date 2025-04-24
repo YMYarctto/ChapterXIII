@@ -9,6 +9,8 @@ public class Pot : MonoBehaviour
 {
     GameObject PotionPrefab;
 
+    PotData_SO pot_data;
+
     List<MedicinalMaterial_SO> medicinalMaterialList = new List<MedicinalMaterial_SO>();
     List<Efficacy> efficacyList = new List<Efficacy>();
     List<SideEffect> sideEffectList = new List<SideEffect>();
@@ -25,6 +27,7 @@ public class Pot : MonoBehaviour
     void Awake()
     {
         PotionPrefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.Potion);
+        pot_data = DataManager.instance.PotData;
         current_status=status.HaveWater;
 
         animator = GetComponent<Animator>();
@@ -178,7 +181,7 @@ public class Pot : MonoBehaviour
         EventManager.instance.Invoke("Pot/Make/Start");
         animator.SetBool("isStir",true);
         current_status=status.Stiring;
-        current_time=5f;
+        current_time=pot_data.GetStirTime(medicinalMaterialList.Count);
         yield return new WaitUntil(()=>current_status==status.Finish);
         animator.SetBool("isStir",false);
         CreatePotion();

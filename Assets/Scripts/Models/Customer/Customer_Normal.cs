@@ -26,6 +26,7 @@ public class Customer_Normal : MonoBehaviour
     Collider2D collider_2d;
     PatienceBar patienceBar;
 
+    float customer_waiting_time;
     float current_waiting_time;
     float waiting_time_scale;
 
@@ -46,7 +47,7 @@ public class Customer_Normal : MonoBehaviour
         if(current_status==Status.Order)
         {
             current_waiting_time-=waiting_time_scale*Time.fixedDeltaTime;
-            patienceBar.ChangeUI(current_waiting_time/customer_data.CustomerWaitingTime);
+            patienceBar.ChangeUI(current_waiting_time/customer_waiting_time);
             if(current_waiting_time<=0){
                 SettlePrice();
                 SetStatus(Status.Leaving);
@@ -76,8 +77,6 @@ public class Customer_Normal : MonoBehaviour
         customer_color.a=0;
         GetComponent<Image>().color=customer_color;
 
-        current_waiting_time=customer_data.CustomerWaitingTime;
-        waiting_time_scale=customer_data.OrderingTimeScale;
         System.Random ran = new();
         int order_count = order_data.RandomOrderCount();
         SetStatus(Status.Waiting);
@@ -91,6 +90,9 @@ public class Customer_Normal : MonoBehaviour
             potionList.Add(order_data.PotionRange[ran.Next(order_data.PotionRange.Count)]);
             CreateOrder(potionList[i]);
         }
+        customer_waiting_time=customer_data.GetWaitingTime(potionList.Count);
+        current_waiting_time=customer_waiting_time;
+        waiting_time_scale=customer_data.OrderingTimeScale;
         return this;
     }
 
@@ -164,6 +166,7 @@ public class Customer_Normal : MonoBehaviour
     void SettlePrice()
     {
         //TODO
+        current_price*=customer_data.GetTipRate(current_waiting_time/customer_waiting_time);
         Debug.Log("获得金钱：" + current_price);
         SetStatus(Status.Leaving);
         transform.SetParent(transform.parent,true);

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0365cf0cf57da4af58081c64e4554d27, type: 3}
   m_Name: OrderData
   m_EditorClassIdentifier: 
-  OrderCount: 4b00000019000000
+  OrderCount: 4b0000001900000000000000
   PotionRange: 00000000010000000300000004000000
