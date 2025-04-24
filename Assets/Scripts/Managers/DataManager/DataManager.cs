@@ -7,10 +7,12 @@ public class DataManager : MonoBehaviour
     public OrderData_SO OrderData{get=>order_data;}
     public CustomerData_SO CustomerData{get=>customer_data;}
     public PotData_SO PotData{get=>pot_data;}
+    public GameData_SO GameData{get=>game_data;}
 
     [SerializeField]private OrderData_SO order_data;
     [SerializeField]private CustomerData_SO customer_data;
     [SerializeField]private PotData_SO pot_data;
+    [SerializeField]private GameData_SO game_data;
     private static DataManager _dataManager;
     public static DataManager instance
     {

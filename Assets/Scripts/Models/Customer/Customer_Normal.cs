@@ -77,7 +77,6 @@ public class Customer_Normal : MonoBehaviour
         customer_color.a=0;
         GetComponent<Image>().color=customer_color;
 
-        System.Random ran = new();
         int order_count = order_data.RandomOrderCount();
         SetStatus(Status.Waiting);
         request = transform.Find("request").gameObject;
@@ -85,11 +84,8 @@ public class Customer_Normal : MonoBehaviour
         collider_2d=request.GetComponent<BoxCollider2D>();
         collider_2d.enabled=false;
         request.SetActive(false);
-        for(int i=0;i<order_count;i++)
-        {
-            potionList.Add(order_data.PotionRange[ran.Next(order_data.PotionRange.Count)]);
-            CreateOrder(potionList[i]);
-        }
+        CreateOrderList(order_count);
+
         customer_waiting_time=customer_data.GetWaitingTime(potionList.Count);
         current_waiting_time=customer_waiting_time;
         waiting_time_scale=customer_data.OrderingTimeScale;
@@ -134,6 +130,15 @@ public class Customer_Normal : MonoBehaviour
 
     public void Order_Refuse(){
         SettlePrice();
+    }
+
+    void CreateOrderList(int order_count){
+        System.Random ran = new();
+        for(int i=0;i<order_count;i++)
+        {
+            potionList.Add(order_data.PotionRange[ran.Next(order_data.PotionRange.Count)]);
+            CreateOrder(potionList[i]);
+        }
     }
 
     void CreateOrder(PotionName potionName){
