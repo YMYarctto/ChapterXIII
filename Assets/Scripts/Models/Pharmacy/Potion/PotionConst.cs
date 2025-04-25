@@ -8,6 +8,7 @@ using ETag;
 
 public static class PotionConst
 {
+    public static Dictionary<List<MaterialName>,PotionName> PotionDict{get=>potionDict;}
     private static Dictionary<List<MaterialName>,PotionName> potionDict = new()
     {
         { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.迷灵薄荷 }, PotionName.安眠药 },

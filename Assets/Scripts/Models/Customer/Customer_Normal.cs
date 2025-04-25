@@ -37,7 +37,7 @@ public class Customer_Normal : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.instance.RemoveListener("Customer/SettleMoney",SettleMoney);
+        EventManager.instance?.RemoveListener("Customer/SettleMoney",SettleMoney);
     }
 
     void FixedUpdate()

@@ -2120,7 +2120,8 @@ MonoBehaviour:
   customer_data: {fileID: 11400000, guid: b388fc0f58aea4b45a2d470c718bae84, type: 2}
   pot_data: {fileID: 11400000, guid: d5d6bbf1cfdd94bd4bddf0e60e8212b2, type: 2}
   game_data: {fileID: 11400000, guid: f959ad4b36d9b4e61bf7996a47490e7d, type: 2}
-  save_data_list: []
+  save_data_list:
+  - {fileID: 11400000, guid: d740ac3a650634ec18531cf4b7eb622d, type: 2}
 --- !u!4 &1651023147
 Transform:
   m_ObjectHideFlags: 0

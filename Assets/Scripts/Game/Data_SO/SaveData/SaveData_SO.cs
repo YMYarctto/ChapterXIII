@@ -32,7 +32,7 @@ public class SaveData_SO : ScriptableObject
         }
         var json = File.ReadAllText(path);
         data = JsonUtility.FromJson<SaveDataModel>(json);
-        Debug.Log($"成功读取到 {fileName}.sav.");
+        Debug.Log($"成功读取到 {fileName}.sav");
     }
 
     public void DeleteFile()
