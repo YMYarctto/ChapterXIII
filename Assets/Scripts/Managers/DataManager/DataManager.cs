@@ -8,11 +8,13 @@ public class DataManager : MonoBehaviour
     public CustomerData_SO CustomerData{get=>customer_data;}
     public PotData_SO PotData{get=>pot_data;}
     public GameData_SO GameData{get=>game_data;}
+    public SaveData_SO DefaultSaveData{get=>save_data_list[0];}
 
     [SerializeField]private OrderData_SO order_data;
     [SerializeField]private CustomerData_SO customer_data;
     [SerializeField]private PotData_SO pot_data;
     [SerializeField]private GameData_SO game_data;
+    [SerializeField][Header("首个存档为默认存档")]private List<SaveData_SO> save_data_list;
     private static DataManager _dataManager;
     public static DataManager instance
     {
