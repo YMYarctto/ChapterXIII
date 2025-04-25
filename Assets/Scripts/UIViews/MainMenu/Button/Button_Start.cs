@@ -28,6 +28,7 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerClick(PointerEventData eventData)
     {
+        DataManager.instance.LoadSaveData(0);
         SceneManager.LoadSceneAsync("PharmacyScene", LoadSceneMode.Additive);
     }
 }

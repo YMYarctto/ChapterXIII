@@ -12,9 +12,8 @@ public class MaterialController : MonoBehaviour
     void Awake()
     {
         save_data=DataManager.instance.DefaultSaveData;
-        Transform[] transforms=GetComponentsInChildren<Transform>();
-        List<int> list=save_data.GetMaterialList();
-        foreach(var trans in transforms)
+        List<int> list=save_data.MaterialList;
+        foreach(Transform trans in transform)
         {
             int id = (int)trans.gameObject.GetComponent<MedicinalMaterial>().medicinalMaterial_SO.ID;
             if(!list.Contains(id)){

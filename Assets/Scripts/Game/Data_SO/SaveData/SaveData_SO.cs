@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SaveData_SO", menuName = "Data/Save/SaveData_SO")]
 public class SaveData_SO : ScriptableObject
 {
+    public bool isInit{get=>File.Exists(GetPath());}
+    public List<int> MaterialList{get=>new(data.MaterialList);}
+
     public string fileName;
     SaveDataModel data;
 
-    public void SaveByJson()
+    public void SaveToFile()
     {
+        data.SaveTime=System.DateTime.Now.ToString();
         var json = JsonUtility.ToJson(data);
         var path = GetPath();
 
         File.WriteAllText(path, json);
     }
 
-    public void LoadFromJson()
+    public void LoadFromFile()
     {
         var path = GetPath();
-        if(!File.Exists(path))
+        if(!isInit)
         {
             Init();
-            SaveByJson();
+            SaveToFile();
             return;
         }
         var json = File.ReadAllText(path);
@@ -43,21 +46,27 @@ public class SaveData_SO : ScriptableObject
         Init();
     }
 
+    public void LoadFromSO(SaveData_SO save_data)
+    {
+        if(!save_data.isInit)
+        {
+            save_data.LoadFromFile();
+        }
+        data=save_data.data;
+    }
+
+    public void SetData(SaveDataModel _data)
+    {
+        data = _data;
+    }
+
     string GetPath()
     {
         return Path.Combine(Application.persistentDataPath, fileName+".sav");
     }
 
-    public List<int> GetMaterialList()
-    {
-        return new(data.MaterialList);
-    }
-
     void Init()
     {
-        data.Day=1;
-        data.Money=0;
-        data.San=6;
-        data.MaterialList=new(){1,2,14,15};
+        data.Init();
     }
 }

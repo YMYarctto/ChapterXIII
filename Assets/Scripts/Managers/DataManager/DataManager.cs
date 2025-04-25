@@ -32,6 +32,25 @@ public class DataManager : MonoBehaviour
     }
     void Init()
     {
-        
+        if(!DefaultSaveData.isInit)
+        {
+            save_data_list[0].LoadFromFile();
+        }
+        foreach(var save_data in save_data_list)
+        {
+            if(save_data.isInit)
+            {
+                save_data.LoadFromFile();
+            }
+        }
+    }
+
+    public void LoadSaveData(int index)
+    {
+        if(index>=save_data_list.Count||index<=0)
+        {
+            return;
+        }
+        save_data_list[0].LoadFromSO(save_data_list[index]);
     }
 }
