@@ -44,6 +44,12 @@ public class CustomerController : MonoBehaviour
     }
 
     public void Refresh(){
+        StartCoroutine(ERefresh());
+    }
+
+    IEnumerator ERefresh()
+    {
+        yield return new WaitForFixedUpdate();
         List<Transform> list=new(customer_area.Keys);
         for(int i=0;i<list.Count;i++)
         {

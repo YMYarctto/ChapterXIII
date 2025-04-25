@@ -62,8 +62,8 @@ public class Customer_Normal : MonoBehaviour
             }
             else
             {
-                EventManager.instance.Invoke("Customer/Leave");
                 Destroy(gameObject);
+                EventManager.instance.Invoke("Customer/Leave");
             }
         }
     }

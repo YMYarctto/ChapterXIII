@@ -83,7 +83,6 @@ public class Pot : MonoBehaviour
         animator.SetTrigger("Add");
         AddTag();
         ShowUI();
-        DebugLog();
     }
 
     public void AddTag()
@@ -236,31 +235,6 @@ public class Pot : MonoBehaviour
         {
             view.AddTag(sideEffect.ToString(),TagColor.SideEffect,true);
         }
-    }
-
-    void DebugLog()
-    {
-        string str = $" 药材个数: {medicinalMaterialList.Count}\n 功效:";
-        foreach (Efficacy efficacy in efficacyList)
-        {
-            str += $" {efficacy},";
-        }
-        str += "\n 副作用:";
-        foreach (SideEffect sideEffect in sideEffectList)
-        {
-            str += $" {sideEffect},";
-        }
-        str += "\n 被抵消的功效:";
-        foreach (Efficacy efficacy in offseted_efficacieList)
-        {
-            str += $" {efficacy},";
-        }
-        str += "\n 被抵消的副作用:";
-        foreach (SideEffect sideEffect in offseted_sideEffectList)
-        {
-            str += $" {sideEffect},";
-        }
-        Debug.Log(str);
     }
 
     enum status{

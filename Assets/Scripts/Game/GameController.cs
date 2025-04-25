@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        CustomerTotal=new();
         CustomerNormalTotal=new();
         CustomerNormalRecepted=new();
         CustomerSpecialTotal=new();
@@ -77,6 +78,8 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(3);
         //TODO
         Debug.Log("累计获得金币: "+money);
+        Debug.Log("服务的客人: "+CustomerNormalRecepted.value+"/"+CustomerNormalTotal.value);
+        Debug.Log("拒绝的客人: "+CustomerRefused.value);
     }
 
     public static void AddMoney(float m)
@@ -93,7 +96,7 @@ public class GameController : MonoBehaviour
 
     public class Int_OnlyAdd
     {
-        public int value{get;}
+        public int value{get=>_value;}
         int _value;
         public Int_OnlyAdd()
         {
