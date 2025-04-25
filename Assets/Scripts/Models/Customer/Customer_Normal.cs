@@ -30,16 +30,6 @@ public class Customer_Normal : MonoBehaviour
     float current_waiting_time;
     float waiting_time_scale;
 
-    void OnEnable()
-    {
-        EventManager.instance.AddListener("Customer/SettleMoney",SettleMoney);
-    }
-
-    void OnDisable()
-    {
-        EventManager.instance?.RemoveListener("Customer/SettleMoney",SettleMoney);
-    }
-
     void FixedUpdate()
     {
         if (current_status == Status.Running)
@@ -135,10 +125,12 @@ public class Customer_Normal : MonoBehaviour
     public void Order_Recept(){
         collider_2d.enabled=true;
         waiting_time_scale=customer_data.WaitingTimeScale;
+        GameController.CustomerNormalRecepted.Add();
         ChangeUI(0);
     }
 
     public void Order_Refuse(){
+        GameController.CustomerRefused.Add();
         SettleMoney();
     }
 
@@ -185,6 +177,7 @@ public class Customer_Normal : MonoBehaviour
         GameController.AddMoney(current_price);
         SetStatus(Status.Leaving);
         transform.SetParent(transform.parent,true);
+        GameController.CustomerLeave.Add();
     }
 
     void SetStatus(Status status)

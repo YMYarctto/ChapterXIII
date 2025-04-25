@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
+    public static int SAN{get=>san;}
+
     static float money;
+    static int san;
+    public static Int_OnlyAdd CustomerTotal;
+    public static Int_OnlyAdd CustomerNormalTotal;
+    public static Int_OnlyAdd CustomerNormalRecepted;
+    public static Int_OnlyAdd CustomerSpecialTotal;
+    public static Int_OnlyAdd CustomerSpecialRecepted;
+    public static Int_OnlyAdd CustomerRefused;
+    public static Int_OnlyAdd CustomerLeave;
 
     GameData_SO game_data;
     TotalTimer totalTimer;
@@ -13,6 +25,12 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        CustomerNormalTotal=new();
+        CustomerNormalRecepted=new();
+        CustomerSpecialTotal=new();
+        CustomerSpecialRecepted=new();
+        CustomerLeave=new();
+        CustomerRefused=new();
         game_data=DataManager.instance.GameData;
         remain_time=game_data.TotalTime;
         StartCoroutine(init());
@@ -37,10 +55,14 @@ public class GameController : MonoBehaviour
         }else{
             totalTimer.ChangeTimeUI(0);
             StopAllCoroutines();
-            EventManager.instance.Invoke("Customer/SettleMoney");
-            //TODO
-            Debug.Log("累计获得金币: "+money);
+            StartCoroutine(WaitAllCustomerLeave());
         }
+    }
+
+    IEnumerator WaitAllCustomerLeave()
+    {
+        yield return new WaitUntil(()=>CustomerTotal.value==CustomerLeave.value);
+        StartCoroutine(TodayFinish());
     }
 
     IEnumerator NextCustomer(float time)
@@ -50,8 +72,36 @@ public class GameController : MonoBehaviour
         StartCoroutine(NextCustomer(game_data.CustomerRefreshTime));
     }
 
-    public static void AddMoney(float m){
+    IEnumerator TodayFinish()
+    {
+        yield return new WaitForSeconds(3);
+        //TODO
+        Debug.Log("累计获得金币: "+money);
+    }
+
+    public static void AddMoney(float m)
+    {
         money+=m;
         UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter").ChangeUI(money);
+    }
+
+    public static void ChangeSAN(int s)
+    {
+        san=s;
+        //TODO UI
+    }
+
+    public class Int_OnlyAdd
+    {
+        public int value{get;}
+        int _value;
+        public Int_OnlyAdd()
+        {
+            _value=0;
+        }
+        public void Add()
+        {
+            _value++;
+        }
     }
 }
