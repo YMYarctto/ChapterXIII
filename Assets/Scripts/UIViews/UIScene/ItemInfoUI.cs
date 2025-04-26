@@ -62,12 +62,12 @@ public class ItemInfoUI : UIView
 
     public override void Enable()
     {
-
+        transform.position = new(0, transform.position.y, 0);
     }
 
     public override void Disable()
     {
-
+        transform.position = new(Screen.width, transform.position.y, 0);
     }
 
     public void ShowImage()
@@ -121,5 +121,13 @@ public class ItemInfoUI : UIView
         }
         tag_index = 0;
         tag_list.Clear();
+    }
+
+    public void RemoveAll()
+    {
+        RemoveAllTag();
+        image.gameObject.SetActive(false);
+        ChangeTitle("");
+        ChangeDescription("");
     }
 }

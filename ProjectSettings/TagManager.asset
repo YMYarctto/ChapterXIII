@@ -8,6 +8,7 @@ TagManager:
   - Inventory
   - Customer
   - InWarehouse
+  - Ash_bin
   layers:
   - Default
   - TransparentFX

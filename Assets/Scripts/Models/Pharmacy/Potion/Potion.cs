@@ -69,6 +69,12 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         // 检测是否有碰撞题，有则是否为物品栏
         if (collider != null)
         {
+            if(collider.CompareTag("Ash_bin"))
+            {
+                UIManager.instance.GetUIView<ItemInfoUI>("ItemInfoUI").RemoveAll();
+                Destroy(gameObject);
+                return;
+            }
             if (collider.CompareTag("Customer"))
             {
                 collider.transform.parent.GetComponent<Customer_Normal>().GivePotion(this);

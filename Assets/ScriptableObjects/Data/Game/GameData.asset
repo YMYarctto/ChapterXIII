@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   TotalTime: 180
-  InitialWaitingTime: 2
+  InitialWaitingTime: 31
   CustomerRefreshTime: 15

@@ -30,5 +30,6 @@ public class Button_Workbench : MonoBehaviour, IPointerEnterHandler, IPointerExi
         UIManager.instance.EnableUIView("Workbench");
         UIManager.instance.DisableUIView("Reception");
         UIManager.instance.DisableUIView("Warehouse");
+        UIManager.instance.EnableUIView("ItemInfoUI");
     }
 }

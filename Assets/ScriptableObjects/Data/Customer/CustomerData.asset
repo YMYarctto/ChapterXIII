@@ -16,7 +16,7 @@ MonoBehaviour:
   - 30
   - 45
   - 60
-  OrderingTimeScale: 0
+  OrderingTimeScale: 0.5
   WaitingTimeScale: 1
   TipRate:
   - 1.4
