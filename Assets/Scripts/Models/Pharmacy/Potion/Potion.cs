@@ -22,6 +22,8 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     GameObject mini;
 
     PotionImage current_image;
+    bool incollider=false;
+    AshBin ash_bin;
 
     public void Init(List<MaterialName> materialList, List<Efficacy> efficacyList, List<SideEffect> sideEffectList)
     {
@@ -91,7 +93,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
             }
             if (collider.CompareTag("InWarehouse"))
             {
-                if (collider.transform.childCount == 0)
+                if (!incollider&&collider.transform.childCount == 0)
                 {
                     parent = collider.transform;
                     current_image = PotionImage.potion;
@@ -110,6 +112,28 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
+        Collider2D collider = Physics2D.Raycast(eventData.position, Vector2.zero).collider;
+        if (collider != null)
+        {
+            if(!incollider&&collider.CompareTag("Ash_bin"))
+            {
+                ash_bin??=collider.GetComponent<AshBin>();
+                ash_bin.Open();
+                incollider=true;
+            }
+            if(incollider&&!collider.CompareTag("Ash_bin"))
+            {
+                ash_bin??=collider.GetComponent<AshBin>();
+                ash_bin.Close();
+                incollider=false;
+            }
+            return;
+        }
+        if(incollider&&ash_bin!=null)
+        {
+            ash_bin.Close();
+            incollider=false;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)

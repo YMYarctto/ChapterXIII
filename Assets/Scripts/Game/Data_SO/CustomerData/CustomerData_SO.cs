@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ECustomer;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,6 +9,8 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(fileName = "CustomerData_SO", menuName = "Data/Customer/CustomerData_SO")]
 public class CustomerData_SO : ScriptableObject
 {
+    public Dictionary<string,int> CustomerStageDict{get=>Customer_Stage.ToDictionary(item=>item.customerName.ToString(),item=>item.stage);}
+
     [Header("点(1/2/3)单的顾客等待时间(秒)")]public List<float> CustomerWaitingTime;
     [Header("未接单时，时间消耗倍率")][Range(0,1)]public float OrderingTimeScale;
     [Header("接单后，时间消耗倍率")]public float WaitingTimeScale;

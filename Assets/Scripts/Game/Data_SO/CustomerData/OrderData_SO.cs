@@ -53,5 +53,12 @@ public class OrderData_SO : ScriptableObject
                 potion_range.Add(List_PotionName.Value);
             }
         }
+        foreach(var List_PotionName in PotionConst.PotionDict_v2)
+        {
+            if(material_list.Contains(List_PotionName.Key))
+            {
+                potion_range.AddRange(List_PotionName.Value);
+            }
+        }
     }
 }

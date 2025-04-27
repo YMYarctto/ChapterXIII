@@ -83,6 +83,7 @@ public abstract class Customer : MonoBehaviour
 
         potionList=new();
         order_obj=new();
+        order_data.LoadData();
         int order_count = order_data.RandomOrderCount();
         SetStatus(Status.Waiting);
         request = transform.Find("request").gameObject;
@@ -102,7 +103,8 @@ public abstract class Customer : MonoBehaviour
         System.Random ran = new();
         for(int i=0;i<order_count;i++)
         {
-            potionList.Add(order_data.PotionRange.Intersect(CurrentCustomer.PotionRequest).ToList()[ran.Next(order_data.PotionRange.Count)]);
+            var list = order_data.PotionRange.Intersect(CurrentCustomer.PotionRequest).ToList();
+            potionList.Add(list[ran.Next(list.Count)]);
             CreateOrder(potionList[i]);
         }
     }

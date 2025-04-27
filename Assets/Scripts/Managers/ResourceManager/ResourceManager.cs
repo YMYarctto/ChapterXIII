@@ -33,6 +33,7 @@ public class ResourceManager : MonoBehaviour
     {
         sprite_dict??=new();
         gameObject_dict??=new();
+        customer_SO_dict??=new();
         StartCoroutine(InitDataManager());
     }
 
@@ -75,6 +76,8 @@ public class ResourceManager : MonoBehaviour
             LoadCount++;
         }
         yield return new WaitUntil(()=>current_cout>=LoadCount);
+        Debug.Log("游戏初始化成功");
+        dataManager.Init();
         StartCoroutine(InitResource());
     }
 
@@ -121,14 +124,15 @@ public class ResourceManager : MonoBehaviour
         foreach(var kv in ResourceConst.customer_normal_gameobject)
         {
             Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
-                var obj=handle.Result;
-                customer_SO_dict[kv.Key.ToString()]= obj;
+                var so=handle.Result;
+                customer_SO_dict[kv.Key.ToString()]= so;
                 current_cout++;
             };
             LoadCount++;
         }
 
         yield return new WaitUntil(()=>current_cout>=LoadCount);
+        Debug.Log("加载资源成功");
         //TODO
     }
 
@@ -142,10 +146,15 @@ public class ResourceManager : MonoBehaviour
 
     public List<GameObject> GetNormalCustomerList_v2(){
         List<GameObject> list=new();
+        var dict=DataManager.instance.CustomerData.CustomerStageDict;
+        int current_stage=DataManager.instance.DefaultSaveData.Stage;
         foreach(var v in ResourceConst.customer_normal_gameobject.Values){
             if(gameObject_dict.TryGetValue(v,out GameObject obj)){
-                list.Add(obj);
-                list.Add(obj);
+                if(dict.TryGetValue(obj.name,out int stage)&&stage<=current_stage)
+                {
+                    list.Add(obj);
+                    list.Add(obj);
+                }
                 continue;
             }
             Debug.Log($"获取预制体失败: {v}");

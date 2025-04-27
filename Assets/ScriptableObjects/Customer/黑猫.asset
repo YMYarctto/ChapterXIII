@@ -9,19 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd886936d44647c184b55a6aacb8b80, type: 3}
-  m_Name: CustomerData
+  m_Script: {fileID: 11500000, guid: 8e5e60ebc38764ae187d16578b8d854f, type: 3}
+  m_Name: "\u9ED1\u732B"
   m_EditorClassIdentifier: 
-  CustomerWaitingTime:
-  - 30
-  - 45
-  - 60
-  OrderingTimeScale: 0.5
-  WaitingTimeScale: 1
-  TipRate:
-  - 1.4
-  - 1.2
-  - 1
-  Customer_Stage:
-  - customerName: 0
-    stage: 0
+  ID: B1
+  Classification: 1
+  Name: 4
+  PotionRequest: 010000000b000000
+  DialogOrder:
+  - www
+  DialogSuccess:
+  - w
+  DialogFail:
+  - nnn

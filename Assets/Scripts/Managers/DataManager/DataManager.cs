@@ -8,7 +8,13 @@ public class DataManagerChange
     public CustomerData_SO customer_data{set=>DataManager.instance.customer_data=value;}
     public PotData_SO pot_data{set=>DataManager.instance.pot_data=value;}
     public GameData_SO game_data{set=>DataManager.instance.game_data=value;}
-    public SaveData_SO save_data_list_Add{set=>DataManager.instance.save_data_list.Add(value);}
+    public SaveData_SO save_data_list_Add{
+        set=>DataManager.instance.save_data_list.Add(value);
+        }
+    public void Init()
+    {
+        DataManager.instance.Init();
+    }
 }
 
 public class DataManager : MonoBehaviour
@@ -39,7 +45,11 @@ public class DataManager : MonoBehaviour
             return _dataManager;
         }
     }
-    void Init()
+    void Awake()
+    {
+        save_data_list??=new();
+    }
+    internal void Init()
     {
         if(!DefaultSaveData.isInit)
         {

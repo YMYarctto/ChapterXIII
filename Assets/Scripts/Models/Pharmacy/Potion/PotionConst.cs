@@ -9,6 +9,7 @@ using ETag;
 public static class PotionConst
 {
     public static Dictionary<List<MaterialName>,PotionName> PotionDict{get=>potionDict;}
+    public static Dictionary<MaterialName,List<PotionName>> PotionDict_v2{get=>potionDict_v2;}
     private static Dictionary<List<MaterialName>,PotionName> potionDict = new()
     {
         { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.迷灵薄荷 }, PotionName.安眠药 },
@@ -18,6 +19,11 @@ public static class PotionConst
         { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.灰胆根,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.解毒药 },
         { new List<MaterialName> { MaterialName.石心花,MaterialName.月落藤,MaterialName.虹须萝卜,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.安神药 },
         { new List<MaterialName> { MaterialName.银须菌,MaterialName.虹须萝卜 }, PotionName.抗菌药 },
+    };
+    private static Dictionary<MaterialName,List<PotionName>> potionDict_v2 = new()
+    {
+        {MaterialName.迷灵薄荷,new(){PotionName.提神药}},
+        {MaterialName.烈根生姜,new(){PotionName.止咳药}},
     };
     private static Dictionary<PotionName, string> potionDescriptionDict = new()
     {
