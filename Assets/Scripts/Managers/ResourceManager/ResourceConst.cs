@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using EResource;
+using ECustomer;
 
 public static class ResourceConst{
     public static Dictionary<GameObjectName,string> gameObjects = new(){
@@ -8,13 +9,13 @@ public static class ResourceConst{
         {GameObjectName.Order,"order"}
     };
 
-    public static Dictionary<NormalCustomerName,string> customer_normal_gameobject=new(){
-        {NormalCustomerName.兔子,"兔子"},
-        {NormalCustomerName.垂耳兔,"垂耳兔"},
-        {NormalCustomerName.蘑菇,"蘑菇"},
-        {NormalCustomerName.黑猫,"黑猫"},
-        {NormalCustomerName.三花,"三花"},
-        {NormalCustomerName.狐狸,"狐狸"},
+    public static Dictionary<CustomerName,string> customer_normal_gameobject=new(){
+        {CustomerName.栗帽兔,"栗帽兔"},
+        {CustomerName.精灵兔,"精灵兔"},
+        {CustomerName.蘑菇,"蘑菇"},
+        {CustomerName.黑猫,"黑猫"},
+        {CustomerName.三花,"三花"},
+        {CustomerName.狐狸,"狐狸"},
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

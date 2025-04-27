@@ -12,7 +12,6 @@ public class OrderData_SO : ScriptableObject
         get{
             if(potion_range.Count==0)
             {
-                Debug.Log("loadData");
                 LoadData(); 
             }
             return potion_range;

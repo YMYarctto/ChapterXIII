@@ -6,11 +6,13 @@ using EResource;
 using ResourceModel;
 using EPotion;
 using ETag;
+using ECustomer;
 
 public class ResourceManager : MonoBehaviour
 {
     private Dictionary<string,GameObject> gameObject_dict;
     private Dictionary<string,Sprite> sprite_dict;
+    private Dictionary<string,Customer_SO> customer_SO_dict;
 
     private static ResourceManager _resourceManager;
     public static ResourceManager instance
@@ -65,13 +67,21 @@ public class ResourceManager : MonoBehaviour
                 gameObject_dict[kv.Key.ToString()]= obj;
             };
         }
+
+        foreach(var kv in ResourceConst.customer_normal_gameobject)
+        {
+            Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
+                var obj=handle.Result;
+                customer_SO_dict[kv.Key.ToString()]= obj;
+            };
+        }
     }
 
     public GameObject GetGameObject(GameObjectName obj_name){
         if(gameObject_dict.TryGetValue(obj_name.ToString(),out GameObject obj)){
             return obj;
         }
-        Debug.Log($"获取预制体失败：{obj_name}");
+        Debug.Log($"获取预制体失败: {obj_name}");
         return null;
     }
 
@@ -83,9 +93,17 @@ public class ResourceManager : MonoBehaviour
                 list.Add(obj);
                 continue;
             }
-            Debug.Log($"获取预制体失败：{v}");
+            Debug.Log($"获取预制体失败: {v}");
         }
         return list;
+    }
+
+    public Customer_SO GetCustomerSO(string cus_name){
+        if(customer_SO_dict.TryGetValue(cus_name,out Customer_SO so)){
+            return so;
+        }
+        Debug.Log($"获取SO文件失败: {cus_name}");
+        return null;
     }
 
     public Sprite GetSprite(string url){
