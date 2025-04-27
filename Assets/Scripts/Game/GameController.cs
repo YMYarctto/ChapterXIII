@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -88,9 +87,9 @@ public class GameController : MonoBehaviour
         UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter").ChangeUI(money);
     }
 
-    public static void ChangeSAN(int s)
+    public static void AddSAN(int s)
     {
-        san=s;
+        san=san+s>=0?san+s:0;
         //TODO UI
     }
 

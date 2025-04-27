@@ -25,3 +25,5 @@ MonoBehaviour:
   Customer_Stage:
   - customerName: 0
     stage: 0
+  - customerName: 4
+    stage: 0

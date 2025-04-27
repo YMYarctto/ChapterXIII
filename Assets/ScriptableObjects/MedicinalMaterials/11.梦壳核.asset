@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5e60ebc38764ae187d16578b8d854f, type: 3}
-  m_Name: "\u8611\u83C7"
+  m_Script: {fileID: 11500000, guid: e78a636c4d6fd4435aa722a9db4a6efe, type: 3}
+  m_Name: "11.\u68A6\u58F3\u6838"
   m_EditorClassIdentifier: 
-  ID: A3
-  Classification: 0
-  Name: 2
-  PotionRequest: 
-  DialogOrder: []
-  DialogSuccess: []
-  DialogFail: []
+  ID: 0
+  Name: 0
+  Efficacy: 
+  SideEffect: 
+  Description: 

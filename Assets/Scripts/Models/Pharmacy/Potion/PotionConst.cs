@@ -19,6 +19,9 @@ public static class PotionConst
         { new List<MaterialName> { MaterialName.凉影果,MaterialName.骨响草,MaterialName.灰胆根,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.解毒药 },
         { new List<MaterialName> { MaterialName.石心花,MaterialName.月落藤,MaterialName.虹须萝卜,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.安神药 },
         { new List<MaterialName> { MaterialName.银须菌,MaterialName.虹须萝卜 }, PotionName.抗菌药 },
+        { new List<MaterialName> { MaterialName.诡枯脂,MaterialName.烈根生姜,MaterialName.迷灵薄荷 }, PotionName.毒药 },
+        { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.骨响草,MaterialName.梦壳核,MaterialName.迷灵薄荷 }, PotionName.致幻药 },
+        { new List<MaterialName> { MaterialName.绵眠叶,MaterialName.石心花,MaterialName.煌光粉,MaterialName.虹须萝卜,MaterialName.迷灵薄荷 }, PotionName.快乐药 },
     };
     private static Dictionary<MaterialName,List<PotionName>> potionDict_v2 = new()
     {
@@ -34,6 +37,9 @@ public static class PotionConst
         { PotionName.解毒药, "这是一瓶用于清除体内毒素的药剂，适合因误食或中毒引起的不适，使用后可快速稳定症状。" },
         { PotionName.安神药, "这是一瓶用于镇定精神、缓解焦虑的药剂，适合神经紧张、易惊易怒等情况，服用后心绪将逐渐平稳。" },
         { PotionName.抗菌药, "这是一瓶用于抵抗感染的药剂，可对抗常见的细菌侵袭，适合在外伤或虚弱时期使用。" },
+        { PotionName.毒药,"这瓶药剂未列入官方认证目录，标签模糊，成分未知。曾有客人私下表示它“令人安静”。监管部不建议处理此类药剂，除非你确定目标不会投诉。"},
+        { PotionName.致幻药,"这瓶药剂会扰乱使用者的五感，引发视觉、听觉甚至时间感知的异常。有客人称它“能看到过去的人”，也有人因此失踪。监管部曾多次勒令销毁此类药剂，切勿陈列于货架。"},
+        { PotionName.快乐药,"这瓶药剂会使人进入极度愉悦与满足的状态，有时伴随无差别的爱意和短暂健忘。它是某些“特殊客人”的最爱。请牢记：快乐不等于安全。"},
     };
     private static Dictionary<PotionName,int> priceDict = new()//暂定
     {
@@ -46,6 +52,9 @@ public static class PotionConst
         { PotionName.解毒药, 90 },
         { PotionName.安神药, 100 },
         { PotionName.抗菌药, 110 },
+        { PotionName.毒药, 450 },
+        { PotionName.致幻药, 600 },
+        { PotionName.快乐药, 800 },
     };
 
     public static PotionInfo GetPotionName(List<MaterialName> materialNames)

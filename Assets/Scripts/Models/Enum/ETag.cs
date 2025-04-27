@@ -14,6 +14,8 @@ namespace ETag
         止吐,
         抗过敏,
         抗菌,
+        offset欣快,
+        offset致幻,
     }
 
     // offset开头的为补缺没有副作用的效果
@@ -31,5 +33,7 @@ namespace ETag
         恶心,
         过敏,
         offset抗菌,
+        欣快,
+        致幻,
     }
 }

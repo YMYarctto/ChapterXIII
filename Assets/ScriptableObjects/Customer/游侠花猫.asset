@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e7768216a7d043e3a552ed758333676, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: 8e5e60ebc38764ae187d16578b8d854f, type: 3}
+  m_Name: "\u6E38\u4FA0\u82B1\u732B"
   m_EditorClassIdentifier: 
-  TotalTime: 10
-  InitialWaitingTime: 1
-  CustomerRefreshTime: 4
+  ID: B2
+  Classification: 1
+  Name: 3
+  PotionRequest: 
+  DialogOrder: []
+  DialogSuccess: []
+  DialogFail: []

@@ -8,10 +8,10 @@ namespace ECustomer
     {
         栗帽兔,
         精灵兔,
-        蘑菇,
-        三花,
+        蘑菇兔,
+        游侠花猫,
         黑猫,
-        狐狸,
+        笑面冰狐,
     }
 
     public enum CustomerClassification

@@ -12,10 +12,10 @@ public static class ResourceConst{
     public static Dictionary<CustomerName,string> customer_normal_gameobject=new(){
         {CustomerName.栗帽兔,"栗帽兔"},
         {CustomerName.精灵兔,"精灵兔"},
-        {CustomerName.蘑菇,"蘑菇"},
+        {CustomerName.蘑菇兔,"蘑菇兔"},
         {CustomerName.黑猫,"黑猫"},
-        {CustomerName.三花,"三花"},
-        {CustomerName.狐狸,"狐狸"},
+        {CustomerName.游侠花猫,"游侠花猫"},
+        {CustomerName.笑面冰狐,"笑面冰狐"},
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

@@ -10,7 +10,7 @@ using System.Linq;
 
 public abstract class Customer : MonoBehaviour
 {
-    Customer_SO CurrentCustomer;
+    protected Customer_SO CurrentCustomer;
 
     Color customer_color;
     float customer_a_speed=0.6f;
@@ -99,7 +99,7 @@ public abstract class Customer : MonoBehaviour
         return this;
     }
 
-    void CreateOrderList(int order_count){
+    protected virtual void CreateOrderList(int order_count){
         System.Random ran = new();
         for(int i=0;i<order_count;i++)
         {
@@ -109,14 +109,14 @@ public abstract class Customer : MonoBehaviour
         }
     }
 
-    public void Order_Recept(){
+    public virtual void Order_Recept(){
         collider_2d.enabled=true;
         waiting_time_scale=customer_data.WaitingTimeScale;
         GameController.CustomerNormalRecepted.Add();
         ChangeUI(0);
     }
 
-    public void Order_Refuse(){
+    public virtual void Order_Refuse(){
         GameController.CustomerRefused.Add();
         SettleMoney();
     }
@@ -136,7 +136,7 @@ public abstract class Customer : MonoBehaviour
         }
     }
 
-    void CreateOrder(PotionName potionName){
+    protected void CreateOrder(PotionName potionName){
         GameObject obj=Instantiate(order_perfab,request.transform);
         var sprites=ResourceManager.instance.GetPotionSprite(potionName);
         if(sprites!=null){
