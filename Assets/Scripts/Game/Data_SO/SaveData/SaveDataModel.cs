@@ -4,6 +4,7 @@ using UnityEngine;
 public struct SaveDataModel
 {
     public int Day;
+    public int Stage;
     public float Money;
     public int San;
 

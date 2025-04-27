@@ -24,7 +24,6 @@ public class ResourceManager : MonoBehaviour
                 _resourceManager = FindObjectOfType(typeof(ResourceManager)) as ResourceManager;
                 if (!_resourceManager)
                     return null;
-                _resourceManager.Init();
             }
             return _resourceManager;
         }
@@ -32,24 +31,71 @@ public class ResourceManager : MonoBehaviour
 
     void Awake()
     {
-        _=instance;
-    }
-
-    void Init()
-    {
         sprite_dict??=new();
         gameObject_dict??=new();
+        StartCoroutine(InitDataManager());
+    }
 
+    IEnumerator InitDataManager()
+    {
+        int LoadCount=0;
+        int current_cout=0;
+        DataManagerChange dataManager=new();
+        Addressables.LoadAssetAsync<OrderData_SO>("OrderData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.order_data=so;
+            current_cout++;
+        };
+        LoadCount++;
+        Addressables.LoadAssetAsync<CustomerData_SO>("CustomerData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.customer_data=so;
+            current_cout++;
+        };
+        LoadCount++;
+        Addressables.LoadAssetAsync<PotData_SO>("PotData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.pot_data=so;
+            current_cout++;
+        };
+        LoadCount++;
+        Addressables.LoadAssetAsync<GameData_SO>("GameData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.game_data=so;
+            current_cout++;
+        };
+        LoadCount++;
+        foreach(var SO in ResourceConst.saveData_SO)
+        {
+            Addressables.LoadAssetAsync<SaveData_SO>(SO).Completed += (handle) =>{
+                var so=handle.Result;
+                dataManager.save_data_list_Add=so;
+                current_cout++;
+            };
+            LoadCount++;
+        }
+        yield return new WaitUntil(()=>current_cout>=LoadCount);
+        StartCoroutine(InitResource());
+    }
+
+    IEnumerator InitResource()
+    {
+        int LoadCount=0;
+        int current_cout=0;
         foreach(var kv in ResourceConst.potion_sprite)
         {
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
                 var t2d=handle.Result;
                 sprite_dict[kv.Key+"药"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                current_cout++;
             };
+            LoadCount++;
             Addressables.LoadAssetAsync<Texture2D>(kv.Value+"_瓶塞").Completed += (handle) =>{
                 var t2d = handle.Result;
                 sprite_dict[kv.Key+"药_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                current_cout++;
             };
+            LoadCount++;
         }
 
         foreach(var kv in ResourceConst.gameObjects)
@@ -57,7 +103,9 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
+                current_cout++;
             };
+            LoadCount++;
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
@@ -65,7 +113,9 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
+                current_cout++;
             };
+            LoadCount++;
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
@@ -73,8 +123,13 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 customer_SO_dict[kv.Key.ToString()]= obj;
+                current_cout++;
             };
+            LoadCount++;
         }
+
+        yield return new WaitUntil(()=>current_cout>=LoadCount);
+        //TODO
     }
 
     public GameObject GetGameObject(GameObjectName obj_name){

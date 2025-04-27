@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ECustomer;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +12,8 @@ public class CustomerData_SO : ScriptableObject
     [Header("未接单时，时间消耗倍率")][Range(0,1)]public float OrderingTimeScale;
     [Header("接单后，时间消耗倍率")]public float WaitingTimeScale;
     [Header("心情为(绿/黄/红)时的付款倍率加成")]public List<float> TipRate;
+    [Header("每位顾客首次出现的阶段")]public List<CustomerStage> Customer_Stage;
+
 
     public float GetWaitingTime(int count){
         if(CustomerWaitingTime.Count==0||count<=0)
@@ -29,5 +33,12 @@ public class CustomerData_SO : ScriptableObject
             return TipRate[index];
         }
         return index==0?1.4f:index==1?1.2f:1f;
+    }
+
+    [Serializable]
+    public struct CustomerStage
+    {
+        public CustomerName customerName;
+        public int stage;
     }
 }

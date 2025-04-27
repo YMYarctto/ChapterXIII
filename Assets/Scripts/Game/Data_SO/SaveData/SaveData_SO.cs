@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SaveData_SO", menuName = "Data/Save/SaveData_SO")]
 public class SaveData_SO : ScriptableObject
 {
+    public int Stage{get=>data.Stage;}
     public bool isInit{get=>File.Exists(GetPath());}
     public List<int> MaterialList{get=>new(data.MaterialList);}
 

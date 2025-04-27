@@ -27,4 +27,9 @@ public static class ResourceConst{
         {"抗菌","抗菌药"},
         {"解毒","解毒药"},
     };
+
+    public static List<string> saveData_SO=new()
+    {
+        "data_1",
+    };
 }

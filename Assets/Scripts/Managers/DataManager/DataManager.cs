@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class DataManagerChange
+{
+    public OrderData_SO order_data{set=>DataManager.instance.order_data=value;}
+    public CustomerData_SO customer_data{set=>DataManager.instance.customer_data=value;}
+    public PotData_SO pot_data{set=>DataManager.instance.pot_data=value;}
+    public GameData_SO game_data{set=>DataManager.instance.game_data=value;}
+    public SaveData_SO save_data_list_Add{set=>DataManager.instance.save_data_list.Add(value);}
+}
+
 public class DataManager : MonoBehaviour
 {
     public OrderData_SO OrderData{get=>order_data;}
@@ -10,11 +19,12 @@ public class DataManager : MonoBehaviour
     public GameData_SO GameData{get=>game_data;}
     public SaveData_SO DefaultSaveData{get=>save_data_list[0];}
 
-    [SerializeField]private OrderData_SO order_data;
-    [SerializeField]private CustomerData_SO customer_data;
-    [SerializeField]private PotData_SO pot_data;
-    [SerializeField]private GameData_SO game_data;
-    [SerializeField][Header("首个存档为默认存档")]private List<SaveData_SO> save_data_list;
+    internal OrderData_SO order_data;
+    internal CustomerData_SO customer_data;
+    internal PotData_SO pot_data;
+    internal GameData_SO game_data;
+    internal List<SaveData_SO> save_data_list;
+
     private static DataManager _dataManager;
     public static DataManager instance
     {
@@ -25,7 +35,6 @@ public class DataManager : MonoBehaviour
                 _dataManager = FindObjectOfType(typeof(DataManager)) as DataManager;
                 if (!_dataManager)
                     return null;
-                _dataManager.Init();
             }
             return _dataManager;
         }
