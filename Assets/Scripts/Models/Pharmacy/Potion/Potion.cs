@@ -44,7 +44,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         mini.SetActive(false);
         current_image = PotionImage.potion;
 
-        foreach (var efficacy in efficacyList)
+        foreach (var efficacy in EfficacyList)
         {
             var sprites = ResourceManager.instance.GetPotionSprite(efficacy);
             if (sprites != null)

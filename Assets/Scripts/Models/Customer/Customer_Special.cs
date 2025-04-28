@@ -29,7 +29,8 @@ public class Customer_Special : Customer
     public override void GivePotion(Potion potion)
     {
         PotionName potionName = potionList[current_potion_index]; 
-        SideEffect tag = (SideEffect)(int)potionName;
+        int potion_int = (int)potionName;
+        SideEffect tag = (SideEffect)(potion_int>100?potion_int:potion_int-100);
         float price = PotionConst.GetPotionPrice(potionName);
         if (potion.SideEffectList.Count>1||!potion.SideEffectList.Contains(tag))
         {

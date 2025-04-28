@@ -87,7 +87,7 @@ public class CustomerController : MonoBehaviour
         customer.transform.SetParent(trans,true);
         customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
         customer_area[trans]=true;
-        customer.GetComponent<Customer_Normal>().Init().SetStatusRunning();
+        customer.GetComponent<Customer_Normal>().Init();
     }
 
     Transform GetAvailableArea(){

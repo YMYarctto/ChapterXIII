@@ -33,6 +33,8 @@ public abstract class Customer : MonoBehaviour
     protected float current_waiting_time;
     float waiting_time_scale;
 
+    bool isInit=false;
+
     void FixedUpdate()
     {
         if (current_status == Status.Running)
@@ -71,7 +73,13 @@ public abstract class Customer : MonoBehaviour
         }
     }
 
-    public Customer Init()
+    public void Init()
+    {
+        StartCoroutine(init());
+        StartCoroutine(SetStatusRunning());
+    }
+
+    IEnumerator init()
     {
         CurrentCustomer=ResourceManager.instance.GetCustomerSO(gameObject.name);
         order_data=DataManager.instance.OrderData;
@@ -96,7 +104,8 @@ public abstract class Customer : MonoBehaviour
         customer_waiting_time=customer_data.GetWaitingTime(potionList.Count);
         current_waiting_time=customer_waiting_time;
         waiting_time_scale=customer_data.OrderingTimeScale;
-        return this;
+        yield return null;
+        isInit=true;
     }
 
     protected virtual void CreateOrderList(int order_count){
@@ -159,8 +168,9 @@ public abstract class Customer : MonoBehaviour
         GameController.CustomerLeave.Add();
     }
 
-    public void SetStatusRunning()
+    IEnumerator SetStatusRunning()
     {
+        yield return new WaitUntil(()=>isInit);
         SetStatus(Status.Running);
     }
 

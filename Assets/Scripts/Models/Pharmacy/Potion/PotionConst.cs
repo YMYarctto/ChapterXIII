@@ -56,6 +56,12 @@ public static class PotionConst
         { PotionName.致幻药, 600 },
         { PotionName.快乐药, 800 },
     };
+    private static Dictionary<SideEffect,PotionName> specialPotionDict=new()
+    {
+        {SideEffect.中毒,PotionName.毒药},
+        {SideEffect.欣快,PotionName.快乐药},
+        {SideEffect.致幻,PotionName.致幻药},
+    };
 
     public static PotionInfo GetPotionName(List<MaterialName> materialNames)
     {
@@ -63,6 +69,22 @@ public static class PotionConst
         foreach(var kv in potionDict){
             if(kv.Key.SequenceEqual(materialList)){
                 return new PotionInfo(kv.Value.ToString(), potionDescriptionDict[kv.Value]);
+            }
+        }
+        return PotionInfo.Null;
+    }
+
+    public static PotionInfo GetPotionName(List<SideEffect> side_effect)
+    {
+        string name;
+        string description;
+        if(side_effect.Count==1)
+        {
+            if(specialPotionDict.TryGetValue(side_effect[0],out PotionName potionName))
+            {
+                name=potionName.ToString();
+                description=potionDescriptionDict[potionName];
+                return new(name,description);
             }
         }
         return PotionInfo.Null;
