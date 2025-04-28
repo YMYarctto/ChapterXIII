@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
     public static int SAN{get=>san;}
+    public static float Money{get=>money;}
 
     static float money;
     static int san;
@@ -18,6 +19,7 @@ public class GameController : MonoBehaviour
     public static Int_OnlyAdd CustomerLeave;
 
     GameData_SO game_data;
+    SaveData_SO save_data;
     TotalTimer totalTimer;
 
     float remain_time;
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
         CustomerRefused=new();
         game_data=DataManager.instance.GameData;
         remain_time=game_data.TotalTime;
+        save_data=DataManager.instance.DefaultSaveData;
         yield return null;
         totalTimer = UIManager.instance.GetUIView<TotalTimer>("TotalTimer");
     }
@@ -88,11 +91,20 @@ public class GameController : MonoBehaviour
 
     IEnumerator TodayFinish()
     {
-        yield return new WaitForSeconds(3);
+        SaveDataModel data=save_data.GetData();
+        data.NextDay(money,san);
+        save_data.SetData(data);
+        yield return null;
+        save_data.SaveToFile();
+        yield return new WaitForSeconds(1);
         //TODO
-        Debug.Log("累计获得金币: "+money);
-        Debug.Log("服务的客人: "+CustomerNormalRecepted.value+"/"+CustomerNormalTotal.value);
-        Debug.Log("拒绝的客人: "+CustomerRefused.value);
+        UIManager.instance.GetUIView<LoadingInit>("LoadingInit").UnloadScene("PharmacyScene",()=>{
+            //EventManager.instance.Invoke("Scene/PharmacyScene/Unload/Finish");
+            UIManager.instance.EnableUIView("SettlePage");
+            UIManager.instance.GetUIView<SettlePage>("SettlePage").GetData(data.Day-1,money,data.Money,
+            $"{CustomerNormalRecepted.value}/{CustomerNormalTotal.value}",
+            $"{CustomerSpecialRecepted.value}/{CustomerSpecialTotal.value}");
+        });
     }
 
     public static void AddMoney(float m)

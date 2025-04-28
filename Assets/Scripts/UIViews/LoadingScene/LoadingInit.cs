@@ -30,12 +30,18 @@ public class LoadingInit : UIView
             image.color=color;
             if(color.a<=0)
             {
+                color.a=0;
+                image.color=color;
+                Debug.Log(color.a);
                 startLoading=false;
                 gameObject.SetActive(false);
                 actionAfterSceneLoad?.Invoke();
             }
             if(color.a>=1)
             {
+                color.a=1;
+                image.color=color;
+                Debug.Log(color.a);
                 startLoading=false;
                 StartCoroutine(ChangeScene());
             }
@@ -50,6 +56,11 @@ public class LoadingInit : UIView
         actionAfterSceneLoad=action;
     }
 
+    public void UnloadScene(string unload,UnityAction action)
+    {
+        ChangeScene("",unload,action);
+    }
+
     IEnumerator ChangeScene()
     {
         var op=SceneManager.UnloadSceneAsync(unloadScene);
@@ -57,10 +68,13 @@ public class LoadingInit : UIView
         {
             yield return null;
         }
-        op=SceneManager.LoadSceneAsync(loadScene,LoadSceneMode.Additive);
-        while (!op.isDone)//如果没有完成
+        if(loadScene!="")
         {
-            yield return null;
+            op=SceneManager.LoadSceneAsync(loadScene,LoadSceneMode.Additive);
+            while (!op.isDone)//如果没有完成
+            {
+                yield return null;
+            }
         }
         yield return new WaitForEndOfFrame();
         Disable();
@@ -80,14 +94,14 @@ public class LoadingInit : UIView
 
     public override void Enable()
     {
-        startLoading=true;
         value=0.6f;
+        startLoading=true;
         gameObject.SetActive(true);
     }
 
     public override void Disable()
     {
-        startLoading=true;
         value=-0.6f;
+        startLoading=true;
     }
 }

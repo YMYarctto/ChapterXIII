@@ -21,4 +21,11 @@ public struct SaveDataModel
         MaterialList=new(){1,3,14,15};
         SaveTime=System.DateTime.Now.ToString();
     }
+
+    public void NextDay(float Money_Add,int san)
+    {
+        Day++;
+        Money+=Money_Add;
+        San=san;
+    }
 }

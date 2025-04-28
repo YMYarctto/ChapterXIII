@@ -7,6 +7,7 @@ using UnityEngine;
 public class SaveData_SO : ScriptableObject
 {
     public int Stage{get=>data.Stage;}
+    public float TotalMoney{get=>data.Money;}
     public bool isInit{get=>File.Exists(GetPath());}
     public List<int> MaterialList{get=>new(data.MaterialList);}
 
@@ -59,6 +60,11 @@ public class SaveData_SO : ScriptableObject
     public void SetData(SaveDataModel _data)
     {
         data = _data;
+    }
+
+    public SaveDataModel GetData()
+    {
+        return data;
     }
 
     string GetPath()
