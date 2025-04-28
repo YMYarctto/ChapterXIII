@@ -7,6 +7,8 @@ using ResourceModel;
 using EPotion;
 using ETag;
 using ECustomer;
+using TMPro;
+using Unity.VisualScripting;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -39,43 +41,42 @@ public class ResourceManager : MonoBehaviour
 
     IEnumerator InitDataManager()
     {
-        int LoadCount=0;
-        int current_cout=0;
+        LoadingPackage pkg=new("正在获取资源。。。");
         DataManagerChange dataManager=new();
         Addressables.LoadAssetAsync<OrderData_SO>("OrderData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.order_data=so;
-            current_cout++;
+            pkg.AddProgress();
         };
-        LoadCount++;
+        pkg.AddCount();
         Addressables.LoadAssetAsync<CustomerData_SO>("CustomerData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.customer_data=so;
-            current_cout++;
+            pkg.AddProgress();
         };
-        LoadCount++;
+        pkg.AddCount();
         Addressables.LoadAssetAsync<PotData_SO>("PotData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.pot_data=so;
-            current_cout++;
+            pkg.AddProgress();
         };
-        LoadCount++;
+        pkg.AddCount();
         Addressables.LoadAssetAsync<GameData_SO>("GameData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.game_data=so;
-            current_cout++;
+            pkg.AddProgress();
         };
-        LoadCount++;
+        pkg.AddCount();
         foreach(var SO in ResourceConst.saveData_SO)
         {
             Addressables.LoadAssetAsync<SaveData_SO>(SO).Completed += (handle) =>{
                 var so=handle.Result;
                 dataManager.save_data_list_Add=so;
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
         }
-        yield return new WaitUntil(()=>current_cout>=LoadCount);
+        yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("游戏初始化成功");
         dataManager.Init();
         StartCoroutine(InitResource());
@@ -83,22 +84,21 @@ public class ResourceManager : MonoBehaviour
 
     IEnumerator InitResource()
     {
-        int LoadCount=0;
-        int current_cout=0;
+        LoadingPackage pkg=new("正在加载资源。。。");
         foreach(var kv in ResourceConst.potion_sprite)
         {
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
                 var t2d=handle.Result;
                 sprite_dict[kv.Key+"药"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
             Addressables.LoadAssetAsync<Texture2D>(kv.Value+"_瓶塞").Completed += (handle) =>{
                 var t2d = handle.Result;
                 sprite_dict[kv.Key+"药_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.gameObjects)
@@ -106,9 +106,9 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
@@ -116,9 +116,9 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
@@ -126,14 +126,15 @@ public class ResourceManager : MonoBehaviour
             Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
                 var so=handle.Result;
                 customer_SO_dict[kv.Key.ToString()]= so;
-                current_cout++;
+                pkg.AddProgress();
             };
-            LoadCount++;
+            pkg.AddCount();
         }
 
-        yield return new WaitUntil(()=>current_cout>=LoadCount);
+        yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("加载资源成功");
-        //TODO
+        pkg.DisableUI();
+        UIManager.instance.DisableUIView("LoadingInit");
     }
 
     public GameObject GetGameObject(GameObjectName obj_name){
@@ -193,5 +194,42 @@ public class ResourceManager : MonoBehaviour
         if(Sprite_plug==null)
             return null;
         return new(Sprite_potion,Sprite_plug);
+    }
+
+    struct LoadingPackage
+    {
+        string Name;
+        int count;
+        int progress;
+        TMP_Text loadingUI;
+
+        public LoadingPackage(string name)
+        {
+            Name=name;
+            count=0;
+            progress=0;
+            loadingUI=GameObject.Find("LoadingUI").GetComponentInChildren<TMP_Text>();
+        }
+
+        public void AddCount()
+        {
+            count++;
+        }
+
+        public void AddProgress()
+        {
+            progress++;
+            loadingUI.text=$"{Name} ({progress}/{count})";
+        }
+
+        public bool Finish()
+        {
+            return count==progress;
+        }
+
+        public void DisableUI()
+        {
+            loadingUI.gameObject.SetActive(false);
+        }
     }
 }

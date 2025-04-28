@@ -24,6 +24,11 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        StartCoroutine(init());
+    }
+
+    IEnumerator init()
+    {
         CustomerTotal=new();
         CustomerNormalTotal=new();
         CustomerNormalRecepted=new();
@@ -33,12 +38,7 @@ public class GameController : MonoBehaviour
         CustomerRefused=new();
         game_data=DataManager.instance.GameData;
         remain_time=game_data.TotalTime;
-        StartCoroutine(init());
-    }
-
-    IEnumerator init()
-    {
-        yield return new WaitForFixedUpdate();
+        yield return null;
         totalTimer = UIManager.instance.GetUIView<TotalTimer>("TotalTimer");
         StartCoroutine(ChangeTotalTime());
         StartCoroutine(NextCustomer(game_data.InitialWaitingTime));
@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
     public static void AddSAN(int s)
     {
         san=san+s>=0?san+s:0;
-        //TODO UI
+        EventManager.instance.Invoke("Game/SAN/OnChange");
     }
 
     public class Int_OnlyAdd

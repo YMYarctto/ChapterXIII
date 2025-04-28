@@ -43,18 +43,18 @@ public static class PotionConst
     };
     private static Dictionary<PotionName,int> priceDict = new()//暂定
     {
-        { PotionName.提神药, 20},
-        { PotionName.止咳药, 25},
-        { PotionName.安眠药, 50 },
-        { PotionName.清热药, 60 },
-        { PotionName.止血药, 70 },
-        { PotionName.止痛药, 80 },
-        { PotionName.解毒药, 90 },
-        { PotionName.安神药, 100 },
-        { PotionName.抗菌药, 110 },
-        { PotionName.毒药, 450 },
-        { PotionName.致幻药, 600 },
-        { PotionName.快乐药, 800 },
+        { PotionName.提神药, 15},
+        { PotionName.止咳药, 15},
+        { PotionName.安眠药, 30 },
+        { PotionName.清热药, 50 },
+        { PotionName.止血药, 50 },
+        { PotionName.止痛药, 75 },
+        { PotionName.解毒药, 105 },
+        { PotionName.安神药, 105 },
+        { PotionName.抗菌药, 30 },
+        { PotionName.毒药, 120 },
+        { PotionName.致幻药, 180 },
+        { PotionName.快乐药, 240 },
     };
     private static Dictionary<SideEffect,PotionName> specialPotionDict=new()
     {
