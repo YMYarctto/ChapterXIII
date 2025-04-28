@@ -24,10 +24,20 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        StartCoroutine(init());
+        StartCoroutine(Init());
     }
 
-    IEnumerator init()
+    void OnEnable()
+    {
+        EventManager.instance.AddListener("Scene/PharmacyScene/Load/Finish",StartGame);
+    }
+
+    void OnDisable()
+    {
+        EventManager.instance?.RemoveListener("Scene/PharmacyScene/Load/Finish",StartGame);
+    }
+
+    IEnumerator Init()
     {
         CustomerTotal=new();
         CustomerNormalTotal=new();
@@ -40,6 +50,10 @@ public class GameController : MonoBehaviour
         remain_time=game_data.TotalTime;
         yield return null;
         totalTimer = UIManager.instance.GetUIView<TotalTimer>("TotalTimer");
+    }
+
+    public void StartGame()
+    {
         StartCoroutine(ChangeTotalTime());
         StartCoroutine(NextCustomer(game_data.InitialWaitingTime));
     }

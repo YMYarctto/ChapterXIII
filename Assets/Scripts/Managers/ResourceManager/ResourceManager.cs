@@ -9,6 +9,7 @@ using ETag;
 using ECustomer;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -134,6 +135,17 @@ public class ResourceManager : MonoBehaviour
         yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("加载资源成功");
         pkg.DisableUI();
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        var op=SceneManager.LoadSceneAsync("MainScene",LoadSceneMode.Additive);
+        while (!op.isDone)//如果没有完成
+        {
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
         UIManager.instance.DisableUIView("LoadingInit");
     }
 
