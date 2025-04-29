@@ -57,6 +57,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f9c1dffa218244249ef17d7447b584f
+    m_Address: "\u81F4\u5E7B\u836F"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44138c7418c6b45668c0cd515c429085
+    m_Address: "\u81F4\u5E7B\u836F_\u74F6\u585E"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 49371bc12e7024271a4a2a07cea035ee
     m_Address: "\u7B11\u9762\u51B0\u72D0"
     m_ReadOnly: 0
@@ -112,6 +122,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cb1801d5c8614a659ff03f549996a2b
+    m_Address: "\u5FEB\u4E50\u836F"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81caf00989ab44095b2f46d01994a15d
     m_Address: potion
     m_ReadOnly: 0
@@ -122,6 +137,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f4ca3d3c9ebc4e76867418fd5506667
+    m_Address: "\u5FEB\u4E50\u836F_\u74F6\u585E"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 95587d35814f349388e11693e3817aff
     m_Address: "\u6B62\u75DB\u836F_\u74F6\u585E"
     m_ReadOnly: 0
@@ -129,6 +149,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9d0b65e19d56b41869f5abf5f8fec999
     m_Address: "\u6817\u5E3D\u5154"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9dfebd380388242168012512031b2508
+    m_Address: "\u6BD2\u836F_\u74F6\u585E"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -154,6 +179,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9e62320066654955990b3e9e7458239
     m_Address: "\u6E05\u70ED\u836F_\u74F6\u585E"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba01fa5a811d0473b8f04889c71d1179
+    m_Address: "\u6BD2\u836F"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

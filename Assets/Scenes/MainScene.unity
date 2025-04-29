@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 658660968}
   - component: {fileID: 658660970}
   m_Layer: 5
-  m_Name: Button_Continue
+  m_Name: Button_Setting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1697,7 +1697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u7EE7\u7EED"
+  m_text: "\u8BBE\u7F6E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee86c0fb8e82a444a8e8ded7f4408e9e, type: 2}
   m_sharedMaterial: {fileID: 6027953366008530045, guid: ee86c0fb8e82a444a8e8ded7f4408e9e, type: 2}
