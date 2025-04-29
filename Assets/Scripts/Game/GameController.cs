@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
     public static int SAN{get=>san;}
     public static float Money{get=>money;}
+    public static UnityAction StartGameAction;
 
     static float money;
     static int san;
@@ -20,23 +22,14 @@ public class GameController : MonoBehaviour
 
     GameData_SO game_data;
     SaveData_SO save_data;
-    TotalTimer totalTimer;
+    FrontDesk frontDesk;
 
+    float total_time;
     float remain_time;
 
     void Awake()
     {
         StartCoroutine(Init());
-    }
-
-    void OnEnable()
-    {
-        EventManager.instance.AddListener("Scene/PharmacyScene/Load/Finish",StartGame);
-    }
-
-    void OnDisable()
-    {
-        EventManager.instance?.RemoveListener("Scene/PharmacyScene/Load/Finish",StartGame);
     }
 
     IEnumerator Init()
@@ -49,10 +42,11 @@ public class GameController : MonoBehaviour
         CustomerLeave=new();
         CustomerRefused=new();
         game_data=DataManager.instance.GameData;
-        remain_time=game_data.TotalTime;
+        total_time=remain_time=game_data.TotalTime;
         save_data=DataManager.instance.DefaultSaveData;
+        StartGameAction=()=>StartGame();
         yield return null;
-        totalTimer = UIManager.instance.GetUIView<TotalTimer>("TotalTimer");
+        frontDesk=UIManager.instance.GetUIView<FrontDesk>("FrontDesk");
     }
 
     public void StartGame()
@@ -63,17 +57,16 @@ public class GameController : MonoBehaviour
 
     IEnumerator ChangeTotalTime()
     {
-        yield return new WaitForSeconds(1);
-        remain_time-=1;
-        if(remain_time>0)
+        while (remain_time>0)
         {
-            totalTimer.ChangeTimeUI((int)remain_time);
-            StartCoroutine(ChangeTotalTime());
-        }else{
-            totalTimer.ChangeTimeUI(0);
-            StopAllCoroutines();
-            StartCoroutine(WaitAllCustomerLeave());
+            remain_time-=Time.fixedDeltaTime;
+            frontDesk.ChangeTimeUI(remain_time/total_time);  
+            yield return new WaitForFixedUpdate();
         }
+        frontDesk.ChangeTimeUI(0);
+        frontDesk.FinishToday();
+        StopAllCoroutines();
+        StartCoroutine(WaitAllCustomerLeave());
     }
 
     IEnumerator WaitAllCustomerLeave()

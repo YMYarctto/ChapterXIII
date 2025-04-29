@@ -30,7 +30,7 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         DataManager.instance.LoadSaveData(0);
         UIManager.instance.GetUIView<LoadingInit>("LoadingInit").ChangeScene("PharmacyScene","MainScene",()=>{
-            EventManager.instance.Invoke("Scene/PharmacyScene/Load/Finish");
+            GameController.StartGameAction.Invoke();
         });
     }
 }

@@ -15,6 +15,7 @@ public class LoadingInit : UIView
 
     string loadScene;
     string unloadScene;
+    UnityAction actionAfterSceneUnload;
     UnityAction actionAfterSceneLoad;
 
     void Awake()
@@ -30,20 +31,15 @@ public class LoadingInit : UIView
             image.color=color;
             if(color.a<=0)
             {
-                color.a=0;
-                image.color=color;
-                Debug.Log(color.a);
                 startLoading=false;
                 gameObject.SetActive(false);
                 actionAfterSceneLoad?.Invoke();
             }
             if(color.a>=1)
             {
-                color.a=1;
-                image.color=color;
-                Debug.Log(color.a);
                 startLoading=false;
                 StartCoroutine(ChangeScene());
+                actionAfterSceneUnload?.Invoke();
             }
         }
     }
@@ -58,15 +54,26 @@ public class LoadingInit : UIView
 
     public void UnloadScene(string unload,UnityAction action)
     {
-        ChangeScene("",unload,action);
+        ChangeScene("",unload,null);
+        actionAfterSceneUnload=action;
+    }
+
+    public void LoadScene(string load,UnityAction unload_action,UnityAction action)
+    {
+        ChangeScene(load,"",action);
+        actionAfterSceneUnload=unload_action;
     }
 
     IEnumerator ChangeScene()
     {
-        var op=SceneManager.UnloadSceneAsync(unloadScene);
-        while (!op.isDone)//如果没有完成
+        AsyncOperation op;
+        if(unloadScene!="")
         {
-            yield return null;
+            op=SceneManager.UnloadSceneAsync(unloadScene);
+            while (!op.isDone)//如果没有完成
+            {
+                yield return null;
+            }
         }
         if(loadScene!="")
         {
@@ -76,7 +83,7 @@ public class LoadingInit : UIView
                 yield return null;
             }
         }
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1);
         Disable();
     }
 
@@ -94,6 +101,7 @@ public class LoadingInit : UIView
 
     public override void Enable()
     {
+        color.a=0;
         value=0.6f;
         startLoading=true;
         gameObject.SetActive(true);
@@ -101,6 +109,7 @@ public class LoadingInit : UIView
 
     public override void Disable()
     {
+        color.a=1;
         value=-0.6f;
         startLoading=true;
     }

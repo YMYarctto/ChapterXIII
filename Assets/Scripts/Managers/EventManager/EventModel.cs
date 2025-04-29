@@ -117,9 +117,9 @@ namespace EventModel{
         public void InvokeAll(){
             foreach(var kv in _event){
                 if(kv.Key==typeof(NullParam)){
-                    kv.Value.Invoke(new NullParam());
+                    kv.Value?.Invoke(new NullParam());
                 }else if(_param.ContainsKey(kv.Key)){
-                    kv.Value.Invoke(_param[kv.Key]);
+                    kv.Value?.Invoke(_param[kv.Key]);
                 }else{
                     Debug.LogError($"EventManager:\nType: {kv.Key} 未设置预设参数\n");
                 }
