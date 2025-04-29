@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: B1
   Classification: 1
   Name: 4
-  PotionRequest: 010000000b000000
+  PotionRequest: 000000000b000000
   DialogOrder:
   - www
   DialogSuccess:

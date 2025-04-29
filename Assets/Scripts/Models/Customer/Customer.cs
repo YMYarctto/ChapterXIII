@@ -92,7 +92,7 @@ public abstract class Customer : MonoBehaviour
         potionList=new();
         order_obj=new();
         order_data.LoadData();
-        int order_count = order_data.RandomOrderCount();
+        int order_count = order_data.RandomOrderCount(DataManager.instance.DefaultSaveData.Stage);
         SetStatus(Status.Waiting);
         request = transform.Find("request").gameObject;
         patienceBar = request.transform.Find("patience_bar").GetComponent<PatienceBar>();

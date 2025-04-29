@@ -26,6 +26,9 @@ public static class ResourceConst{
         {"清热","清热药"},
         {"抗菌","抗菌药"},
         {"解毒","解毒药"},
+        {"中毒","毒药"},
+        {"致幻","致幻药"},
+        {"欣快","快乐药"},
     };
 
     public static List<string> saveData_SO=new()

@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: A1
   Classification: 0
   Name: 0
-  PotionRequest: 0700000004000000
+  PotionRequest: 0100000004000000
   DialogOrder:
   - "\u59D0\u59D0\u4F60\u597D\uFF0C\u6211\u60F3\u4E70\u70B9\u836F\u2026\u2026"
   - "\u6700\u8FD1\u4E0D\u592A\u8212\u670D\u7684\u8BF4\u3002"

@@ -4,6 +4,7 @@ using UnityEngine;
 using EPotion;
 using EMaterial;
 using System.Linq;
+using System;
 
 [CreateAssetMenu(fileName = "OrderData_SO", menuName = "Data/Customer/OrderData_SO")]
 public class OrderData_SO : ScriptableObject
@@ -18,22 +19,29 @@ public class OrderData_SO : ScriptableObject
         }
     }
 
-    [Header("顾客点单数量(1/2/3)的对应权值")]public List<int> OrderCount;
+    [SerializeField][Header("每阶段顾客点单数量(1/2/3)的对应权值")]public List<List_Int> OrderCount;
 
     List<PotionName> potion_range;
 
-    public int RandomOrderCount(){
+    public int RandomOrderCount(int stage){
+        List<int> current_order_count;
+        if(stage<0&&stage>OrderCount.Count){
+            current_order_count=OrderCount[OrderCount.Count-1].list;
+        }else
+        {
+            current_order_count=OrderCount[stage].list;
+        }
         System.Random ran = new();
         int per=0;
-        foreach(var i in OrderCount)
+        foreach(var i in current_order_count)
         {
             per+=i;
         }
         var ran_per =ran.Next(per);
         per=0;
-        for(int i=0;i<OrderCount.Count;i++)
+        for(int i=0;i<current_order_count.Count;i++)
         {
-            per+=OrderCount[i];
+            per+=current_order_count[i];
             if(ran_per<per)return i+1;
         }
         return -1;
@@ -60,5 +68,11 @@ public class OrderData_SO : ScriptableObject
                 potion_range.AddRange(List_PotionName.Value);
             }
         }
+    }
+
+    [Serializable]
+    public struct List_Int
+    {
+        public List<int> list;
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: A2
   Classification: 0
   Name: 1
-  PotionRequest: 
+  PotionRequest: 000000000300000001000000
   DialogOrder: []
   DialogSuccess: []
   DialogFail: []

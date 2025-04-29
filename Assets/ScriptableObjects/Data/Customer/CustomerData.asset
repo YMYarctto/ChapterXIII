@@ -27,3 +27,11 @@ MonoBehaviour:
     stage: 0
   - customerName: 4
     stage: 0
+  - customerName: 1
+    stage: 1
+  - customerName: 3
+    stage: 1
+  - customerName: 2
+    stage: 2
+  - customerName: 5
+    stage: 1

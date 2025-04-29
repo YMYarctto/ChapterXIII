@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     public static Int_OnlyAdd CustomerLeave;
 
     GameData_SO game_data;
+    GameData_SO.time game_data_time;
     SaveData_SO save_data;
     FrontDesk frontDesk;
 
@@ -41,9 +43,11 @@ public class GameController : MonoBehaviour
         CustomerSpecialRecepted=new();
         CustomerLeave=new();
         CustomerRefused=new();
-        game_data=DataManager.instance.GameData;
-        total_time=remain_time=game_data.TotalTime;
         save_data=DataManager.instance.DefaultSaveData;
+        game_data=DataManager.instance.GameData;
+        san=save_data.SAN;
+        game_data_time=game_data.GetTime(save_data.Stage);
+        total_time=remain_time=game_data_time.TotalTime;
         StartGameAction=()=>StartGame();
         yield return null;
         frontDesk=UIManager.instance.GetUIView<FrontDesk>("FrontDesk");
@@ -52,7 +56,7 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(ChangeTotalTime());
-        StartCoroutine(NextCustomer(game_data.InitialWaitingTime));
+        StartCoroutine(NextCustomer(game_data_time.InitialWaitingTime));
     }
 
     IEnumerator ChangeTotalTime()
@@ -79,20 +83,23 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         EventManager.instance.Invoke("Customer/Create");
-        StartCoroutine(NextCustomer(game_data.CustomerRefreshTime));
+        StartCoroutine(NextCustomer(game_data_time.CustomerRefreshTime));
     }
 
     IEnumerator TodayFinish()
     {
         SaveDataModel data=save_data.GetData();
         data.NextDay(money,san);
+        var kv=game_data.GetStage(data.Day);
+        data.Stage=kv.Key;
+        data.Money-=kv.Value;
         save_data.SetData(data);
+        save_data.LoadMaterial();
         yield return null;
         save_data.SaveToFile();
         yield return new WaitForSeconds(1);
         //TODO
         UIManager.instance.GetUIView<LoadingInit>("LoadingInit").UnloadScene("PharmacyScene",()=>{
-            //EventManager.instance.Invoke("Scene/PharmacyScene/Unload/Finish");
             UIManager.instance.EnableUIView("SettlePage");
             UIManager.instance.GetUIView<SettlePage>("SettlePage").GetData(data.Day-1,money,data.Money,
             $"{CustomerNormalRecepted.value}/{CustomerNormalTotal.value}",
