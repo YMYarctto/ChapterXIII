@@ -66,6 +66,15 @@ public class EventManager : MonoBehaviour
         }
         _events[url].RemoveListener(listener);
     }
+    public void RemoveListener(string url)
+    {
+        if(!_events.ContainsKey(url)){
+            Debug.LogError($"\"{url}\"不存在");
+            return;
+        }
+        _events[url].RemoveAllListeners();
+        _events.Remove(url);
+    }
     public void RemoveListener<T>(string url, UnityAction<T> listener)
     {
         if(!_events.ContainsKey(url)){

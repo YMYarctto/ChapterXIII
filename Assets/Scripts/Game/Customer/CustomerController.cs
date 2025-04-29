@@ -38,8 +38,8 @@ public class CustomerController : MonoBehaviour
 
     void OnDisable()
     {
-        EventManager.instance?.RemoveListener("Customer/Leave",Refresh);
-        EventManager.instance?.RemoveListener("Customer/Create",CreateCustomer);
+        EventManager.instance?.RemoveListener("Customer/Leave");
+        EventManager.instance?.RemoveListener("Customer/Create");
     }
 
     public void Refresh(){
