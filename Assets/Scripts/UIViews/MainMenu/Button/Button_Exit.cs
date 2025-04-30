@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.SceneManagement;
 
-public class Button_Reception : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class Button_Exit : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     TMP_Text text;
 
@@ -27,9 +28,10 @@ public class Button_Reception : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIManager.instance.DisableUIView("Workbench");
-        UIManager.instance.EnableUIView("Reception");
-        UIManager.instance.DisableUIView("Warehouse");
-        UIManager.instance.DisableUIView("ItemInfoUI");
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

@@ -9,7 +9,7 @@ public class MoneyCounter : UIView
 
     public void ChangeUI(float money)
     {
-        TMP.text="金币："+money.ToString();
+        TMP.text=money.ToString();
     }
 
     void Awake()

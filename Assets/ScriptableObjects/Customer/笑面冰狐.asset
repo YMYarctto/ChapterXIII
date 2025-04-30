@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: C1
   Classification: 2
   Name: 5
-  PotionRequest: 69000000
+  PotionRequest: 08000000050000000700000006000000
   DialogOrder: []
   DialogSuccess: []
   DialogFail: []

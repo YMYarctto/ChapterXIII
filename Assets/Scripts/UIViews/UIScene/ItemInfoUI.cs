@@ -62,12 +62,12 @@ public class ItemInfoUI : UIView
 
     public override void Enable()
     {
-        transform.position = new(0, transform.position.y, 0);
+        transform.position = new(40, transform.position.y, 0);
     }
 
     public override void Disable()
     {
-        transform.position = new(Screen.width, transform.position.y, 0);
+        transform.position = new(Screen.width+40, transform.position.y, 0);
     }
 
     public void ShowImage()
