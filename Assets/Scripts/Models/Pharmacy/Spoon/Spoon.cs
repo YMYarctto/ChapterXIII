@@ -25,8 +25,8 @@ public class Spoon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     void OnDisable()
     {
-        EventManager.instance?.RemoveListener("Pot/Make/Start",HideThis);
-        EventManager.instance?.RemoveListener("Pot/Make/Finish",ShowThis);
+        EventManager.instance?.RemoveListener("Pot/Make/Start");
+        EventManager.instance?.RemoveListener("Pot/Make/Finish");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
