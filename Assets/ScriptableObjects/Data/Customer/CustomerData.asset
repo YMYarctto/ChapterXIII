@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CustomerData
   m_EditorClassIdentifier: 
   CustomerWaitingTime:
-  - 30
   - 45
   - 60
-  OrderingTimeScale: 0.5
+  - 75
+  OrderingTimeScale: 0.4
   WaitingTimeScale: 1
   TipRate:
   - 1.4

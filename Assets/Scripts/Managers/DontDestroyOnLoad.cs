@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
-    [Header("DontDestroyOnLoad")]
-    public bool Enable;
-
     void Awake() {
-        if (Enable) {
-            DontDestroyOnLoad(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
     }
 }

@@ -20,16 +20,11 @@ public class EventManager : MonoBehaviour
                 _eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
                 if (!_eventManager)
                     return null;
-                _eventManager.Init();
             }
             return _eventManager;
         }
     }
-    void Awake()
-    {
-        _=instance;
-    }
-    void Init()
+    public void Init()
     {
         _events ??= new();
     }

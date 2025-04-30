@@ -68,6 +68,12 @@ public class ResourceManager : MonoBehaviour
             pkg.AddProgress();
         };
         pkg.AddCount();
+        Addressables.LoadAssetAsync<AudioData_SO>("AudioData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.audio_data=so;
+            pkg.AddProgress();
+        };
+        pkg.AddCount();
         foreach(var SO in ResourceConst.saveData_SO)
         {
             Addressables.LoadAssetAsync<SaveData_SO>(SO).Completed += (handle) =>{
@@ -134,6 +140,8 @@ public class ResourceManager : MonoBehaviour
 
         yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("加载资源成功");
+        EventManager.instance.Init();
+        AudioManager.instance.Init();
         pkg.DisableUI();
         StartCoroutine(LoadScene());
     }

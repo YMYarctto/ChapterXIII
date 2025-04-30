@@ -88,6 +88,7 @@ public class CustomerController : MonoBehaviour
         customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
         customer_area[trans]=true;
         customer.GetComponent<Customer_Normal>().Init();
+        AudioManager.instance.PlayAudio("Customer","Customer/Come");
     }
 
     Transform GetAvailableArea(){

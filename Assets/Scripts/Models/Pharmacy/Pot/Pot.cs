@@ -81,6 +81,7 @@ public class Pot : MonoBehaviour
         }
         medicinalMaterialList.Add(medicinalMaterial_SO);
         animator.SetTrigger("Add");
+        AudioManager.instance.PlayAudio("Pot","Pot/Add");
         AddTag();
         ShowUI();
     }
@@ -176,10 +177,12 @@ public class Pot : MonoBehaviour
 
     IEnumerator Stir(){
         EventManager.instance.Invoke("Pot/Make/Start");
+        AudioManager.instance.PlayAudio("Pot","Pot/Stir");
         animator.SetBool("isStir",true);
         current_status=status.Stiring;
         current_time=pot_data.GetStirTime(medicinalMaterialList.Count);
         yield return new WaitUntil(()=>current_status==status.Finish);
+        AudioManager.instance.StopAudio("Pot");
         animator.SetBool("isStir",false);
         CreatePotion();
         EventManager.instance.Invoke("Pot/Make/Finish");

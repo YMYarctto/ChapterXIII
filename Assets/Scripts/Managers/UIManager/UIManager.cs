@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
             return _UIManager;
         }
     }
-    void Init()
+    public void Init()
     {
         _UIs ??= new();
     }

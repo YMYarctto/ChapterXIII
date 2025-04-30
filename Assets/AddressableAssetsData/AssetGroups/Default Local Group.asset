@@ -192,6 +192,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4ce1dd91b2a54d8da3071ddf7774f83
+    m_Address: AudioData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d5d6bbf1cfdd94bd4bddf0e60e8212b2
     m_Address: PotData
     m_ReadOnly: 0
