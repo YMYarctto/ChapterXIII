@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
         game_data_time=game_data.GetTime(save_data.Stage);
         total_time=remain_time=game_data_time.TotalTime;
         StartGameAction=()=>StartGame();
+        PageConst.Init();
         yield return null;
         frontDesk=UIManager.instance.GetUIView<FrontDesk>("FrontDesk");
     }

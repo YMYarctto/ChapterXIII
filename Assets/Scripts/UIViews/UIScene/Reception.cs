@@ -11,7 +11,7 @@ public class Reception : UIView
 
     public override void Init()
     {
-
+        Enable();
     }
 
     public override void OnUnload()
@@ -21,11 +21,11 @@ public class Reception : UIView
 
     public override void Enable()
     {
-        transform.position = new(Screen.width / 2, 0, 0);
+        transform.localPosition = new(0, transform.localPosition.y, 0);
     }
 
     public override void Disable()
     {
-        transform.position = new(-Screen.width / 2, 0, 0);
+        transform.localPosition = new(-CanvasSetting.Width*2, transform.localPosition.y, 0);
     }
 }

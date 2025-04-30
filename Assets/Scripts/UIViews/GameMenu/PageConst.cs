@@ -6,6 +6,11 @@ public static class PageConst
 {
     public static int Page=0;
 
+    public static void Init()
+    {
+        Page=0;
+    }
+
     public static void ChangePage(int i)
     {
         Page=Page+i<0?0:Page+i>2?2:Page+i;
