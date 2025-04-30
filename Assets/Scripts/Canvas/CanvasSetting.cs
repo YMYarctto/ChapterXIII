@@ -8,6 +8,7 @@ public class CanvasSetting : MonoBehaviour
     private float width;
     private float height;
     private float width_height_ratio;
+    private float current_ratio;
     private static float ratio_const;
     private RectTransform rect_left;
     private RectTransform rect_right;
@@ -21,6 +22,11 @@ public class CanvasSetting : MonoBehaviour
         rect_left = transform.Find("black_block_left").GetComponent<RectTransform>();
         rect_right = transform.Find("black_block_right").GetComponent<RectTransform>();
         bg = transform.Find("bg").GetComponent<RectTransform>();
+        width = Screen.width;
+        height = Screen.height;//获取屏幕宽高信息
+        width_height_ratio=width/height;
+        if (width_height_ratio >= ratio_const)
+            Width_Add();
     }
 
     // Update is called once per frame
@@ -28,17 +34,20 @@ public class CanvasSetting : MonoBehaviour
     {
         width = Screen.width;
         height = Screen.height;//获取屏幕宽高信息
-        width_height_ratio = width / height;
-            if (width_height_ratio >= ratio_const)
-            {
-                if(rect==null)
-                    return;
-                Width_Add();
-            }
-            // if (width_height_ratio < ratio_const)
-            // {
-            //     Height_Add();
-            // }
+        current_ratio=width/height;
+        if(current_ratio==width_height_ratio)
+        {
+            return;
+        }
+        width_height_ratio=current_ratio;
+        if (width_height_ratio >= ratio_const)
+        {
+            Width_Add();
+        }
+        // if (width_height_ratio < ratio_const)
+        // {
+        //     Height_Add();
+        // }
     }
     public void Width_Add()
     {

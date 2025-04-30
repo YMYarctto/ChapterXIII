@@ -11,7 +11,6 @@ public class Workbench : UIView
 
     public override void Init()
     {
-        Disable();
     }
 
     public override void OnUnload()

@@ -11,7 +11,6 @@ public class Reception : UIView
 
     public override void Init()
     {
-        Enable();
     }
 
     public override void OnUnload()

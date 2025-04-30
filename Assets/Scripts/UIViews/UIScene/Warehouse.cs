@@ -11,7 +11,6 @@ public class Warehouse : UIView
 
     public override void Init()
     {
-        Disable();
     }
 
     public override void OnUnload()
