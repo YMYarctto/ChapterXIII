@@ -29,7 +29,11 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
     {
         EfficacyList = new(efficacyList.OrderBy(x => (int)x).ToList());
         SideEffectList = new(sideEffectList.OrderBy(x => (int)x).ToList());
-        var potionInfo = PotionConst.GetPotionName(materialList);
+        var potionInfo = PotionConst.GetPotionName(sideEffectList);
+        if (potionInfo.IsNull())
+        {
+            potionInfo = PotionConst.GetPotionName(materialList);
+        }
         if (potionInfo.IsNull())
         {
             potionInfo = PotionConst.GetPotionName(efficacyList);

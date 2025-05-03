@@ -45,7 +45,7 @@ public class GameData_SO : ScriptableObject
                 return new(i-1,0);
             }
         }
-        return new(DayToState.Count-1,DayToState[DayToState.Count-1].Money);
+        return new(DayToState.Count-1,0);
     }
 
     public time GetTime(int stage)

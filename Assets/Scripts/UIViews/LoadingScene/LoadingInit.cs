@@ -102,7 +102,7 @@ public class LoadingInit : UIView
     public override void Enable()
     {
         color.a=0;
-        value=0.6f;
+        value=1;
         startLoading=true;
         gameObject.SetActive(true);
     }
@@ -110,7 +110,7 @@ public class LoadingInit : UIView
     public override void Disable()
     {
         color.a=1;
-        value=-0.6f;
+        value=-1;
         startLoading=true;
     }
 }

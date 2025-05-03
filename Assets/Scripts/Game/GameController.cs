@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator Init()
     {
+        money=0;
         CustomerTotal=new();
         CustomerNormalTotal=new();
         CustomerNormalRecepted=new();

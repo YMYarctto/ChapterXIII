@@ -21,6 +21,8 @@ public class Pot : MonoBehaviour
 
     Transform[] shelf_uiviews = new Transform[3];
 
+    PotBar potBar;
+
     status current_status;
     float current_time;
 
@@ -29,6 +31,7 @@ public class Pot : MonoBehaviour
         PotionPrefab = ResourceManager.instance.GetGameObject(EResource.GameObjectName.Potion);
         pot_data = DataManager.instance.PotData;
         current_status=status.HaveWater;
+        potBar=UIManager.instance.GetUIView<PotBar>("PotBar");
 
         animator = GetComponent<Animator>();
         string[] _uiviews = {
@@ -52,16 +55,6 @@ public class Pot : MonoBehaviour
     {
         EventManager.instance?.RemoveListener("Pot/Add");
         EventManager.instance?.RemoveListener("Pot/Make");
-    }
-
-    void FixedUpdate()
-    {
-        if(current_status==status.Stiring)
-            if(current_time>0){
-                current_time-=Time.fixedDeltaTime;
-            }else{
-                current_status=status.Finish;
-            }
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
@@ -177,11 +170,18 @@ public class Pot : MonoBehaviour
 
     IEnumerator Stir(){
         EventManager.instance.Invoke("Pot/Make/Start");
+        potBar.Enable();
         AudioManager.instance.PlayAudio("Pot","Pot/Stir");
         animator.SetBool("isStir",true);
         current_status=status.Stiring;
-        current_time=pot_data.GetStirTime(medicinalMaterialList.Count);
-        yield return new WaitUntil(()=>current_status==status.Finish);
+        float max_time = pot_data.GetStirTime(medicinalMaterialList.Count);
+        current_time=max_time;
+        while(current_time>0){
+            current_time-=Time.fixedDeltaTime;
+            potBar.ChangeBar(1-current_time/max_time);
+            yield return new WaitForFixedUpdate();
+        }
+        potBar.Disable();
         AudioManager.instance.StopAudio("Pot");
         animator.SetBool("isStir",false);
         CreatePotion();
@@ -244,6 +244,5 @@ public class Pot : MonoBehaviour
         NoWater,
         HaveWater,
         Stiring,
-        Finish,
     }
 }
