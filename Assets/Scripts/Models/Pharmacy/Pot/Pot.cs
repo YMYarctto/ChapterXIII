@@ -17,7 +17,8 @@ public class Pot : MonoBehaviour
     List<Efficacy> offseted_efficacieList = new List<Efficacy>();
     List<SideEffect> offseted_sideEffectList = new List<SideEffect>();
 
-    Animator animator;
+    Animator pot_animator;
+    Animator effect_animator;
 
     Transform[] shelf_uiviews = new Transform[3];
 
@@ -33,7 +34,8 @@ public class Pot : MonoBehaviour
         current_status=status.HaveWater;
         potBar=UIManager.instance.GetUIView<PotBar>("PotBar");
 
-        animator = GetComponent<Animator>();
+        pot_animator = GetComponent<Animator>();
+        effect_animator = GameObject.Find("Pot_SpecialEffects").GetComponent<Animator>();
         string[] _uiviews = {
         "Shelf_item1",
         "Shelf_item2",
@@ -49,12 +51,14 @@ public class Pot : MonoBehaviour
     {
         EventManager.instance.AddListener<MedicinalMaterial_SO>("Pot/Add", AddMadicinalMaterial);
         EventManager.instance.AddListener("Pot/Make", StarStir);
+        EventManager.instance.AddListener("Game/SAN/OnChange",ChangeSPAnimation);
     }
 
     void OnDisable()
     {
         EventManager.instance?.RemoveListener("Pot/Add");
         EventManager.instance?.RemoveListener("Pot/Make");
+        EventManager.instance?.RemoveListener("Game/SAN/OnChange");
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
@@ -73,7 +77,7 @@ public class Pot : MonoBehaviour
             return;
         }
         medicinalMaterialList.Add(medicinalMaterial_SO);
-        animator.SetTrigger("Add");
+        pot_animator.SetTrigger("Add");
         AudioManager.instance.PlayAudio("Pot","Pot/Add");
         AddTag();
         ShowUI();
@@ -172,7 +176,7 @@ public class Pot : MonoBehaviour
         EventManager.instance.Invoke("Pot/Make/Start");
         potBar.Enable();
         AudioManager.instance.PlayAudio("Pot","Pot/Stir");
-        animator.SetBool("isStir",true);
+        pot_animator.SetBool("isStir",true);
         current_status=status.Stiring;
         float max_time = pot_data.GetStirTime(medicinalMaterialList.Count);
         current_time=max_time;
@@ -183,10 +187,24 @@ public class Pot : MonoBehaviour
         }
         potBar.Disable();
         AudioManager.instance.StopAudio("Pot");
-        animator.SetBool("isStir",false);
+        pot_animator.SetBool("isStir",false);
         CreatePotion();
         EventManager.instance.Invoke("Pot/Make/Finish");
         current_status=status.HaveWater;
+    }
+
+    public void ChangeSPAnimation()
+    {
+        if(GameController.SAN<=3)
+        {
+            pot_animator.SetBool("LowSAN",true);
+            effect_animator.SetBool("LowSAN",true);
+        }
+        else
+        {
+            pot_animator.SetBool("LowSAN",false);
+            effect_animator.SetBool("LowSAN",false);
+        }
     }
 
     bool ShelfIsEmpty()

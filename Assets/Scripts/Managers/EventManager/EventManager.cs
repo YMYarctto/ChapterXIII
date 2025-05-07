@@ -64,7 +64,6 @@ public class EventManager : MonoBehaviour
     public void RemoveListener(string url)
     {
         if(!_events.ContainsKey(url)){
-            Debug.LogError($"\"{url}\"不存在");
             return;
         }
         _events[url].RemoveAllListeners();

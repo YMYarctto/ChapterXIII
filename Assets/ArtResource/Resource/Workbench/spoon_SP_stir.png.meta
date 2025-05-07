@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0435d13ecaaf84277876939fa79ce38d
+guid: 3eb8a81ba19c64c67ae163abadb6c7b3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -121,112 +121,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: pot_SpecialEffect_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 760
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cddb065972bdf4d7cb51acb658e9ae9c
-      internalID: -1136452078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pot_SpecialEffect_1
-      rect:
-        serializedVersion: 2
-        x: 850
-        y: 0
-        width: 760
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3957aae0d0054614b1e155fd5a6927e
-      internalID: -1772114971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pot_SpecialEffect_2
-      rect:
-        serializedVersion: 2
-        x: 2062
-        y: 0
-        width: 760
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ca781485554c461787331bf4247a6d3
-      internalID: 1061084898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pot_SpecialEffect_3
-      rect:
-        serializedVersion: 2
-        x: 3241
-        y: 0
-        width: 760
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb121a9f44e9f4c70a8a18ab8c5baf4a
-      internalID: -765226905
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pot_SpecialEffect_4
-      rect:
-        serializedVersion: 2
-        x: 4233
-        y: 0
-        width: 380
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fae57ae10f93e4256a5905c430087b44
-      internalID: 738443166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -237,12 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      pot_SpecialEffect_0: -1136452078
-      pot_SpecialEffect_1: -1772114971
-      pot_SpecialEffect_2: 1061084898
-      pot_SpecialEffect_3: -765226905
-      pot_SpecialEffect_4: 738443166
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

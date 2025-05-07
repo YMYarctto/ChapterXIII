@@ -66,7 +66,7 @@ public class BG_SP : MonoBehaviour
         image.color=color;
         while(color.a<1)
         {
-            color.a+=2f*Time.fixedDeltaTime;
+            color.a+=3f*Time.fixedDeltaTime;
             image.color=color;
             yield return new WaitForFixedUpdate();
         }
@@ -82,7 +82,7 @@ public class BG_SP : MonoBehaviour
         image.color=color;
         while(color.a>0)
         {
-            color.a-=2f*Time.fixedDeltaTime;
+            color.a-=3f*Time.fixedDeltaTime;
             image.color=color;
             yield return new WaitForFixedUpdate();
         }

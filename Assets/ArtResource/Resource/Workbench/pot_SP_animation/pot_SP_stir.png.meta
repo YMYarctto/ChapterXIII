@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0435d13ecaaf84277876939fa79ce38d
+guid: 0b3f008c942fa4dedbb9e5ab8660df14
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pot_SpecialEffect_0
+      name: pot_SP_stir_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 760
-        height: 296
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cddb065972bdf4d7cb51acb658e9ae9c
-      internalID: -1136452078
+      spriteID: f0678b7a14a324c9fac762a37bd13022
+      internalID: -1491470586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_1
+      name: pot_SP_stir_1
       rect:
         serializedVersion: 2
-        x: 850
+        x: 1183
         y: 0
-        width: 760
-        height: 296
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3957aae0d0054614b1e155fd5a6927e
-      internalID: -1772114971
+      spriteID: 29df3151c140046118c5c8b7fb215adf
+      internalID: 336455500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_2
+      name: pot_SP_stir_2
       rect:
         serializedVersion: 2
-        x: 2062
+        x: 2370
         y: 0
-        width: 760
-        height: 296
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ca781485554c461787331bf4247a6d3
-      internalID: 1061084898
+      spriteID: fc8e51a72d5914bac917ae54dccb187a
+      internalID: 1058810304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_3
+      name: pot_SP_stir_3
       rect:
         serializedVersion: 2
-        x: 3241
+        x: 3613
         y: 0
-        width: 760
-        height: 296
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb121a9f44e9f4c70a8a18ab8c5baf4a
-      internalID: -765226905
+      spriteID: d24b083038c7849a99b945e04642820c
+      internalID: 1797546363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_4
+      name: pot_SP_stir_4
       rect:
         serializedVersion: 2
-        x: 4233
+        x: 4858
         y: 0
-        width: 380
-        height: 296
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,8 +221,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fae57ae10f93e4256a5905c430087b44
-      internalID: 738443166
+      spriteID: 17a48920e0122497097b6ae87eb1d4c0
+      internalID: -1270971716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pot_SP_stir_5
+      rect:
+        serializedVersion: 2
+        x: 6012
+        y: 0
+        width: 1074
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25373ae7337a74831ad15134fcdf1791
+      internalID: 804650203
       vertices: []
       indices: 
       edges: []
@@ -238,11 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pot_SpecialEffect_0: -1136452078
-      pot_SpecialEffect_1: -1772114971
-      pot_SpecialEffect_2: 1061084898
-      pot_SpecialEffect_3: -765226905
-      pot_SpecialEffect_4: 738443166
+      pot_SP_stir_0: -1491470586
+      pot_SP_stir_1: 336455500
+      pot_SP_stir_2: 1058810304
+      pot_SP_stir_3: 1797546363
+      pot_SP_stir_4: -1270971716
+      pot_SP_stir_5: 804650203
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

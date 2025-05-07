@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0435d13ecaaf84277876939fa79ce38d
+guid: a01d0c3c11672491aa997c1b87ad45e7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pot_SpecialEffect_0
+      name: pot_SP_special_sffect_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,17 +137,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cddb065972bdf4d7cb51acb658e9ae9c
-      internalID: -1136452078
+      spriteID: 3b2625c5a8b7643b69f125e83f2040a7
+      internalID: 286715344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_1
+      name: pot_SP_special_sffect_1
       rect:
         serializedVersion: 2
-        x: 850
+        x: 825
         y: 0
         width: 760
         height: 296
@@ -158,17 +158,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3957aae0d0054614b1e155fd5a6927e
-      internalID: -1772114971
+      spriteID: 3c2b0450e9e124efe92a7b120110bf0a
+      internalID: 615369455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_2
+      name: pot_SP_special_sffect_2
       rect:
         serializedVersion: 2
-        x: 2062
+        x: 1981
         y: 0
         width: 760
         height: 296
@@ -179,17 +179,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ca781485554c461787331bf4247a6d3
-      internalID: 1061084898
+      spriteID: 994989369c8aa4e0ba2ec2e5cb1f6d98
+      internalID: -1151379849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_3
+      name: pot_SP_special_sffect_3
       rect:
         serializedVersion: 2
-        x: 3241
+        x: 3198
         y: 0
         width: 760
         height: 296
@@ -200,17 +200,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb121a9f44e9f4c70a8a18ab8c5baf4a
-      internalID: -765226905
+      spriteID: b4af1b556d65e4c0ba73214baa91b63c
+      internalID: -2009396548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_4
+      name: pot_SP_special_sffect_4
       rect:
         serializedVersion: 2
-        x: 4233
+        x: 4209
         y: 0
         width: 380
         height: 296
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fae57ae10f93e4256a5905c430087b44
-      internalID: 738443166
+      spriteID: 801cfbcdf1d234877b2df293408db083
+      internalID: -182940920
       vertices: []
       indices: 
       edges: []
@@ -238,11 +238,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pot_SpecialEffect_0: -1136452078
-      pot_SpecialEffect_1: -1772114971
-      pot_SpecialEffect_2: 1061084898
-      pot_SpecialEffect_3: -765226905
-      pot_SpecialEffect_4: 738443166
+      pot_SP_special_sffect_0: 286715344
+      pot_SP_special_sffect_1: 615369455
+      pot_SP_special_sffect_2: -1151379849
+      pot_SP_special_sffect_3: -2009396548
+      pot_SP_special_sffect_4: -182940920
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

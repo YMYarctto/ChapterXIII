@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0435d13ecaaf84277876939fa79ce38d
+guid: cc862fcb3e73548ff957875a717b3667
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pot_SpecialEffect_0
+      name: pot_SP_soup_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 760
-        height: 296
+        y: 620
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cddb065972bdf4d7cb51acb658e9ae9c
-      internalID: -1136452078
+      spriteID: 58b031763cfcd41d7ae908f15b71668e
+      internalID: 2052665388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_1
+      name: pot_SP_soup_1
       rect:
         serializedVersion: 2
-        x: 850
-        y: 0
-        width: 760
-        height: 296
+        x: 1286
+        y: 620
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3957aae0d0054614b1e155fd5a6927e
-      internalID: -1772114971
+      spriteID: 9f8fc27c9b626472b9567fe288f02b39
+      internalID: -1498120445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_2
+      name: pot_SP_soup_2
       rect:
         serializedVersion: 2
-        x: 2062
-        y: 0
-        width: 760
-        height: 296
+        x: 1
+        y: 145
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ca781485554c461787331bf4247a6d3
-      internalID: 1061084898
+      spriteID: 654eadb77ec06415c89d2f34a613ed63
+      internalID: 593662399
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pot_SpecialEffect_3
+      name: pot_SP_soup_3
       rect:
         serializedVersion: 2
-        x: 3241
-        y: 0
-        width: 760
-        height: 296
+        x: 1286
+        y: 145
+        width: 1074
+        height: 291
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,29 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb121a9f44e9f4c70a8a18ab8c5baf4a
-      internalID: -765226905
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pot_SpecialEffect_4
-      rect:
-        serializedVersion: 2
-        x: 4233
-        y: 0
-        width: 380
-        height: 296
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fae57ae10f93e4256a5905c430087b44
-      internalID: 738443166
+      spriteID: e1404f39e0910496ca7a828d8fe14d36
+      internalID: -2032322164
       vertices: []
       indices: 
       edges: []
@@ -238,11 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pot_SpecialEffect_0: -1136452078
-      pot_SpecialEffect_1: -1772114971
-      pot_SpecialEffect_2: 1061084898
-      pot_SpecialEffect_3: -765226905
-      pot_SpecialEffect_4: 738443166
+      pot_SP_soup_0: 2052665388
+      pot_SP_soup_1: -1498120445
+      pot_SP_soup_2: 593662399
+      pot_SP_soup_3: -2032322164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
