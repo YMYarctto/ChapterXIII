@@ -117,7 +117,12 @@ public class GameController : MonoBehaviour
 
     public static void AddSAN(int s)
     {
-        san=san+s>=0?san+s:0;
+        san=
+        san+s>=0?
+        san+s<=6?
+        san+s:
+        6:
+        0;
         EventManager.instance.Invoke("Game/SAN/OnChange");
     }
 
