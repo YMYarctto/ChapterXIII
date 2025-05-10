@@ -33,7 +33,7 @@ public class SettlePage : UIView
         UIManager.instance?.RemoveUIView("SettlePage");
     }
 
-    public void GetData(int day,float money,float total_moeny,string normal_customer,string special_customer)
+    public void GetData(int day,int money,int total_moeny,string normal_customer,string special_customer)
     {
         Day.text=day.ToString();
         CurrentMoney.text=money.ToString();

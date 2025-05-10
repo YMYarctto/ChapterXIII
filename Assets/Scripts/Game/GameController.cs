@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     GameData_SO.time game_data_time;
     SaveData_SO save_data;
     FrontDesk frontDesk;
+    static MoneyCounter moneyCounter;
 
     float total_time;
     float remain_time;
@@ -57,6 +58,8 @@ public class GameController : MonoBehaviour
         StartGameAction=()=>StartGame();
         PageConst.Init();
         yield return null;
+        moneyCounter=UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter");
+        moneyCounter.ChangeUI(0);
         frontDesk=UIManager.instance.GetUIView<FrontDesk>("FrontDesk");
     }
 
@@ -108,7 +111,7 @@ public class GameController : MonoBehaviour
         //TODO
         UIManager.instance.GetUIView<LoadingInit>("LoadingInit").UnloadScene("PharmacyScene",()=>{
             UIManager.instance.EnableUIView("SettlePage");
-            UIManager.instance.GetUIView<SettlePage>("SettlePage").GetData(data.Day-1,money,data.Money,
+            UIManager.instance.GetUIView<SettlePage>("SettlePage").GetData(data.Day-1,(int)money,(int)data.Money,
             $"{CustomerNormalRecepted.value}/{CustomerNormalTotal.value}",
             $"{CustomerSpecialRecepted.value}/{CustomerSpecialTotal.value}");
         });
@@ -117,7 +120,7 @@ public class GameController : MonoBehaviour
     public static void AddMoney(float m)
     {
         money+=m;
-        UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter").ChangeUI(money);
+        moneyCounter.ChangeUISmooth((int)money);
     }
 
     public static void AddSAN(int s)
