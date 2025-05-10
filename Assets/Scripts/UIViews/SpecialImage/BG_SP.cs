@@ -12,9 +12,9 @@ public class BG_SP : MonoBehaviour
         gameObjects=new GameObject[transform.childCount];
         for(int i=0;i<transform.childCount;i++)
         {
+            gameObjects[i]=transform.Find("bg_SP_"+(i+1)).gameObject;
             Image image=gameObjects[i].GetComponent<Image>();
             image.color=new Color(image.color.r,image.color.g,image.color.b,0);
-            gameObjects[i]=transform.Find("bg_SP_"+(i+1)).gameObject;
             gameObjects[i].SetActive(false);
         }
     }

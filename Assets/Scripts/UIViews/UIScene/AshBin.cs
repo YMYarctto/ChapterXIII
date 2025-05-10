@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AshBin : MonoBehaviour
 {
@@ -11,18 +12,27 @@ public class AshBin : MonoBehaviour
     {
         open=transform.Find("open").gameObject;
         close=transform.Find("close").gameObject;
-        open.SetActive(false);
+        SetActive(open,false);
     }
 
     public void Open()
     {
-        open.SetActive(true);
-        close.SetActive(false);
+        SetActive(open,true);
+        SetActive(close,false);
     }
 
     public void Close()
     {
-        open.SetActive(false);
-        close.SetActive(true);
+        SetActive(open,false);
+        SetActive(close,true);
+    }
+
+    public void SetActive(GameObject obj,bool isActive)
+    {
+        if(obj.TryGetComponent<Image>(out var image))
+        {
+            float alpha=isActive ? 1 : 0;
+            image.color=new Color(image.color.r,image.color.g,image.color.b,alpha);
+        }
     }
 }

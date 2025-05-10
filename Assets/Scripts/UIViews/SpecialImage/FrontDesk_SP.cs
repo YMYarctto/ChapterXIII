@@ -10,10 +10,13 @@ public class FrontDesk_SP : MonoBehaviour
     void Awake()
     {
         gameObjects=new GameObject[transform.childCount];
-        gameObjects[0]=transform.Find("SP_2").gameObject;
-        gameObjects[0].SetActive(false);
-        gameObjects[1]=transform.Find("SP_3").gameObject;
-        gameObjects[1].SetActive(false);
+        for(int i=0;i<transform.childCount;i++)
+        {
+            gameObjects[i]=transform.Find("SP_"+(i+2)).gameObject;
+            Image image=gameObjects[i].GetComponent<Image>();
+            image.color=new Color(image.color.r,image.color.g,image.color.b,0);
+            gameObjects[i].SetActive(false);
+        }
     }
 
     void OnEnable()
@@ -56,8 +59,6 @@ public class FrontDesk_SP : MonoBehaviour
         obj.SetActive(true);
         Image image=obj.GetComponent<Image>();
         Color color=image.color;
-        color.a=0;
-        image.color=color;
         while(color.a<1)
         {
             color.a+=3f*Time.fixedDeltaTime;
@@ -72,8 +73,6 @@ public class FrontDesk_SP : MonoBehaviour
     {
         Image image=obj.GetComponent<Image>();
         Color color=image.color;
-        color.a=1;
-        image.color=color;
         while(color.a>0)
         {
             color.a-=3f*Time.fixedDeltaTime;
