@@ -21,11 +21,6 @@ public class FrontDesk_SP : MonoBehaviour
         EventManager.instance.AddListener("Game/SAN/OnChange",ChangeBG);
     }
 
-    void OnDisable()
-    {
-        EventManager.instance?.RemoveListener("Game/SAN/OnChange");
-    }
-
     public void ChangeBG()
     {
         int i=GameController.SAN-2;

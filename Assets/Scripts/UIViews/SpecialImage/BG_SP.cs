@@ -12,6 +12,8 @@ public class BG_SP : MonoBehaviour
         gameObjects=new GameObject[transform.childCount];
         for(int i=0;i<transform.childCount;i++)
         {
+            Image image=gameObjects[i].GetComponent<Image>();
+            image.color=new Color(image.color.r,image.color.g,image.color.b,0);
             gameObjects[i]=transform.Find("bg_SP_"+(i+1)).gameObject;
             gameObjects[i].SetActive(false);
         }
@@ -20,11 +22,6 @@ public class BG_SP : MonoBehaviour
     void OnEnable()
     {
         EventManager.instance.AddListener("Game/SAN/OnChange",ChangeBG);
-    }
-
-    void OnDisable()
-    {
-        EventManager.instance?.RemoveListener("Game/SAN/OnChange");
     }
 
     public void ChangeBG()
@@ -62,8 +59,8 @@ public class BG_SP : MonoBehaviour
         obj.SetActive(true);
         Image image=obj.GetComponent<Image>();
         Color color=image.color;
-        color.a=0;
-        image.color=color;
+        // color.a=0;
+        // image.color=color;
         while(color.a<1)
         {
             color.a+=3f*Time.fixedDeltaTime;
@@ -78,8 +75,8 @@ public class BG_SP : MonoBehaviour
     {
         Image image=obj.GetComponent<Image>();
         Color color=image.color;
-        color.a=1;
-        image.color=color;
+        // color.a=1;
+        // image.color=color;
         while(color.a>0)
         {
             color.a-=3f*Time.fixedDeltaTime;

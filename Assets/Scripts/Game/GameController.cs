@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour
         StartCoroutine(Init());
     }
 
+    void OnDisable() 
+    {
+        EventManager.instance?.RemoveListener("Game/SAN/OnChange");
+    }
+
     IEnumerator Init()
     {
         money=0;

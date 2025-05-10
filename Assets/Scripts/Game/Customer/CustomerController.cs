@@ -10,7 +10,7 @@ public class CustomerController : MonoBehaviour
 
     Transform customer_panel;
     Dictionary<Transform,bool> customer_area;
-    Transform waiting_area;
+    public static Transform waiting_area;
 
     Queue<GameObject> customer_inWaiting;
 

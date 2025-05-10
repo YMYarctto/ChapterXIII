@@ -67,7 +67,9 @@ public abstract class Customer : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                transform.SetParent(CustomerController.waiting_area,false);
+                transform.localPosition=new Vector3(0,0,0);
+                transform.localScale=new Vector3(0,0,0);
                 EventManager.instance.Invoke("Customer/Leave");
             }
         }

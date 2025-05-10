@@ -58,7 +58,6 @@ public class Pot : MonoBehaviour
     {
         EventManager.instance?.RemoveListener("Pot/Add");
         EventManager.instance?.RemoveListener("Pot/Make");
-        EventManager.instance?.RemoveListener("Game/SAN/OnChange");
     }
 
     public void AddMadicinalMaterial(MedicinalMaterial_SO medicinalMaterial_SO)
