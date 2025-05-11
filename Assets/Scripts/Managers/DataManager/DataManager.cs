@@ -9,6 +9,7 @@ public class DataManagerChange
     public PotData_SO pot_data{set=>DataManager.instance.pot_data=value;}
     public GameData_SO game_data{set=>DataManager.instance.game_data=value;}
     public AudioData_SO audio_data{set=>DataManager.instance.audio_data=value;}
+    public SettingData_SO setting_data{set=>DataManager.instance.setting_data=value;}
     public SaveData_SO save_data_list_Add{
         set=>DataManager.instance.save_data_list.Add(value);
         }
@@ -25,6 +26,7 @@ public class DataManager : MonoBehaviour
     public PotData_SO PotData{get=>pot_data;}
     public GameData_SO GameData{get=>game_data;}
     public AudioData_SO AudioData{get=>audio_data;}
+    public SettingData_SO SettingData{get=>setting_data;}
     public SaveData_SO DefaultSaveData{get=>save_data_list[0];}
 
     internal OrderData_SO order_data;
@@ -32,6 +34,7 @@ public class DataManager : MonoBehaviour
     internal PotData_SO pot_data;
     internal GameData_SO game_data;
     internal AudioData_SO audio_data;
+    internal SettingData_SO setting_data;
     internal List<SaveData_SO> save_data_list;
 
     private static DataManager _dataManager;

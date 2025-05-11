@@ -8,6 +8,7 @@ public class SpecialEffectAnimation : MonoBehaviour
     void Awake()
     {
         transform.position = Vector3.zero;
+        AudioManager.instance.PlayMusic("Music/MainMenu");
     }
 
     void FixedUpdate()

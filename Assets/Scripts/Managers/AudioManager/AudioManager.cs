@@ -6,8 +6,37 @@ public class AudioManager : MonoBehaviour
 {
     [Header("启用Debug模式")]
     public bool DebugModel;
+
+    public float AudioVolume
+    {
+        get=> _AudioVolume;
+        set
+        {
+            _AudioVolume=value;
+            if (_AudioSources != null)
+            {
+                foreach (var source in _AudioSources.Values)
+                {
+                    source.volume = value;
+                }
+            }
+        }
+    }
+    public float MusicVolume
+    {
+        get => _MusicVolume;
+        set
+        {
+            _MusicVolume = value;
+            _MusicSource.volume = value;
+        }
+    }
+
+    private float _AudioVolume;
+    private float _MusicVolume;
     private Dictionary<string,AudioClip> _Audios;
     private Dictionary<string,AudioSource> _AudioSources;
+    private AudioSource _MusicSource;
 
     private static AudioManager _AudioManager;
     public static AudioManager instance
@@ -27,17 +56,33 @@ public class AudioManager : MonoBehaviour
     }
     public void Init()
     {
+        _AudioVolume=DataManager.instance.setting_data.AudioVolume;
+        _MusicVolume=DataManager.instance.setting_data.MusicVolume;
         _Audios ??= DataManager.instance.audio_data.AudioClipDict;
         _AudioSources ??=new();
+        InitMusicSource();
+    }
+    void InitMusicSource()
+    {
+        if (_MusicSource == null)
+        {
+            var obj = new GameObject("MusicSource");
+            obj.transform.SetParent(transform);
+            _MusicSource = obj.AddComponent<AudioSource>();
+            _MusicSource.loop = true;
+            _MusicSource.playOnAwake = false;
+            _MusicSource.mute = false;
+        }
     }
     AudioSource NewAudioSource(string url)
     {
-        var obj = new GameObject("AudioSource");
+        var obj = new GameObject($"AudioSource_{url}");
         obj.transform.SetParent(transform);
         AudioSource audioSource=obj.AddComponent<AudioSource>();
         audioSource.loop=false;
         audioSource.playOnAwake=false;
         audioSource.mute=false;
+        audioSource.volume=_AudioVolume;
         _AudioSources.Add(url,audioSource);
         return audioSource;
     }
@@ -68,5 +113,52 @@ public class AudioManager : MonoBehaviour
         }
 
         _AudioSources[url_source].Stop();
+    }
+
+    public AudioManager PlayMusic(string url)
+    {
+        if(!_Audios.ContainsKey(url))
+        {
+            Debug.Log($"url: {url}, 音乐不存在");
+            return instance;
+        }
+        _MusicSource.clip=_Audios[url];
+        _MusicSource.Stop();
+        StartCoroutine(EPlayMusic(url,0.5f));
+        return instance;
+    }
+
+    public AudioManager ForcePlayMusic(string url)
+    {
+        if(!_Audios.ContainsKey(url))
+        {
+            Debug.Log($"url: {url}, 音乐不存在");
+            return instance;
+        }
+        _MusicSource.clip=_Audios[url];
+        _MusicSource.Play();
+        return instance;
+    }
+
+    public void Next(string url)
+    {
+        if(!_Audios.ContainsKey(url))
+        {
+            Debug.Log($"url: {url}, 音乐不存在");
+            return;
+        }
+        StartCoroutine(EPlayMusic(url,_MusicSource.clip.length));
+    }
+
+    IEnumerator EPlayMusic(string url,float delay)
+    { 
+        yield return new WaitForSeconds(delay+0.5f);
+        _MusicSource.clip=_Audios[url];
+        _MusicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        _MusicSource.Stop();
     }
 }

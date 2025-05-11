@@ -6,9 +6,7 @@ using EResource;
 using ResourceModel;
 using EPotion;
 using ETag;
-using ECustomer;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
 public class ResourceManager : MonoBehaviour
@@ -71,6 +69,12 @@ public class ResourceManager : MonoBehaviour
         Addressables.LoadAssetAsync<AudioData_SO>("AudioData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.audio_data=so;
+            pkg.AddProgress();
+        };
+        pkg.AddCount();
+        Addressables.LoadAssetAsync<SettingData_SO>("SettingData").Completed += (handle) =>{
+            var so=handle.Result;
+            dataManager.setting_data=so;
             pkg.AddProgress();
         };
         pkg.AddCount();

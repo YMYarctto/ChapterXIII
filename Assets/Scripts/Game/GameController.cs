@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator Init()
     {
+        AudioManager.instance.PlayMusic("Music/Game/Start").Next("Music/Game/Loop");
         money=0;
         CustomerTotal=new();
         CustomerNormalTotal=new();
@@ -107,6 +108,7 @@ public class GameController : MonoBehaviour
         save_data.LoadMaterial();
         yield return null;
         save_data.SaveToFile();
+        AudioManager.instance.ForcePlayMusic("Music/Game/Finish");
         yield return new WaitForSeconds(1);
         //TODO
         UIManager.instance.GetUIView<LoadingInit>("LoadingInit").UnloadScene("PharmacyScene",()=>{
@@ -114,6 +116,7 @@ public class GameController : MonoBehaviour
             UIManager.instance.GetUIView<SettlePage>("SettlePage").GetData(data.Day-1,(int)money,(int)data.Money,
             $"{CustomerNormalRecepted.value}/{CustomerNormalTotal.value}",
             $"{CustomerSpecialRecepted.value}/{CustomerSpecialTotal.value}");
+            AudioManager.instance.PlayMusic("Music/SettlePage");
         });
     }
 

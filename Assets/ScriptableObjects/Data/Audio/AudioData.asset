@@ -19,3 +19,13 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 20f500c93becd45db95734c525d765a8, type: 3}
   - url: Pot/Stir
     audio: {fileID: 8300000, guid: 5e848c9e8d2c94157817bc9f4a650883, type: 3}
+  - url: Music/MainMenu
+    audio: {fileID: 8300000, guid: f32a63890219b4e3eaa24531250c52cd, type: 3}
+  - url: Music/Game/Start
+    audio: {fileID: 8300000, guid: 07169e4ab8ec04f3a8df4a25e681d32a, type: 3}
+  - url: Music/Game/Loop
+    audio: {fileID: 8300000, guid: aff00500262af418fb7ff1b4b1e5d6da, type: 3}
+  - url: Music/Game/Finish
+    audio: {fileID: 8300000, guid: ffd6555e7b5ad4350abb66a58d8314e0, type: 3}
+  - url: Music/SettlePage
+    audio: {fileID: 8300000, guid: 6e2029835a85a4050b064f53e1670c72, type: 3}
