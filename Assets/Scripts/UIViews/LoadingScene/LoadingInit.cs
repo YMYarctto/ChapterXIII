@@ -23,11 +23,11 @@ public class LoadingInit : UIView
         UIManager.instance.AddUIView("LoadingInit",this);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(startLoading)
         {
-            color.a+=value*Time.fixedDeltaTime;
+            color.a+=value*Time.unscaledDeltaTime;
             image.color=color;
             if(color.a<=0)
             {
@@ -44,6 +44,14 @@ public class LoadingInit : UIView
         }
     }
 
+    public void ChangeUIView(UnityAction action)
+    {
+        Enable();
+        loadScene="";
+        unloadScene="";
+        actionAfterSceneLoad=null;
+        actionAfterSceneUnload=action;
+    }
     public void ChangeScene(string load,string unload,UnityAction action)
     {
         Enable();
@@ -83,7 +91,7 @@ public class LoadingInit : UIView
                 yield return null;
             }
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         Disable();
     }
 

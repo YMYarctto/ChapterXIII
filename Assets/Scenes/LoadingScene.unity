@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 48518753}
   - component: {fileID: 48518756}
   - component: {fileID: 48518755}
+  - component: {fileID: 48518757}
   - component: {fileID: 48518754}
   m_Layer: 5
   m_Name: button_return
@@ -242,6 +243,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48518752}
   m_CullTransparentMesh: 1
+--- !u!114 &48518757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48518752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29c94e485f1e483d8aa8e1d8d7ca2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &102984667
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +667,7 @@ RectTransform:
   m_Father: {fileID: 1012229528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 101, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -818,7 +831,7 @@ RectTransform:
   m_Father: {fileID: 184870783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1155,13 +1168,14 @@ GameObject:
   - component: {fileID: 541771597}
   - component: {fileID: 541771599}
   - component: {fileID: 541771598}
+  - component: {fileID: 541771600}
   m_Layer: 5
   m_Name: SettingMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &541771597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1222,6 +1236,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541771596}
   m_CullTransparentMesh: 1
+--- !u!114 &541771600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541771596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4184252c14a144669de8f64b6e0b5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIViewIndex: SettingMenu
 --- !u!1 &579572140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,6 +2422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1095669793}
   - component: {fileID: 1095669794}
+  - component: {fileID: 1095669795}
   m_Layer: 5
   m_Name: "\u97F3\u4E50_slider"
   m_TagString: Untagged
@@ -2476,7 +2504,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1095669795}
+        m_TargetAssemblyTypeName: Slider_Volumn, Assembly-CSharp
+        m_MethodName: OnSliderChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1095669795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095669792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a851d802dffeb46d29fddb3ecdb015ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderType: 0
 --- !u!1 &1099090872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2563,7 @@ RectTransform:
   m_Father: {fileID: 1504604912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2853,7 +2906,7 @@ RectTransform:
   m_Father: {fileID: 1688175987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 101, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3093,9 +3146,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 541771597}
   - {fileID: 600823126}
   - {fileID: 388675691}
-  - {fileID: 541771597}
   m_Father: {fileID: 967506857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3547,6 +3600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1860943137}
   - component: {fileID: 1860943138}
+  - component: {fileID: 1860943139}
   m_Layer: 5
   m_Name: "\u97F3\u6548_slider"
   m_TagString: Untagged
@@ -3628,7 +3682,32 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1860943139}
+        m_TargetAssemblyTypeName: Slider_Volumn, Assembly-CSharp
+        m_MethodName: OnSliderChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1860943139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860943136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a851d802dffeb46d29fddb3ecdb015ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderType: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

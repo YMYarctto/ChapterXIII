@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MailMenu : UIView
+public class DefaultUIView : UIView
 {
+    public string UIViewIndex;
+
     void Awake()
     {
-        UIManager.instance.AddUIView("MailMenu",this);
+        UIViewIndex ??= gameObject.name;
+        UIManager.instance.AddUIView(UIViewIndex,this);
     }
 
     public override void Init()
@@ -16,6 +19,6 @@ public class MailMenu : UIView
 
     public override void OnUnload()
     {
-        UIManager.instance?.RemoveUIView("MailMenu");
+        UIManager.instance?.RemoveUIView(UIViewIndex);
     }
 }

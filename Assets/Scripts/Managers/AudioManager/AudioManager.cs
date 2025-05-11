@@ -152,7 +152,7 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator EPlayMusic(string url,float delay)
     { 
-        yield return new WaitForSeconds(delay+0.5f);
+        yield return new WaitForSecondsRealtime(delay+0.5f);
         _MusicSource.clip=_Audios[url];
         _MusicSource.Play();
     }

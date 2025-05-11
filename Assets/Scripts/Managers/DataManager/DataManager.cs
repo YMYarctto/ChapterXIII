@@ -61,6 +61,7 @@ public class DataManager : MonoBehaviour
         {
             save_data_list[0].LoadFromFile();
         }
+        setting_data.LoadFromFile();
         foreach(var save_data in save_data_list)
         {
             if(save_data.isInit)

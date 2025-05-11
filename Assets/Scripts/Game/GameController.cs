@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
         while (remain_time>0)
         {
             remain_time-=Time.fixedDeltaTime;
-            frontDesk.ChangeTimeUI(remain_time/total_time);  
+            frontDesk.ChangeTimeUI(remain_time/total_time);
             yield return new WaitForFixedUpdate();
         }
         frontDesk.ChangeTimeUI(0);
