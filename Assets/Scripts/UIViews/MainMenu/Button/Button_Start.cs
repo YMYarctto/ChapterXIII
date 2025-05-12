@@ -16,6 +16,13 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             Debug.LogError("Button: 未找到 TMP_Text 组件");
         }
+        if(DataManager.instance.IsNewGame)
+        {
+            text.text = "开始游戏";
+        }else
+        {
+            text.text = "读取存档";
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -28,9 +35,15 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        DataManager.instance.LoadSaveData(0);
-        UIManager.instance.GetUIView<LoadingInit>("LoadingInit").ChangeScene("PharmacyScene","MainScene",()=>{
-            GameController.StartGameAction.Invoke();
-        });
+        if(DataManager.instance.IsNewGame)
+        {
+            DataManager.instance.DefaultSaveData.LoadFromFile();
+            UIManager.instance.GetUIView<LoadingInit>("LoadingInit").ChangeScene("PharmacyScene","MainScene",()=>{
+                GameController.StartGameAction.Invoke();
+            });
+        }else
+        {
+            UIManager.instance.EnableUIView("LoadMenu");
+        }
     }
 }

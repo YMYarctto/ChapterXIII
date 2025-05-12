@@ -28,6 +28,16 @@ public class DataManager : MonoBehaviour
     public AudioData_SO AudioData{get=>audio_data;}
     public SettingData_SO SettingData{get=>setting_data;}
     public SaveData_SO DefaultSaveData{get=>save_data_list[0];}
+    public bool IsNewGame{get{
+        foreach(var save_data in save_data_list)
+        {
+            if(save_data.isInit)
+            {
+                return false;
+            }
+        }
+        return true;
+    }}
 
     internal OrderData_SO order_data;
     internal CustomerData_SO customer_data;
@@ -57,10 +67,6 @@ public class DataManager : MonoBehaviour
     }
     internal void Init()
     {
-        if(!DefaultSaveData.isInit)
-        {
-            save_data_list[0].LoadFromFile();
-        }
         setting_data.LoadFromFile();
         foreach(var save_data in save_data_list)
         {
@@ -78,5 +84,14 @@ public class DataManager : MonoBehaviour
             return;
         }
         save_data_list[0].LoadFromSO(save_data_list[index]);
+    }
+
+    public SaveData_SO GetSaveData(int index)
+    {
+        if(index>=save_data_list.Count||index<=0)
+        {
+            return DefaultSaveData;
+        }
+        return save_data_list[index];
     }
 }

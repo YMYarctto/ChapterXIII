@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SaveData_SO", menuName = "Data/Save/SaveData_SO")]
 public class SaveData_SO : ScriptableObject
 {
+    public string SaveTime{get=>data.SaveTime;}
     public int SAN{get=>data.San;}
     public int Day{get=>data.Day;}
     public int Stage{get=>data.Stage;}
@@ -19,7 +20,7 @@ public class SaveData_SO : ScriptableObject
 
     public void SaveToFile()
     {
-        data.SaveTime=System.DateTime.Now.ToString();
+        data.SaveTime=System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         var json = JsonUtility.ToJson(data);
         var path = GetPath();
 
@@ -48,6 +49,7 @@ public class SaveData_SO : ScriptableObject
             return;
         }
         File.Delete(path);
+        Debug.Log($"成功删除 {fileName}.sav");
         Init();
     }
 

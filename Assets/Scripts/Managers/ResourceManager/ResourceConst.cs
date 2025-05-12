@@ -33,6 +33,8 @@ public static class ResourceConst{
 
     public static List<string> saveData_SO=new()
     {
+        "data_0",
         "data_1",
+        "data_2",
     };
 }

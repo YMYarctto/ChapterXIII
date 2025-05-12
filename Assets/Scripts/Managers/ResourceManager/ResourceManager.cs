@@ -8,6 +8,7 @@ using EPotion;
 using ETag;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class ResourceManager : MonoBehaviour
                 pkg.AddProgress();
             };
             pkg.AddCount();
+            yield return new WaitUntil(()=>pkg.Finish());
         }
         yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("游戏初始化成功");
@@ -177,8 +179,10 @@ public class ResourceManager : MonoBehaviour
             if(gameObject_dict.TryGetValue(v,out GameObject obj)){
                 if(dict.TryGetValue(obj.name,out int stage)&&stage<=current_stage)
                 {
-                    list.Add(obj);
-                    list.Add(obj);
+                    float avg=stage-(float)current_stage/2;
+                    int max=(int)(2+current_stage/2+avg>=0?-avg:avg);
+                    for(int i=0;i<max;i++)
+                        list.Add(obj);
                 }
                 continue;
             }
