@@ -44,32 +44,31 @@ public class LoadingInit : UIView
         }
     }
 
-    public void ChangeUIView(UnityAction action)
-    {
-        Enable();
-        loadScene="";
-        unloadScene="";
-        actionAfterSceneLoad=null;
-        actionAfterSceneUnload=action;
-    }
-    public void ChangeScene(string load,string unload,UnityAction action)
+    public void ChangeScene(string load,string unload,UnityAction afterUnload,UnityAction afterLoad)
     {
         Enable();
         loadScene=load;
         unloadScene=unload;
-        actionAfterSceneLoad=action;
+        actionAfterSceneLoad=afterLoad;
+        actionAfterSceneUnload=afterUnload;
+    }
+    public void ChangeUIView(UnityAction afterUnload)
+    {
+        ChangeScene("", "",afterUnload,null);
+    }
+    public void ChangeScene(string load,string unload,UnityAction afterLoad)
+    {
+        ChangeScene(load,unload,null,afterLoad);
     }
 
     public void UnloadScene(string unload,UnityAction action)
     {
-        ChangeScene("",unload,null);
-        actionAfterSceneUnload=action;
+        ChangeScene("",unload,action,null);
     }
 
     public void LoadScene(string load,UnityAction unload_action,UnityAction action)
     {
-        ChangeScene(load,"",action);
-        actionAfterSceneUnload=unload_action;
+        ChangeScene(load,"",unload_action,action);
     }
 
     IEnumerator ChangeScene()

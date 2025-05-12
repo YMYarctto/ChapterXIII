@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class LoadDataInfo : MonoBehaviour,IPointerClickHandler
 {
     public int index;
+    SaveData_SO data;
 
     TMP_Text day;
     TMP_Text time;
@@ -21,24 +22,32 @@ public class LoadDataInfo : MonoBehaviour,IPointerClickHandler
         money = transform.Find("Money").GetComponent<TMP_Text>();
         line = transform.Find("Line").gameObject;
         delete = transform.Find("Delete").gameObject;
+    }
+
+    public void Init()
+    {
+        data = DataManager.instance.GetSaveData(index);
         GetData();
     }
 
     public void GetData()
     {
-        SaveData_SO data = DataManager.instance.GetSaveData(index);
         if (data.isInit)
         {
+            line.SetActive(true);
+            delete.SetActive(true);
+            time.gameObject.SetActive(true);
+            money.gameObject.SetActive(true);
             day.text = $"第{data.Day}天";
             time.text = data.SaveTime;
             money.text = data.TotalMoney.ToString();
             return;
         }
-        day.text = "新建存档";
         time.gameObject.SetActive(false);
         money.gameObject.SetActive(false);
         line.SetActive(false);
         delete.SetActive(false);
+        day.text = "新建存档";
     }
 
     public void DeleteData()
@@ -49,9 +58,20 @@ public class LoadDataInfo : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        DataManager.instance.LoadSaveData(index);
-        UIManager.instance.GetUIView<LoadingInit>("LoadingInit").ChangeScene("PharmacyScene","MainScene",()=>{
-            GameController.StartGameAction.Invoke();
-        });
+        if(LoadMenu.enableType==EnableType.Load)
+        {
+            DataManager.instance.LoadSaveData(index);
+            UIManager.instance.GetUIView<LoadingInit>("LoadingInit").ChangeScene("PharmacyScene","MainScene",()=>{
+                UIManager.instance.GetUIView<LoadMenu>("LoadMenu").ForceDisable();
+            },()=>{
+                GameController.StartGameAction.Invoke();
+            });
+        }
+        else if(LoadMenu.enableType==EnableType.Save)
+        {
+            data.LoadFromSO(DataManager.instance.DefaultSaveData);
+            data.SaveToFile();
+            GetData();
+        }
     }
 }

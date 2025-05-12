@@ -43,6 +43,7 @@ public class ResourceManager : MonoBehaviour
     {
         LoadingPackage pkg=new("正在获取资源。。。");
         DataManagerChange dataManager=new();
+        pkg.AddCount();
         Addressables.LoadAssetAsync<OrderData_SO>("OrderData").Completed += (handle) =>{
             var so=handle.Result;
             dataManager.order_data=so;
@@ -78,16 +79,17 @@ public class ResourceManager : MonoBehaviour
             dataManager.setting_data=so;
             pkg.AddProgress();
         };
-        pkg.AddCount();
+        pkg.AddCount(ResourceConst.saveData_SO.Count);
         foreach(var SO in ResourceConst.saveData_SO)
         {
+            bool finish=false;
             Addressables.LoadAssetAsync<SaveData_SO>(SO).Completed += (handle) =>{
                 var so=handle.Result;
                 dataManager.save_data_list_Add=so;
                 pkg.AddProgress();
+                finish=true;
             };
-            pkg.AddCount();
-            yield return new WaitUntil(()=>pkg.Finish());
+            yield return new WaitUntil(()=>finish);
         }
         yield return new WaitUntil(()=>pkg.Finish());
         Debug.Log("游戏初始化成功");
@@ -100,48 +102,48 @@ public class ResourceManager : MonoBehaviour
         LoadingPackage pkg=new("正在加载资源。。。");
         foreach(var kv in ResourceConst.potion_sprite)
         {
+            pkg.AddCount();
             Addressables.LoadAssetAsync<Texture2D>(kv.Value).Completed += (handle) =>{
                 var t2d=handle.Result;
-                sprite_dict[kv.Key+"药"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                sprite_dict[kv.Value]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
                 pkg.AddProgress();
             };
             pkg.AddCount();
             Addressables.LoadAssetAsync<Texture2D>(kv.Value+"_瓶塞").Completed += (handle) =>{
                 var t2d = handle.Result;
-                sprite_dict[kv.Key+"药_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
+                sprite_dict[kv.Value+"_瓶塞"]=Sprite.Create(t2d, new Rect(0, 0, t2d.width, t2d.height), Vector2.zero);
                 pkg.AddProgress();
             };
-            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.gameObjects)
         {
+            pkg.AddCount();
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
                 pkg.AddProgress();
             };
-            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
         {
+            pkg.AddCount();
             Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
                 var obj=handle.Result;
                 gameObject_dict[kv.Key.ToString()]= obj;
                 pkg.AddProgress();
             };
-            pkg.AddCount();
         }
 
         foreach(var kv in ResourceConst.customer_normal_gameobject)
         {
+            pkg.AddCount();
             Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
                 var so=handle.Result;
                 customer_SO_dict[kv.Key.ToString()]= so;
                 pkg.AddProgress();
             };
-            pkg.AddCount();
         }
 
         yield return new WaitUntil(()=>pkg.Finish());
@@ -179,8 +181,7 @@ public class ResourceManager : MonoBehaviour
             if(gameObject_dict.TryGetValue(v,out GameObject obj)){
                 if(dict.TryGetValue(obj.name,out int stage)&&stage<=current_stage)
                 {
-                    float avg=stage-(float)current_stage/2;
-                    int max=(int)(2+current_stage/2+avg>=0?-avg:avg);
+                    int max=GetCustomerCount(current_stage,stage);
                     for(int i=0;i<max;i++)
                         list.Add(obj);
                 }
@@ -189,6 +190,23 @@ public class ResourceManager : MonoBehaviour
             Debug.Log($"获取预制体失败: {v}");
         }
         return list;
+    }
+
+    int GetCustomerCount(int current_stage,int customer_stage)
+    {
+        int _base=2;
+        if(customer_stage<=0)
+        {
+            return _base;
+        }
+        if(current_stage/2>customer_stage)
+        {
+            return _base+customer_stage;
+        }
+        else
+        {
+            return GetCustomerCount(current_stage,customer_stage-2-current_stage%2);
+        }
     }
 
     public Customer_SO GetCustomerSO(string cus_name){
@@ -214,7 +232,7 @@ public class ResourceManager : MonoBehaviour
         return GetPotionSprite(url.ToString()+"药");
     }
 
-    PotionSprite GetPotionSprite(string url){
+    public PotionSprite GetPotionSprite(string url){
         var Sprite_potion = GetSprite(url);
         if(Sprite_potion==null)
             return null;
@@ -237,6 +255,11 @@ public class ResourceManager : MonoBehaviour
             count=0;
             progress=0;
             loadingUI=GameObject.Find("LoadingUI").GetComponentInChildren<TMP_Text>();
+        }
+
+        public void AddCount(int count)
+        {
+            this.count+=count;
         }
 
         public void AddCount()

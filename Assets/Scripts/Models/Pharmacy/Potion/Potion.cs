@@ -48,15 +48,17 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
         mini.SetActive(false);
         current_image = PotionImage.potion;
 
-        foreach (var efficacy in EfficacyList)
+        var sprites = ResourceManager.instance.GetPotionSprite(potion_name);
+        if (sprites == null) foreach (var efficacy in EfficacyList)
         {
-            var sprites = ResourceManager.instance.GetPotionSprite(efficacy);
-            if (sprites != null)
-            {
-                potion.GetComponent<Image>().sprite = sprites.potion;
-                potion.transform.Find("bottle_plug").GetComponent<Image>().sprite = sprites.bottle_plug;
-                potion.transform.Find("bottle_plug").GetComponent<RectTransform>().sizeDelta=new Vector2(sprites.bottle_plug.bounds.size.x*100,sprites.bottle_plug.bounds.size.y*100);
-            }
+            sprites = ResourceManager.instance.GetPotionSprite(efficacy);
+            if (sprites != null) break;
+        }
+        if (sprites != null)
+        {
+            potion.GetComponent<Image>().sprite = sprites.potion;
+            potion.transform.Find("bottle_plug").GetComponent<Image>().sprite = sprites.bottle_plug;
+            potion.transform.Find("bottle_plug").GetComponent<RectTransform>().sizeDelta=new Vector2(sprites.bottle_plug.bounds.size.x*100,sprites.bottle_plug.bounds.size.y*100);
         }
     }
 

@@ -43,7 +43,7 @@ public class Button_Start : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             });
         }else
         {
-            UIManager.instance.EnableUIView("LoadMenu");
+            UIManager.instance.GetUIView<LoadMenu>("LoadMenu").Enable(EnableType.Load);
         }
     }
 }
