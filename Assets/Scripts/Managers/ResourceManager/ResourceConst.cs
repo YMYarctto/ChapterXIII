@@ -18,6 +18,10 @@ public static class ResourceConst{
         {CustomerName.笑面冰狐,"笑面冰狐"},
     };
 
+    public static Dictionary<CustomerName,string> customer_special_gameobject=new(){
+        {CustomerName.special,"special"},
+    };
+
     public static Dictionary<string,string> potion_sprite = new(){
         {"安眠","安眠药"},
         {"安神","安神药"},

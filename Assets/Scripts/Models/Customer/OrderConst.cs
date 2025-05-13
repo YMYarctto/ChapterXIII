@@ -7,7 +7,7 @@ public static class OrderConst
     public static List<List<Vector3>> PositonConst = new(){
         new(){new(-20,20,0)},
         new(){new(-20,60,0),new(-20,-40,0)},
-        new(){new(-20,110,0),new(-20,10,0),new(-20,70,0)},
+        new(){new(-20,110,0),new(-20,10,0),new(-20,-70,0)},
     };
 
     public static Dictionary<PositionScale,PositionModel> PositonStruct = new(){

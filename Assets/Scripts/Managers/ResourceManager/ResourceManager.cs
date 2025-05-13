@@ -134,10 +134,22 @@ public class ResourceManager : MonoBehaviour
                 gameObject_dict[kv.Key.ToString()]= obj;
                 pkg.AddProgress();
             };
+            pkg.AddCount();
+            Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
+                var so=handle.Result;
+                customer_SO_dict[kv.Key.ToString()]= so;
+                pkg.AddProgress();
+            };
         }
 
-        foreach(var kv in ResourceConst.customer_normal_gameobject)
+        foreach(var kv in ResourceConst.customer_special_gameobject)
         {
+            pkg.AddCount();
+            Addressables.LoadAssetAsync<GameObject>(kv.Value).Completed += (handle) =>{
+                var obj=handle.Result;
+                gameObject_dict[kv.Key.ToString()]= obj;
+                pkg.AddProgress();
+            };
             pkg.AddCount();
             Addressables.LoadAssetAsync<Customer_SO>(kv.Value).Completed += (handle) =>{
                 var so=handle.Result;
@@ -184,6 +196,28 @@ public class ResourceManager : MonoBehaviour
                     int max=GetCustomerCount(current_stage,stage);
                     for(int i=0;i<max;i++)
                         list.Add(obj);
+                }
+                continue;
+            }
+            Debug.Log($"获取预制体失败: {v}");
+        }
+        return list;
+    }
+
+    public List<GameObject> GetRandomSpecialCustomerList(int count)
+    {
+        List<GameObject> list=new();
+        var dict=DataManager.instance.CustomerData.CustomerStageDict;
+        int current_stage=DataManager.instance.DefaultSaveData.Stage;
+        foreach(var v in ResourceConst.customer_special_gameobject.Values){
+            if(gameObject_dict.TryGetValue(v,out GameObject obj)){
+                if(dict.TryGetValue(obj.name,out int stage)&&stage<=current_stage)
+                {
+                    list.Add(obj);
+                }
+                if(list.Count>=count)
+                {
+                    return list;
                 }
                 continue;
             }

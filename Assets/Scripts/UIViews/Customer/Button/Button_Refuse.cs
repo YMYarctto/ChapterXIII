@@ -8,6 +8,6 @@ public class Button_Refuse : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        transform.parent.parent.parent.GetComponent<Customer_Normal>().Order_Refuse();
+        transform.parent.parent.parent.GetComponent<Customer>().Order_Refuse();
     }
 }

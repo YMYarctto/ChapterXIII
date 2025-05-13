@@ -12,6 +12,7 @@ namespace ECustomer
         游侠花猫,
         黑猫,
         笑面冰狐,
+        special,
     }
 
     public enum CustomerClassification

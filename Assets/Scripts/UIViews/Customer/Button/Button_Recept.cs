@@ -8,7 +8,7 @@ public class Button_Recept : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        transform.parent.parent.parent.GetComponent<Customer_Normal>().Order_Recept();
+        transform.parent.parent.parent.GetComponent<Customer>().Order_Recept();
         transform.parent.gameObject.SetActive(false);
     }
 }

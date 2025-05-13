@@ -92,6 +92,8 @@ public class GameController : MonoBehaviour
 
     IEnumerator NextCustomer(float time)
     {
+        time-=SAN<6?7-SAN:0;
+        time=time<0?0:time;
         yield return new WaitForSeconds(time);
         EventManager.instance.Invoke("Customer/Create");
         StartCoroutine(NextCustomer(game_data_time.CustomerRefreshTime));

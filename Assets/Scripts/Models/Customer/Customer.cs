@@ -32,6 +32,7 @@ public abstract class Customer : MonoBehaviour
     protected float customer_waiting_time;
     protected float current_waiting_time;
     float waiting_time_scale;
+    float SAN_time_Scale;
 
     bool isInit=false;
 
@@ -51,7 +52,8 @@ public abstract class Customer : MonoBehaviour
         }
         if(current_status==Status.Order)
         {
-            current_waiting_time-=waiting_time_scale*Time.fixedDeltaTime;
+            SAN_time_Scale=1+0.05f*(6-GameController.SAN);
+            current_waiting_time-=waiting_time_scale*SAN_time_Scale*Time.fixedDeltaTime;
             patienceBar.ChangeUI(current_waiting_time/customer_waiting_time);
             if(current_waiting_time<=0){
                 SettleMoney();

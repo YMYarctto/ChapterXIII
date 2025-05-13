@@ -13,9 +13,11 @@ public class CustomerController : MonoBehaviour
     public static Transform waiting_area;
 
     Queue<GameObject> customer_inWaiting;
+    int special_customer_count;
 
     void Awake()
     {
+        special_customer_count=DataManager.instance.DefaultSaveData.Stage;
         customer_perfab_list=ResourceManager.instance.GetNormalCustomerList_v2();
         random_customer_list=RandomList(customer_perfab_list);
         
@@ -88,7 +90,7 @@ public class CustomerController : MonoBehaviour
         customer.transform.SetParent(trans,true);
         customer.transform.localPosition=new(0,customer.transform.localPosition.y,customer.transform.localPosition.z);
         customer_area[trans]=true;
-        customer.GetComponent<Customer_Normal>().Init();
+        customer.GetComponent<Customer>().Init();
         AudioManager.instance.PlayAudio("Customer","Customer/Come");
     }
 
@@ -108,6 +110,9 @@ public class CustomerController : MonoBehaviour
 
     Queue<GameObject> RandomList(List<GameObject> gameObject_list){
         List<GameObject> list=new(gameObject_list);
+        if(special_customer_count>0)
+            list.AddRange(ResourceManager.instance.GetRandomSpecialCustomerList(special_customer_count));
+        special_customer_count=0;
         GameObject temp;
         System.Random ran=new();
         int max=list.Count;
