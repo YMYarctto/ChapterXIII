@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
         save_data=DataManager.instance.DefaultSaveData;
         game_data=DataManager.instance.GameData;
         san=save_data.SAN;
+        AddSAN(1);
         game_data_time=game_data.GetTime(save_data.Stage);
         total_time=remain_time=game_data_time.TotalTime;
         StartGameAction=()=>StartGame();

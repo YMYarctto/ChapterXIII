@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5e60ebc38764ae187d16578b8d854f, type: 3}
   m_Name: special
   m_EditorClassIdentifier: 
-  ID: 
+  ID: E1
   Classification: 0
-  Name: 0
-  PotionRequest: 
+  Name: 6
+  PotionRequest: 69000000
   DialogOrder: []
   DialogSuccess: []
   DialogFail: []

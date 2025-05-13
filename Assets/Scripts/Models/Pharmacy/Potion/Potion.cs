@@ -85,7 +85,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
             }
             if (collider.CompareTag("Customer"))
             {
-                collider.transform.parent.GetComponent<Customer_Normal>().GivePotion(this);
+                collider.transform.parent.GetComponent<Customer>().GivePotion(this);
                 Destroy(gameObject);
                 return;
             }

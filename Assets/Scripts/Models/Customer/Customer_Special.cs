@@ -30,7 +30,7 @@ public class Customer_Special : Customer
     {
         PotionName potionName = potionList[current_potion_index]; 
         int potion_int = (int)potionName;
-        SideEffect tag = (SideEffect)(potion_int>100?potion_int:potion_int-100);
+        SideEffect tag = (SideEffect)(potion_int>100?potion_int-100:potion_int);
         float price = PotionConst.GetPotionPrice(potionName);
         if (potion.SideEffectList.Count>1||!potion.SideEffectList.Contains(tag))
         {
