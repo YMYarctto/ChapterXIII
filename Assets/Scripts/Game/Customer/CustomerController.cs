@@ -57,10 +57,10 @@ public class CustomerController : MonoBehaviour
                 customer_area[list[i]]=false;
             }
         }
-        for(Transform trans=GetAvailableArea();trans!=null&&customer_inWaiting.Count>0;)
+        Transform trans=GetAvailableArea();
+        if(trans!=null&&customer_inWaiting.Count>0)
         {
             CreateCustomer(customer_inWaiting.Dequeue(),trans);
-            yield return new WaitForFixedUpdate();
         }
     }
 
