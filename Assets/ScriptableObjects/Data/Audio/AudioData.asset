@@ -29,3 +29,5 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: ffd6555e7b5ad4350abb66a58d8314e0, type: 3}
   - url: Music/SettlePage
     audio: {fileID: 8300000, guid: 6e2029835a85a4050b064f53e1670c72, type: 3}
+  - url: Potion/Place
+    audio: {fileID: 8300000, guid: c4380b6adbd80426392e8266dd63f13b, type: 3}

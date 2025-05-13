@@ -10,5 +10,6 @@ public class Button_GameMenu : MonoBehaviour,IPointerClickHandler
         UIManager.instance.EnableUIView("GameMenu");
         UIManager.instance.DisableUIView("MailMenu");
         UIManager.instance.EnableUIView("Button_MailMenu");
+        AudioManager.instance.PauseAudio();
     }
 }

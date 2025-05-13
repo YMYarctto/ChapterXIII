@@ -8,5 +8,6 @@ public class Button_GameReturn : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         UIManager.instance.DisableUIView("GameMenu");
+        AudioManager.instance.UnPauseAudio();
     }
 }

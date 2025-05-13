@@ -108,6 +108,7 @@ public class GameController : MonoBehaviour
         save_data.LoadMaterial();
         yield return null;
         save_data.SaveToFile();
+        AudioManager.instance.StopAudio();
         AudioManager.instance.ForcePlayMusic("Music/Game/Finish");
         yield return new WaitForSeconds(1);
         //TODO
@@ -128,12 +129,7 @@ public class GameController : MonoBehaviour
 
     public static void AddSAN(int s)
     {
-        san=
-        san+s>=0?
-        san+s<=6?
-        san+s:
-        6:
-        0;
+        san=san+s>=0?san+s<=6?san+s:6:0;
         EventManager.instance.Invoke("Game/SAN/OnChange");
     }
 

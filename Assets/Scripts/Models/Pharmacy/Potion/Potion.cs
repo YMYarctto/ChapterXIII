@@ -95,6 +95,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
                 {
                     parent = collider.transform;
                     current_image = PotionImage.mini;
+                    AudioManager.instance.PlayAudio("Potion","Potion/Place");
                 }
             }
             if (collider.CompareTag("InWarehouse"))
@@ -103,6 +104,7 @@ public class Potion : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHa
                 {
                     parent = collider.transform;
                     current_image = PotionImage.potion;
+                    AudioManager.instance.PlayAudio("Potion","Potion/Place");
                 }
             }
 

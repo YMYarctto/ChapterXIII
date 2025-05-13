@@ -104,6 +104,30 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
+    public void UnPauseAudio()
+    {
+        foreach (var source in _AudioSources.Values)
+        {
+            source.UnPause();
+        }
+    }
+
+    public void PauseAudio()
+    {
+        foreach (var source in _AudioSources.Values)
+        {
+            source.Pause();
+        }
+    }
+
+    public void StopAudio()
+    {
+        foreach (var source in _AudioSources.Values)
+        {
+            source.Stop();
+        }
+    }
+
     public void StopAudio(string url_source)
     {
         if(!_AudioSources.ContainsKey(url_source))

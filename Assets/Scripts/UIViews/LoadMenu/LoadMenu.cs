@@ -16,6 +16,7 @@ public class LoadMenu : UIView
     public override void Init()
     {
         transform.localScale = new Vector3(0, 1, 1);
+        transform.localPosition = new Vector3(0,Screen.height,0);
         _enableType= EnableType.Load;
     }
 
@@ -51,6 +52,7 @@ public class LoadMenu : UIView
     }
     IEnumerator EEnable()
     {
+        transform.localPosition = new Vector3(0,0,0);
         while(transform.localScale.x<1)
         {
             transform.localScale+=new Vector3(10,0,0)*Time.unscaledDeltaTime;
@@ -66,6 +68,7 @@ public class LoadMenu : UIView
             yield return null;
         }
         transform.localScale=new Vector3(0,1,1);
+        transform.localPosition = new Vector3(0,Screen.height,0);
     }
 
 }
