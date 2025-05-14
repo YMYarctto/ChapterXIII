@@ -74,8 +74,6 @@ public class CustomerController : MonoBehaviour
         Transform trans = GetAvailableArea();
         var customer = Instantiate(customer_perfab,waiting_area);
         customer.name = customer.name.Replace("(Clone)", "");
-        GameController.CustomerTotal.Add();
-        GameController.CustomerNormalTotal.Add();
         if(trans==null)
         {
             customer.SetActive(false);

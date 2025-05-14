@@ -57,15 +57,20 @@ public class MailContent : UIView
         {
             gameobjectList[pageList[i].index].SetActive(false);
         }
-        gameobjectList[pageList[current_page_index].index].SetActive(true);
+        GameObject currentPage=gameobjectList[pageList[current_page_index].index];
+        currentPage.SetActive(true);
         pageList[current_page_index].IsNew=false;
         mailPageCounter.SetPage(current_page_index + 1, pageList.Count);
+        RectTransform rt=GetComponent<RectTransform>();
+        rt.sizeDelta=new Vector2(rt.sizeDelta.x,currentPage.GetComponent<RectTransform>().sizeDelta.y+300);
     }
 
     public void AddPage(Page page)
     {
         pageList.Add(page);
-        if(page.index==0)page.IsNew=false;
+        if(pageList.Count<=1){
+            page.IsNew=false;
+        }
     }
 
     public void AddPageFinish()
@@ -73,5 +78,7 @@ public class MailContent : UIView
         mailPageCounter = UIManager.instance.GetUIView<MailPageCounter>("MailPageCounter");
         mailPageCounter.SetPage(current_page_index + 1, pageList.Count);
         isInit = true;
+        RectTransform rt=GetComponent<RectTransform>();
+        rt.sizeDelta=new Vector2(rt.sizeDelta.x,gameobjectList[pageList[current_page_index].index].GetComponent<RectTransform>().sizeDelta.y+300);
     }
 }

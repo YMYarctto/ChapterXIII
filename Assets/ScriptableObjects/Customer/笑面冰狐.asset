@@ -15,7 +15,13 @@ MonoBehaviour:
   ID: C1
   Classification: 2
   Name: 5
-  PotionRequest: 08000000050000000700000006000000
-  DialogOrder: []
-  DialogSuccess: []
-  DialogFail: []
+  PotionRequest: 0300000006000000
+  DialogOrder:
+  - "\u5982\u679C\u4E0D\u7CBE\u81F4\u4FDD\u517B\u7684\u8BDD\uFF0C\u76AE\u80A4\u4F1A\u53D8\u5F97\u8D8A\u6765\u8D8A\u5DEE\u7684\u3002"
+  DialogSuccess:
+  - "\u554A\u554A\u554A\u2014\u2014\u771F\u7F8E\u5999\u554A\u3002"
+  DialogFail:
+  - "\u8FD9\u53EF\u4E0D\u662F\u6211\u60F3\u8981\u7684\u3002"
+  - "\u8981\u5C0F\u5FC3\u54E6\uFF0C\u5931\u671B\u7684\u4EBA\u5F88\u5371\u9669\u3002"
+  DialogRefuse:
+  - "\u5C0F\u5BB6\u4F19\uFF0C\u6211\u770B\u8D77\u6765\u6709\u90A3\u4E48\u5371\u9669\u5692\u3002"

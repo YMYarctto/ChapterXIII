@@ -16,12 +16,15 @@ MonoBehaviour:
   - TotalTime: 150
     InitialWaitingTime: 31
     CustomerRefreshTime: 15
-  - TotalTime: 180
-    InitialWaitingTime: 31
+  - TotalTime: 178
+    InitialWaitingTime: 29
     CustomerRefreshTime: 12.5
-  - TotalTime: 185
-    InitialWaitingTime: 31
-    CustomerRefreshTime: 11
+  - TotalTime: 205
+    InitialWaitingTime: 26
+    CustomerRefreshTime: 12
+  - TotalTime: 230
+    InitialWaitingTime: 23
+    CustomerRefreshTime: 11.5
   DayToState:
   - Day: 1
     Money: 0
@@ -29,7 +32,10 @@ MonoBehaviour:
     Money: 800
   - Day: 6
     Money: 1000
+  - Day: 9
+    Money: 1500
   MaterialLists:
   - list: 01000000020000000d0000000e0000000f000000
   - list: 030000000400000009000000
-  - list: 050000000b000000
+  - list: 050000000b00000006000000
+  - list: 070000000a000000

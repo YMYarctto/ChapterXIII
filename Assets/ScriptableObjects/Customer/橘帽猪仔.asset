@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5e60ebc38764ae187d16578b8d854f, type: 3}
+  m_Name: "\u6A58\u5E3D\u732A\u4ED4"
+  m_EditorClassIdentifier: 
+  ID: D3
+  Classification: 3
+  Name: 6
+  PotionRequest: 0800000005000000
+  DialogOrder:
+  - "\u6211\u6628\u5929\u5403\u592A\u591A\u6A58\u5B50\u4E86\u2026\u2026\u8EAB\u4F53\u602A\u602A\u7684\u3002"
+  - "\u611F\u89C9\u8EAB\u4F53\u90FD\u53D1\u9EC4\u4E86\uFF0C\u4E0D\u77E5\u9053\u662F\u4E0D\u662F\u9519\u89C9~"
+  DialogSuccess:
+  - "\u597D\u50CF\u597D\u591A\u4E86\u8036\u2026\u2026"
+  - "\u8C22\u8C22\u4F60\uFF0C\u5C0F\u6A58\u5B50\u59D0\u59D0\u2026\u2026"
+  DialogFail:
+  - "\u5443\u2026\u2026\u8FD9\u4E2A\u597D\u50CF\u2026\u2026\u6CA1\u4EC0\u4E48\u7528\uFF1F"
+  - "\u5514\u2026\u2026\u6211\u7684\u8EAB\u4F53\u597D\u50CF\u2026\u2026\u66F4\u9EC4\u4E86\u2026\u2026"
+  DialogRefuse:
+  - "\u4E0B\u6B21\u591A\u5907\u4E00\u4E9B\u836F\u6750\u561B\u3002"
+  - "\u542C\u8BF4\u6709\u4E9B\u4EBA\u4E0D\u559C\u6B22\u6A58\u5B50\u7684\u5473\u9053\u2026\u2026"

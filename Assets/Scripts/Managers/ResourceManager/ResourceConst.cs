@@ -16,10 +16,15 @@ public static class ResourceConst{
         {CustomerName.黑猫,"黑猫"},
         {CustomerName.游侠花猫,"游侠花猫"},
         {CustomerName.笑面冰狐,"笑面冰狐"},
+        {CustomerName.橘帽猪仔,"橘帽猪仔"},
+        {CustomerName.睡帽猪仔,"睡帽猪仔"},
+        {CustomerName.贺帽猪仔,"贺帽猪仔"},
     };
 
     public static Dictionary<CustomerName,string> customer_special_gameobject=new(){
-        {CustomerName.special,"special"},
+        {CustomerName.特殊客人A,"特殊客人A"},
+        {CustomerName.特殊客人B,"特殊客人B"},
+        {CustomerName.特殊客人C,"特殊客人C"},
     };
 
     public static Dictionary<string,string> potion_sprite = new(){

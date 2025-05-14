@@ -38,6 +38,7 @@ public class Customer_Special : Customer
             dialog_str = CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogFail);
         }
         current_price += price > 0 ? price : 0;
+        order_obj[current_potion_index].SetActive(false);
         SettleMoney();
     }
 

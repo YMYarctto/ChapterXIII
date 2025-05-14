@@ -7,6 +7,7 @@ using EResource;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using ECustomer;
 
 public abstract class Customer : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public abstract class Customer : MonoBehaviour
     Collider2D collider_2d;
     PatienceBar patienceBar;
     TMP_Text dialog;
+    GameObject button;
     protected string dialog_str;
 
     protected float customer_waiting_time;
@@ -59,7 +61,6 @@ public abstract class Customer : MonoBehaviour
             patienceBar.ChangeUI(current_waiting_time/customer_waiting_time);
             if(current_waiting_time<=0){
                 SettleMoney();
-                SetStatus(Status.Leaving);
             }
         }
         if (current_status == Status.Leaving)
@@ -106,6 +107,7 @@ public abstract class Customer : MonoBehaviour
         collider_2d.enabled=false;
         dialog = request.transform.Find("dialog").GetComponent<TMP_Text>();
         dialog.text=CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogOrder);
+        button = request.transform.Find("button").gameObject;
         request.SetActive(false);
         CreateOrderList(order_count);
 
@@ -131,7 +133,13 @@ public abstract class Customer : MonoBehaviour
         dialog_str=CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogSuccess);
         collider_2d.enabled=true;
         waiting_time_scale=customer_data.WaitingTimeScale;
-        GameController.CustomerNormalRecepted.Add();
+        if(CurrentCustomer.Classification==CustomerClassification.SA)
+        {
+            GameController.CustomerSpecialRecepted.Add();
+        }else
+        {
+            GameController.CustomerNormalRecepted.Add();
+        }
         ChangeUI(0);
     }
 
@@ -178,9 +186,15 @@ public abstract class Customer : MonoBehaviour
 
     IEnumerator ESettleMoney()
     {
+        for(int i=0;i<order_obj.Count;i++)
+        {
+            order_obj[i].SetActive(false);
+        }
+        SetStatus(Status.Waiting);
         dialog.text=dialog_str;
+        button.SetActive(false);
         GameController.AddMoney(current_price);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         SetStatus(Status.Leaving);
         transform.SetParent(transform.parent,true);
         GameController.CustomerLeave.Add();
@@ -190,6 +204,15 @@ public abstract class Customer : MonoBehaviour
     {
         yield return new WaitUntil(()=>isInit);
         SetStatus(Status.Running);
+        GameController.CustomerTotal.Add();
+        if(CurrentCustomer.Classification==CustomerClassification.SA)
+        {
+            GameController.CustomerSpecialTotal.Add();
+        }
+        else
+        {
+            GameController.CustomerNormalTotal.Add();
+        }
     }
 
     protected void SetStatus(Status status)
