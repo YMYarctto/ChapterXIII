@@ -72,6 +72,7 @@ public class AudioManager : MonoBehaviour
             _MusicSource.loop = true;
             _MusicSource.playOnAwake = false;
             _MusicSource.mute = false;
+            _MusicSource.volume = _MusicVolume;
         }
     }
     AudioSource NewAudioSource(string url)

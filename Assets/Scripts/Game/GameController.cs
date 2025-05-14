@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -54,15 +56,24 @@ public class GameController : MonoBehaviour
         save_data=DataManager.instance.DefaultSaveData;
         game_data=DataManager.instance.GameData;
         san=save_data.SAN;
-        AddSAN(1);
         game_data_time=game_data.GetTime(save_data.Stage);
         total_time=remain_time=game_data_time.TotalTime;
         StartGameAction=()=>StartGame();
         PageConst.Init();
         yield return null;
+        AddSAN(1);
         moneyCounter=UIManager.instance.GetUIView<MoneyCounter>("MoneyCounter");
         moneyCounter.ChangeUI(0);
         frontDesk=UIManager.instance.GetUIView<FrontDesk>("FrontDesk");
+        if(save_data.Stage+1<game_data.DayToState.Count&&save_data.Stage>0)
+        {
+            Page.Add(2,game_data.DayToState.ConvertAll(v=>v.Day).Contains(save_data.Day));
+            UIManager.instance.GetUIView<Page_SettleMoney>("Page_SettleMoney").SetData(game_data.DayToState[save_data.Stage+1].Day-1,(int)game_data.DayToState[save_data.Stage].Money);
+        }
+        Page.Add(0,save_data.Day==1);
+        Page.Add(1,save_data.Day==1);
+        UIManager.instance.GetUIView<MailContent>("MailContent").AddPageFinish();
+        UIManager.instance.EnableUIView("Button_MailMenu");
     }
 
     public void StartGame()

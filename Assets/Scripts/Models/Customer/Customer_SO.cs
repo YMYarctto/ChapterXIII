@@ -14,6 +14,7 @@ public class Customer_SO : ScriptableObject
     [SerializeField][Header("点单对话")] public List<string> DialogOrder;
     [SerializeField][Header("完成订单对话")] public List<string> DialogSuccess;
     [SerializeField][Header("未完成订单对话")] public List<string> DialogFail;
+    [SerializeField][Header("拒绝订单对话")] public List<string> DialogRefuse;
 
     public string GetRandomDialog(List<string> strs)
     {

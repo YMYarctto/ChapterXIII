@@ -14,6 +14,12 @@ public class DefaultUIView : UIView
 
     public override void Init()
     {
+        StartCoroutine(EInit());
+    }
+
+    IEnumerator EInit()
+    {
+        yield return null;
         Disable();
     }
 

@@ -14,10 +14,12 @@ public class Customer_Normal : Customer
         if (!potion.EfficacyList.Contains(tag))
         {
             price = 0;
+            dialog_str = CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogFail);
         }
         if (potion.SideEffectList.Count > 0)
         {
             price -= price * potion.SideEffectList.Count / 3;
+            dialog_str = CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogFail);
         }
         current_price += price > 0 ? price : 0;
         order_obj[current_potion_index].SetActive(false);

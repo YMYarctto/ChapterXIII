@@ -10,7 +10,13 @@ public class Slider_Volumn : MonoBehaviour
     void Awake()
     {
         slider = GetComponent<Slider>();
-        LoadSliderValue();
+    }
+    void OnEnable() 
+    {
+        if(ResourceManager.instance.IsInit)
+        {
+            LoadSliderValue();
+        }
     }
     public void OnSliderChange()
     {

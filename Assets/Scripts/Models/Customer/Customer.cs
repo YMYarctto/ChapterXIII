@@ -28,6 +28,8 @@ public abstract class Customer : MonoBehaviour
     GameObject request;
     Collider2D collider_2d;
     PatienceBar patienceBar;
+    TMP_Text dialog;
+    protected string dialog_str;
 
     protected float customer_waiting_time;
     protected float current_waiting_time;
@@ -102,6 +104,8 @@ public abstract class Customer : MonoBehaviour
         patienceBar = request.transform.Find("patience_bar").GetComponent<PatienceBar>();
         collider_2d=request.GetComponent<BoxCollider2D>();
         collider_2d.enabled=false;
+        dialog = request.transform.Find("dialog").GetComponent<TMP_Text>();
+        dialog.text=CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogOrder);
         request.SetActive(false);
         CreateOrderList(order_count);
 
@@ -123,6 +127,8 @@ public abstract class Customer : MonoBehaviour
     }
 
     public virtual void Order_Recept(){
+        dialog.text="";
+        dialog_str=CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogSuccess);
         collider_2d.enabled=true;
         waiting_time_scale=customer_data.WaitingTimeScale;
         GameController.CustomerNormalRecepted.Add();
@@ -130,6 +136,7 @@ public abstract class Customer : MonoBehaviour
     }
 
     public virtual void Order_Refuse(){
+        dialog_str=CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogRefuse);
         GameController.CustomerRefused.Add();
         SettleMoney();
     }
@@ -166,7 +173,14 @@ public abstract class Customer : MonoBehaviour
     public virtual void SettleMoney()
     {
         if(current_status!=Status.Order)return;
+        StartCoroutine(ESettleMoney());
+    }
+
+    IEnumerator ESettleMoney()
+    {
+        dialog.text=dialog_str;
         GameController.AddMoney(current_price);
+        yield return new WaitForSeconds(1);
         SetStatus(Status.Leaving);
         transform.SetParent(transform.parent,true);
         GameController.CustomerLeave.Add();

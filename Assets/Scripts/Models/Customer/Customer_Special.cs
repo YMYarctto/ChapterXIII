@@ -35,6 +35,7 @@ public class Customer_Special : Customer
         if (potion.SideEffectList.Count>1||!potion.SideEffectList.Contains(tag))
         {
             price = 0;
+            dialog_str = CurrentCustomer.GetRandomDialog(CurrentCustomer.DialogFail);
         }
         current_price += price > 0 ? price : 0;
         SettleMoney();

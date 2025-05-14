@@ -12,6 +12,8 @@ using UnityEngine.Rendering;
 
 public class ResourceManager : MonoBehaviour
 {
+    public bool IsInit { get; private set; } = false;
+
     private Dictionary<string,GameObject> gameObject_dict;
     private Dictionary<string,Sprite> sprite_dict;
     private Dictionary<string,Customer_SO> customer_SO_dict;
@@ -162,6 +164,7 @@ public class ResourceManager : MonoBehaviour
         Debug.Log("加载资源成功");
         EventManager.instance.Init();
         AudioManager.instance.Init();
+        IsInit=true;
         pkg.DisableUI();
         StartCoroutine(LoadScene());
     }

@@ -22,6 +22,7 @@ public class LoadDataInfo : MonoBehaviour,IPointerClickHandler
         money = transform.Find("Money").GetComponent<TMP_Text>();
         line = transform.Find("Line").gameObject;
         delete = transform.Find("Delete").gameObject;
+        if(index==0)delete.SetActive(false);
     }
 
     public void Init()
@@ -35,7 +36,7 @@ public class LoadDataInfo : MonoBehaviour,IPointerClickHandler
         if (data.isInit)
         {
             line.SetActive(true);
-            delete.SetActive(true);
+            if(index!=0)delete.SetActive(true);
             time.gameObject.SetActive(true);
             money.gameObject.SetActive(true);
             day.text = $"第{data.Day}天";
